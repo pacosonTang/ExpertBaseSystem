@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ExpertBaseSystem"
+  id="myeclipse.1408151195021"
+  context-root="/ExpertBaseSystem"
+  j2ee-spec="6.0"
+  archive="ExpertBaseSystem.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

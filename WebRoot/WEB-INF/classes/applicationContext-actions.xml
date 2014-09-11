@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	<bean name="loginAction" class="com.cdkx.expertbasesystem.actions.LoginAction">
+		<property name="userService" ref="userService"/>
+	</bean>
+	<bean name="userAction" class="com.cdkx.expertbasesystem.actions.UserAction">
+		<property name="userService" ref="userService"/>
+	</bean>
+	<bean name="managerAction" class="com.cdkx.expertbasesystem.actions.ManagerAction">
+		<property name="userService" ref="userService"/>
+	</bean>
+	<bean name="memberAction" class="com.cdkx.expertbasesystem.actions.MemberAction">
+		<property name="userService" ref="userService"/>
+		<property name="awardService" ref="awardService"/>
+		<property name="patentService" ref="patentService"/>
+		<property name="projectService" ref="projectService"/>
+		<property name="thesisService" ref="thesisService"/>
+	</bean>
+	<bean name="serverAction" class="com.cdkx.expertbasesystem.actions.ServerAction">
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean name="searchAction" class="com.cdkx.expertbasesystem.actions.SearchAction">
+		<property name="userService" ref="userService" />
+	</bean>
+</beans>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.multipart.maxSize" value="10485760" />
+    <constant name="struts.i18n.encoding" value="UTF-8" />
+
+    <package name="default" namespace="/" extends="struts-default">
+		
+        <default-action-ref name="loginPage" />
+        
+       	<global-results>
+       		<result name="commonError">/WEB-INF/jsp/error.jsp</result>
+       	</global-results>
+       	
+       	<global-exception-mappings>
+       		<exception-mapping result="commonError" exception="com.cdkx.expertbasesystem.exception.AppException"/>
+       	</global-exception-mappings>
+       	
+       	<action name="loginPage">
+       		<result>/WEB-INF/jsp/login.jsp</result>
+       	</action>
+       	
+       	<action name="login" class="loginAction" method="login">
+       		<result name="leader_success">/WEB-INF/jsp/leader_main.jsp</result>
+       		<result name="server_success">/WEB-INF/jsp/server_main.jsp</result>
+       		<result name="member_success">/WEB-INF/jsp/member_main.jsp</result>
+       		<result name="manager_success">/WEB-INF/jsp/manager_main.jsp</result>
+       		<result name="error" type="redirect">loginPage.action</result>
+       	</action>
+       	
+       	<action name="logout" class="loginAction" method="logout">
+       		<result name="success" type="redirect">loginPage.action</result>
+       	</action>
+       	
+       	<action name="regeditPage">
+       		<result>/WEB-INF/jsp/regedit.jsp</result>
+       	</action>
+       	
+       	<action name="register" class="userAction" method="register">
+       		<result name="sucess" type="redirect">loginInput.action</result>
+       	</action>
+    </package>
+    
+    <package name="common" namespace="/common" extends="default">
+    	<action name="modifyUser" class="userAction" method="modifyUser">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="showUser" class="userAction" method="showUser">
+    		<result name="manager_success">/WEB-INF/jsp/manager_info.jsp</result>
+    		<result name="leader_success">/WEB-INF/jsp/leader_info.jsp</result>
+    		<result name="member_success">/WEB-INF/jsp/member_info.jsp</result>
+    		<result name="server_success">/WEB-INF/jsp/server_info.jsp</result>
+    	</action>
+    	<action name="searchMembers" class="searchAction" method="searchMembers">
+    		<result name="manager_success">/WEB-INF/jsp/manager_main.jsp</result>
+    		<result name="leader_success">/WEB-INF/jsp/leader_main.jsp</result>
+    		<result name="server_success">/WEB-INF/jsp/server_main.jsp</result>
+    		<result name="member_success">/WEB-INF/jsp/member_main.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="member" namespace="/member" extends="default">
+    	<action name="showAward" class="memberAction" method="showAward">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="showPatent" class="memberAction" method="showPatent">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="showProject" class="memberAction" method="showProject">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="showThesis" class="memberAction" method="showThesis">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="addAward" class="memberAction" method="addAward">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="addPatent" class="memberAction" method="addPatent">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="addProject" class="memberAction" method="addProject">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="addThesis" class="memberAction" method="addThesis">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="deleteAward" class="memberAction" method="deleteAward">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="deletePatent" class="memberAction" method="deletePatent">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="deleteProject" class="memberAction" method="deleteProject">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    	<action name="deleteThesis" class="memberAction" method="deleteThesis">
+    		<result name="success" type="redirect">showUser.action</result>
+    	</action>
+    </package>
+    
+    <package name="leader" namespace="/leader" extends="default">
+    	
+    </package>
+    
+    <package name="server" namespace="/server" extends="default">
+    	<action name="showMembers" class="serverAction" method="showMembers">
+    		<result name="success">/WEB-INF/jsp/members.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="manager" namespace="manager" extends="default">
+    	<action name="showUncheckedUsers" class="managerAction" method="showUncheckedUsers">
+    		<result>/WEB-INF/jsp/audit.jsp</result>
+    	</action>
+    	<action name="passUser" class="managerAction" method="passUser">
+    		<result name="success" type="redirect">auditPage.action</result>
+    	</action>
+    	<action name="refuseUser" class="managerAction" method="refuseUser">
+    		<result name="success" type="redirect">auditPage.action</result>
+    	</action>
+    	<action name="addLeader" class="managerAction" method="addLeader">
+    		<result name="success" type="redirect">showLeaders.action</result>
+    	</action>
+    	<action name="addServer" class="managerAction" method="addServer">
+    		<result name="success" type="redirect">showServers.action</result>
+    	</action>
+    	<action name="addMember" class="managerAction" method="addMember">
+    		<result name="success" type="redirect">showMembers.action</result>
+    	</action>
+    	<action name="deleteLeaders" class="managerAction" method="deleteLeaders">
+    		<result name="success" type="redirect">showLeaders.action</result>
+    	</action>
+    	<action name="deleteServers" class="managerAction" method="deleteServers">
+    		<result name="success" type="redirect">showServers.action</result>
+    	</action>
+    	<action name="deleteMembers" class="managerAction" method="deleteMembers">
+    		<result name="success" type="redirect">showMembers.action</result>
+    	</action>
+    	<action name="showLeaders" class="managerAction" method="showLeaders">
+    		<result name="success" type="redirect">/WEB-INF/jsp/leaders.jsp</result>
+    	</action>
+    	<action name="showServers" class="managerAction" method="showServers">
+    		<result name="success" type="redirect">/WEB-INF/jsp/servers.jsp</result>
+    	</action>
+    	<action name="showMembers" class="managerAction" method="showMembers">
+    		<result name="success" type="redirect">/WEB-INF/jsp/members.jsp</result>
+    	</action>
+    </package>
+</struts>
