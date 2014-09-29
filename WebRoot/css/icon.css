@@ -1,0 +1,42 @@
+@charset "utf-8";
+/* CSS Document */
+
+.add {
+	background-image:url(../img/add.ico)!important;
+}
+.delete {
+	background-image:url(../img/delete.ico)!important;
+}
+.modify {
+	background-image:url(../img/modify.ico)!important;
+}
+.save {
+	background-image:url(../img/save.ico)!important;
+}
+.look {
+	background-image:url(../img/ico)!important;
+}
+.cancel {
+	background-image:url(../img/cancel.ico)!important;
+}
+.back {
+	background-image:url(../img/back.ico)!important;
+}
+.open {
+	background-image:url(../img/open.ico)!important;
+}
+.close {
+	background-image:url(../img/close.ico)!important;
+}
+.search {
+	background-image:url(../img/search.ico)!important;
+}
+.confirm {
+	background-image:url(../img/confirm.ico)!important;
+}
+.displayall {
+	background-image:url(../img/displayall.ico)!important;
+}
+.refuse {
+	background-image:url(../img/refuse.ico)!important;
+}

@@ -20,7 +20,7 @@
             <column name="patent_no" length="20" not-null="true" />
         </property>
         <many-to-one name="user" class="com.cdkx.expertbasesystem.domain.User" fetch="select">
-        	<column name="user" />
+        	<column name="user_id" />
         </many-to-one>
     </class>
 </hibernate-mapping>

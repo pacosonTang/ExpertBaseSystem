@@ -30,8 +30,8 @@ public class SubjectDaoImpl extends HibernateDaoSupport implements SubjectDao {
 	}
 
 	@Override
-	public List<Subject> findSubjects() {
-		return getHibernateTemplate().find("from Subject s");
+	public List<Subject> findSubjectsByParent(int id) {
+		return getHibernateTemplate().find("from Subject s where s.parent.id=" + id);
 	}
 
 	@Override

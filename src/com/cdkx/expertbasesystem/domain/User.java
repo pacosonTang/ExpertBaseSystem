@@ -51,11 +51,41 @@ public class User {
 	//用户级别
 	private int level;
 	
-	//会员的详细信息
-	private UserDetail userDetail;
+	//用户所属的协会
+	private Institution institution;
 	
-	//用户信息是否已经通过审核
-	private int checked;
+	//所学专业
+	private Subject major;
+	
+	//现从事专业
+	private Subject currentMajor;
+	
+	//学历
+	private Degree education;
+	
+	//学位
+	private Degree degree;
+	
+	//性别
+	private String sex;
+	
+	//出生日期
+	private String birthday;
+	
+	//擅长领域
+	private String adept;
+	
+	//毕业院校
+	private String school;
+	
+	//毕业时间
+	private String graduateTime;
+	
+	//专业技术职称
+	private String title;
+	
+	//职责
+	private String duty;
 	
 	//会员的科研项目
 	private Set<Project> projects;
@@ -213,19 +243,99 @@ public class User {
 		this.awards = awards;
 	}
 
-	public UserDetail getUserDetail() {
-		return userDetail;
+	public Institution getInstitution() {
+		return institution;
 	}
 
-	public void setUserDetail(UserDetail userDetail) {
-		this.userDetail = userDetail;
+	public void setInstitution(Institution institution) {
+		this.institution = institution;
 	}
 
-	public int getChecked() {
-		return checked;
+	public Subject getMajor() {
+		return major;
 	}
 
-	public void setChecked(int checked) {
-		this.checked = checked;
-	} 
+	public void setMajor(Subject major) {
+		this.major = major;
+	}
+
+	public Subject getCurrentMajor() {
+		return currentMajor;
+	}
+
+	public void setCurrentMajor(Subject currentMajor) {
+		this.currentMajor = currentMajor;
+	}
+
+	public Degree getEducation() {
+		return education;
+	}
+
+	public void setEducation(Degree education) {
+		this.education = education;
+	}
+
+	public Degree getDegree() {
+		return degree;
+	}
+
+	public void setDegree(Degree degree) {
+		this.degree = degree;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getAdept() {
+		return adept;
+	}
+
+	public void setAdept(String adept) {
+		this.adept = adept;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+	public String getGraduateTime() {
+		return graduateTime;
+	}
+
+	public void setGraduateTime(String graduateTime) {
+		this.graduateTime = graduateTime;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDuty() {
+		return duty;
+	}
+
+	public void setDuty(String duty) {
+		this.duty = duty;
+	}
 }

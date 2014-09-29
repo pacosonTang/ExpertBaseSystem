@@ -43,10 +43,10 @@ public interface SubjectService {
 	public Subject findSubject(int id);
 	
 	/**
-	 * 找到所有的学科专业实体
-	 * @return List 包含所有的学科专业实体
+	 * 找到parent下所有的子专业
+	 * @return List 该专业的所有子专业
 	 */
-	public List<Subject> findSubjects();
+	public List<Subject> findSubjectsByParent(int id);
 	
 	/**
 	 * 查找一级学科实体

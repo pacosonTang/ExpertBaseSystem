@@ -13,14 +13,8 @@ public class Thesis {
 	//论文名称
 	private String name;
 	
-	//论文发布日期
+	//收录年份
 	private String pubTime;
-	
-	//是否收录
-	private int isAccept;
-	
-	//是否在核心期刊刊登
-	private int isCore;
 	
 	//论文所属的会员
 	private User user;
@@ -47,22 +41,6 @@ public class Thesis {
 
 	public void setPubTime(String pubTime) {
 		this.pubTime = pubTime;
-	}
-
-	public int getIsAccept() {
-		return isAccept;
-	}
-
-	public void setIsAccept(int isAccept) {
-		this.isAccept = isAccept;
-	}
-
-	public int getIsCore() {
-		return isCore;
-	}
-
-	public void setIsCore(int isCore) {
-		this.isCore = isCore;
 	}
 
 	public User getUser() {

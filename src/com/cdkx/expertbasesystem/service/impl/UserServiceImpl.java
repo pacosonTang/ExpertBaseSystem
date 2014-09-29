@@ -1,6 +1,5 @@
 package com.cdkx.expertbasesystem.service.impl;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import com.cdkx.expertbasesystem.dao.UserDao;
@@ -126,6 +125,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findUncheckedUsers() {
 		return userDao.findUncheckedUsers();
+	}
+
+	@Override
+	public List<Object[]> statisticMembers(String countCondition) {
+		//if(countCondition.equals(""))
+		return userDao.statisticMembers(countCondition);
 	}
 
 }

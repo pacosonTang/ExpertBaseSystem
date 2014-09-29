@@ -13,11 +13,11 @@
         <property name="name" type="java.lang.String">
             <column name="name" length="45" not-null="true" />
         </property>
-        <set name="userDetails" inverse="true">
+        <set name="users" inverse="true">
             <key>
                 <column name="institution" />
             </key>
-            <one-to-many class="com.cdkx.expertbasesystem.domain.UserDetail" />
+            <one-to-many class="com.cdkx.expertbasesystem.domain.User" />
         </set>
     </class>
 </hibernate-mapping>

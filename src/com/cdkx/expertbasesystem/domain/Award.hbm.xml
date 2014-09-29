@@ -19,8 +19,11 @@
         <property name="awardTime" type="java.lang.String">
             <column name="award_time" length="20" not-null="true" />
         </property>
+        <property name="rank" type="java.lang.Integer">
+            <column name="rank" />
+        </property>
         <many-to-one name="user" class="com.cdkx.expertbasesystem.domain.User" fetch="select">
-        	<column name="user" />
+        	<column name="user_id" />
         </many-to-one>
     </class>
 </hibernate-mapping>

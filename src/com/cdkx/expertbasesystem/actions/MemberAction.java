@@ -1,5 +1,6 @@
 package com.cdkx.expertbasesystem.actions;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import com.cdkx.expertbasesystem.service.PatentService;
 import com.cdkx.expertbasesystem.service.ProjectService;
 import com.cdkx.expertbasesystem.service.ThesisService;
 import com.cdkx.expertbasesystem.service.UserService;
+import com.cdkx.expertbasesystem.utils.JsonUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -45,19 +47,19 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	
 	private AwardService awardService;
 	
-	private int userId;
-	
 	private UserService userService;
 	
-	private User user;
+	private List<Award> awards;
 	
-	private Set<Award> awards;
+	private List<Patent> patents;
 	
-	private Set<Patent> patents;
+	private List<Project> projects;
 	
-	private Set<Project> projects;
+	private List<Thesis> thesises;
 	
-	private Set<Thesis> thesises;
+	private String jsonString;
+	
+	private String selectIds;
 	
 	private Map<String, Object> session;
 
@@ -66,8 +68,9 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * @return 页面转向信息
 	 */
 	public String showAward(){
-		getUser();
-		awards = user.getAwards();
+		int userId = Integer.parseInt(session.get("userId").toString());
+		awards = awardService.findAwardByUser(userId);
+		jsonString = JsonUtil.jsonForList(awards);
 		return SUCCESS;
 	}
 	
@@ -76,8 +79,9 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * @return 页面转向信息
 	 */
 	public String showPatent(){
-		getUser();
-		patents = user.getPatents();
+		int userId = Integer.parseInt(session.get("userId").toString());
+		patents = patentService.findPatentByUser(userId);
+		jsonString = JsonUtil.jsonForList(patents);
 		return SUCCESS;
 	}
 	
@@ -86,8 +90,9 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * @return
 	 */
 	public String showProject(){
-		getUser();
-		projects = user.getProjects();
+		int userId = Integer.parseInt(session.get("userId").toString());
+		projects = projectService.findProjectByUser(userId);
+		jsonString = JsonUtil.jsonForList(projects);
 		return SUCCESS;
 	}
 	
@@ -96,8 +101,9 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * @return
 	 */
 	public String showThesis(){
-		getUser();
-		thesises = user.getThesises();
+		int userId = Integer.parseInt(session.get("userId").toString());
+		thesises = thesisService.findThesisByUser(userId);
+		jsonString = JsonUtil.jsonForList(thesises);
 		return SUCCESS;
 	}
 	
@@ -106,9 +112,11 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * @return
 	 */
 	public String addAward(){
-		getUser();
-		award.setUser(user);
+		int userId = Integer.parseInt(session.get("userId").toString());
+		award.setUser(new User());
+		award.getUser().setId(userId);
 		awardService.addAward(award);
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -117,9 +125,11 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * @return
 	 */
 	public String addPatent(){
-		getUser();
-		patent.setUser(user);
+		int userId = Integer.parseInt(session.get("userId").toString());
+		patent.setUser(new User());
+		patent.getUser().setId(userId);
 		patentService.addPatent(patent);
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -128,9 +138,11 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * @return
 	 */
 	public String addProject(){
-		getUser();
-		project.setUser(user);
+		int userId = Integer.parseInt(session.get("userId").toString());
+		project.setUser(new User());
+		project.getUser().setId(userId);
 		projectService.addProject(project);
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -139,9 +151,11 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * @return
 	 */
 	public String addThesis(){
-		getUser();
-		thesis.setUser(user);
+		int userId = Integer.parseInt(session.get("userId").toString());
+		thesis.setUser(new User());
+		thesis.getUser().setId(userId);
 		thesisService.addThesis(thesis);
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -149,8 +163,11 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * 删除奖励信息
 	 * @return
 	 */
-	public String deleteAward(){
-		awardService.deleteAwardById(award.getId());
+	public String deleteAwards(){
+		String[] ids = selectIds.split(",");
+		for(int i = 0; i < ids.length; i++)
+			awardService.deleteAwardById(Integer.parseInt(ids[i]));
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -158,8 +175,11 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * 删除专利信息
 	 * @return
 	 */
-	public String deletePatent(){
-		patentService.deletePatentById(patent.getId());
+	public String deletePatents(){
+		String[] ids = selectIds.split(",");
+		for(int i = 0; i < ids.length; i++)
+			patentService.deletePatentById(Integer.parseInt(ids[i]));
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -167,8 +187,11 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * 删除项目信息
 	 * @return
 	 */
-	public String deleteProject(){
-		projectService.deleteProjectById(project.getId());
+	public String deleteProjects(){
+		String[] ids = selectIds.split(",");
+		for(int i = 0; i < ids.length; i++)
+			projectService.deleteProjectById(Integer.parseInt(ids[i]));
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -176,17 +199,12 @@ public class MemberAction extends ActionSupport implements SessionAware {
 	 * 删除论文信息
 	 * @return
 	 */
-	public String deleteThesis(){
-		thesisService.deleteThesisById(thesis.getId());
+	public String deleteThesises(){
+		String[] ids = selectIds.split(",");
+		for(int i = 0; i < ids.length; i++)
+			thesisService.deleteThesisById(Integer.parseInt(ids[i]));
+		jsonString = "{success:true}";
 		return SUCCESS;
-	}
-	
-	private void getUser(){
-		if(session.get("userId") != null){
-			userId = Integer.parseInt(session.get("userId").toString());
-			user = userService.findUser(userId);
-		} else
-			throw new AppException("用户没有登录！请先登录...");
 	}
 	
 	@Override
@@ -246,20 +264,12 @@ public class MemberAction extends ActionSupport implements SessionAware {
 		this.userService = userService;
 	}
 
-	public Set<Award> getAwards() {
-		return awards;
+	public String getJsonString() {
+		return jsonString;
 	}
 
-	public Set<Patent> getPatents() {
-		return patents;
-	}
-
-	public Set<Project> getProjects() {
-		return projects;
-	}
-
-	public Set<Thesis> getThesises() {
-		return thesises;
+	public void setSelectIds(String selectIds) {
+		this.selectIds = selectIds;
 	}
 
 }

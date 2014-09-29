@@ -34,7 +34,7 @@ public interface InstitutionService {
 	 * @param id 待查找协会实体的编号
 	 * @return Institution 对应的协会实体
 	 */
-	public Institution findInstitutions(int id);
+	public Institution findInstitution(int id);
 	
 	/**
 	 * 查找所有的协会实体

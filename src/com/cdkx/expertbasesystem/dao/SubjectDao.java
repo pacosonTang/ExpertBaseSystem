@@ -30,10 +30,10 @@ public interface SubjectDao {
 	public void modifySubject(Subject subject);
 	
 	/**
-	 * 查找所有学科分类
-	 * @return List 包含所有学科分类的信息
+	 * 找到id专业下所有子专业
+	 * @return List 该专业的所有子专业
 	 */
-	public List<Subject> findSubjects();
+	public List<Subject> findSubjectsByParent(int id);
 	
 	/**
 	 * 查找指定学科分类

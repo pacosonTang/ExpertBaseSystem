@@ -75,5 +75,9 @@ public interface UserDao {
 	 */
 	public List<User> findUncheckedUsers();
 	
-	
+	/**
+	 * 对会员信息进行统计
+	 * @return Obeject
+	 */
+	public List<Object[]> statisticMembers(String countCondition);
 }

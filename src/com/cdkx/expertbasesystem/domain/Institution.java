@@ -15,8 +15,8 @@ public class Institution {
 	//协会名称
 	private String name;
 	
-	//同一个协会下的会员
-	private Set<UserDetail> userDetails;
+	//相同协会的会员
+	private Set<User> users;
 
 	public int getId() {
 		return id;
@@ -34,11 +34,11 @@ public class Institution {
 		this.name = name;
 	}
 
-	public Set<UserDetail> getUserDetails() {
-		return userDetails;
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setUserDetails(Set<UserDetail> userDetails) {
-		this.userDetails = userDetails;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

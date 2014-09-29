@@ -36,23 +36,20 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		List<User> users = userService.login(user);
 		if(users != null && !users.isEmpty()){
 			user = users.get(0);
-			if(user.getChecked() == 0){
-				session.put("loginError", "访问受限，该用户还没有通过审核");
+			
+			session.put("userId", user.getId());
+			session.put("username", user.getUsername());
+			session.remove("loginError");
+			if(user.getLevel() == 0)
+				return "manager_success";
+			else if(user.getLevel() == 1)
+				return "leader_success";
+			else if(user.getLevel() == 2)
+				return "server_success";
+			else if(user.getLevel() == 3)
+				return "member_success";
+			else
 				return ERROR;
-			} else {
-				session.put("userId", user.getId());
-				session.remove("loginError");
-				if(user.getLevel() == 0)
-					return "manager_success";
-				else if(user.getLevel() == 1)
-					return "leader_success";
-				else if(user.getLevel() == 2)
-					return "server_success";
-				else if(user.getLevel() == 3)
-					return "member_success";
-				else
-					return ERROR;
-			}
 		} else {
 			session.put("loginError", "用户名和密码不匹配！");
 			return ERROR;

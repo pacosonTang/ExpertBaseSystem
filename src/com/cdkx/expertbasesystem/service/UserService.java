@@ -80,4 +80,10 @@ public interface UserService {
 	 * @return List 所有未审核的用户信息
 	 */
 	public List<User> findUncheckedUsers();
+	
+	/**
+	 * 对会员进行统计
+	 * @return
+	 */
+	public List<Object[]> statisticMembers(String countCondition);
 }

@@ -1,0 +1,36 @@
+//User类
+Ext.define("User", {
+	extend : 'Ext.data.Model',
+	fields : [
+  		{name:'id', type:'int', sortable:true},
+  		{name:'realname', type:'string', sortable:true},
+  		{name:'username', type:'string', sortable:true},
+  		{name:'password', type:'string', sortable:true},
+  		{name:'workUnit', type:'String', sortable:true},
+  		{name:'telephone', type:'string', sortable:true},
+  		{name:'officePhone', type:'string', sortable:true},
+  		{name:'postcode', type:'string', sortable:true},
+  		{name:'email', type:'string', sortable:true},
+  		{name:'idNo', type:'string', sortable:true},
+  		{name:'qq', type:'string', sortable:true},
+  		{name:'address', type:'string', sortable:true},
+  		{name:'avatar', type:'string', sortable:true},
+  		{name:'sex', type:'string', sortable:true},
+  		{name:'birthday', type:'string', sortable:true},
+  		{name:'adept', type:'string', sortable:true},
+  		{name:'school', type:'string', sortable:true},
+  		{name:'graduateTime', type:'string', sortable:true},
+  		{name:'title', type:'string', sortable:true},
+  		{name:'duty', type:'string', sortable:true},
+  		{name:'institution.id', type:'int', sortable:true},
+  		{name:'institution.name', type:'string', sortable:true},
+  		{name:'degree.id', type:'int', sortable:true},
+  		{name:'degree.name', type:'string', sortable:true},
+  		{name:'education.id', type:'int', sortable:true},
+  		{name : 'education.name', type : 'string', sortable : true},
+  		{name:'major.id', type:'int', sortable:true},
+  		{name:'major.name', type:'string', sortable:true},
+  		{name:'currentMajor.id', type:'int', sortable:true},
+  		{name:'currentMajor.name', type:'string', sortable:true}
+  	]
+});

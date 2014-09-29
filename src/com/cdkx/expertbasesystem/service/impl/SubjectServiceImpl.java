@@ -69,9 +69,9 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 
 	@Override
-	public List<Subject> findSubjects() {
+	public List<Subject> findSubjectsByParent(int id) {
 		try {
-			return subjectDao.findSubjects();
+			return subjectDao.findSubjectsByParent(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查找所有学科专业信息失败！");

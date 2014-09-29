@@ -11,12 +11,12 @@ public class DegreeDaoImpl extends HibernateDaoSupport implements DegreeDao {
 
 	@Override
 	public List<Degree> findDegrees() {
-		return getHibernateTemplate().find("from Degree d where d.isDegree=0");
+		return getHibernateTemplate().find("from Degree d where d.isDegree=1");
 	}
 
 	@Override
 	public List<Degree> findEducations() {
-		return getHibernateTemplate().find("from Degree d where d.isDegree=1");
+		return getHibernateTemplate().find("from Degree d where d.isDegree=0");
 	}
 
 }

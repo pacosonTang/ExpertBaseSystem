@@ -8,7 +8,7 @@
     <class name="com.cdkx.expertbasesystem.domain.Subject" table="t_subject" catalog="expertinfobase">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="native" />
+            <generator class="native"></generator>
         </id>
         <many-to-one name="parent" class="com.cdkx.expertbasesystem.domain.Subject" fetch="select">
             <column name="parent" />
@@ -16,23 +16,23 @@
         <property name="name" type="java.lang.String">
             <column name="name" length="20" not-null="true" />
         </property>
-        <set name="userDetailsForMajor" inverse="true">
+        <set name="usersForMajor" inverse="true">
             <key>
                 <column name="major" />
             </key>
-            <one-to-many class="com.cdkx.expertbasesystem.domain.UserDetail" />
+            <one-to-many class="com.cdkx.expertbasesystem.domain.User" />
         </set>
-        <set name="subjects" inverse="true" cascade="all-delete-orphan">
+        <set name="children" inverse="true" cascade="all-delete-orphan">
             <key>
                 <column name="parent" />
             </key>
             <one-to-many class="com.cdkx.expertbasesystem.domain.Subject" />
         </set>
-        <set name="userDetailsForCurrentMajor" inverse="true">
+        <set name="usersForCurrentMajor" inverse="true">
             <key>
                 <column name="current_major" />
             </key>
-            <one-to-many class="com.cdkx.expertbasesystem.domain.UserDetail" />
+            <one-to-many class="com.cdkx.expertbasesystem.domain.User" />
         </set>
     </class>
 </hibernate-mapping>

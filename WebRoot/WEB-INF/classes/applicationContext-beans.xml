@@ -10,9 +10,6 @@
 	<bean name="userService" class="com.cdkx.expertbasesystem.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"/>
 	</bean>
-	<bean name="userDetailService" class="com.cdkx.expertbasesystem.service.impl.UserDetailServiceImpl">
-		<property name="userDetailDao" ref="userDetailDao"/>
-	</bean>
 	<bean name="awardService" class="com.cdkx.expertbasesystem.service.impl.AwardServiceImpl">
 		<property name="awardDao" ref="awardDao"/>
 	</bean>

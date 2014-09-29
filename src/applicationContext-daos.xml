@@ -10,9 +10,6 @@
 	<bean name="userDao" class="com.cdkx.expertbasesystem.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	<bean name="userDetailDao" class="com.cdkx.expertbasesystem.dao.impl.UserDetailDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
 	<bean name="projectDao" class="com.cdkx.expertbasesystem.dao.impl.ProjectDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>

@@ -18,11 +18,11 @@ public class Degree {
 	//是否为学位
 	private int isDegree;
 	
-	//当前学位下的所有会员
-	private Set<UserDetail> userDetailsForDegree;
+	//相同学位的会员集合
+	private Set<User> usersForDegree;
 	
-	//当前学历下的所有会员
-	private Set<UserDetail> userDetailsForEducation;
+	//相同学历的会员集合
+	private Set<User> usersForEducation;
 
 	public int getId() {
 		return id;
@@ -48,19 +48,19 @@ public class Degree {
 		this.isDegree = isDegree;
 	}
 
-	public Set<UserDetail> getUserDetailsForDegree() {
-		return userDetailsForDegree;
+	public Set<User> getUsersForDegree() {
+		return usersForDegree;
 	}
 
-	public void setUserDetailsForDegree(Set<UserDetail> userDetailsForDegree) {
-		this.userDetailsForDegree = userDetailsForDegree;
+	public void setUsersForDegree(Set<User> usersForDegree) {
+		this.usersForDegree = usersForDegree;
 	}
 
-	public Set<UserDetail> getUserDetailsForEducation() {
-		return userDetailsForEducation;
+	public Set<User> getUsersForEducation() {
+		return usersForEducation;
 	}
 
-	public void setUserDetailsForEducation(Set<UserDetail> userDetailsForEducation) {
-		this.userDetailsForEducation = userDetailsForEducation;
+	public void setUsersForEducation(Set<User> usersForEducation) {
+		this.usersForEducation = usersForEducation;
 	}
 }

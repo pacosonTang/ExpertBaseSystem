@@ -2,9 +2,20 @@ package com.cdkx.expertbasesystem.actions;
 
 import java.util.List;
 
+import sun.security.provider.MD5;
+
+import com.cdkx.expertbasesystem.domain.Award;
+import com.cdkx.expertbasesystem.domain.Patent;
+import com.cdkx.expertbasesystem.domain.Project;
+import com.cdkx.expertbasesystem.domain.Thesis;
 import com.cdkx.expertbasesystem.domain.User;
-import com.cdkx.expertbasesystem.exception.AppException;
+import com.cdkx.expertbasesystem.service.AwardService;
+import com.cdkx.expertbasesystem.service.PatentService;
+import com.cdkx.expertbasesystem.service.ProjectService;
+import com.cdkx.expertbasesystem.service.ThesisService;
 import com.cdkx.expertbasesystem.service.UserService;
+import com.cdkx.expertbasesystem.utils.JsonUtil;
+import com.cdkx.expertbasesystem.utils.MD5Util;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -24,47 +35,37 @@ public class ManagerAction extends ActionSupport {
 	
 	private List<User> servers;
 	
+	private String jsonString;
+	
 	private String selectIds;
+	
+	private int userId;
+	
+	private List<Thesis> thesises;
+	
+	private List<Patent> patents;
+	
+	private List<Project> projects;
+	
+	private List<Award> awards;
+	
+	private Thesis thesis;
+	
+	private Award award;
+	
+	private Patent patent;
+	
+	private Project project;
 	
 	private UserService userService;
 	
-	/**
-	 * 显示待审核的会员
-	 * @return
-	 */
-	public String showUncheckedUsers(){
-		members = userService.findUncheckedUsers();
-		return SUCCESS;
-	}
+	private ThesisService thesisService;
 	
-	/**
-	 * 对用户信息进行审核,同意用户的注册
-	 * @return 回转到用户审核页面
-	 */
-	public String passUser(){
-		String[] ids = selectIds.split(",");
-		for(int i = 0; i < ids.length; i++){
-			user = userService.findUser(Integer.parseInt(ids[i]));
-			if(user != null){
-				user.setChecked(1);
-				userService.modifyUser(user);
-			} else
-				throw new AppException("该用户不存在！");
-		}
-		return SUCCESS;
-	}
+	private PatentService patentService;
 	
-	/**
-	 * 拒绝用户的注册
-	 * @return 回转到审核页面
-	 */
-	public String refuseUser(){
-		String[] ids = selectIds.split(",");
-		for(int i = 0; i < ids.length; i++){
-			userService.deleteUser(Integer.parseInt(ids[i]));
-		}
-		return SUCCESS;
-	}
+	private ProjectService projectService;
+	
+	private AwardService awardService;
 	
 	/**
 	 * 领导统一视为没有详情信息，只有必要信息
@@ -73,7 +74,10 @@ public class ManagerAction extends ActionSupport {
 	 */
 	public String addLeader(){
 		user.setLevel(1);
+		user.setUsername(user.getTelephone());
+		user.setPassword(MD5Util.encode("123456"));
 		userService.addUser(user);
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -83,7 +87,10 @@ public class ManagerAction extends ActionSupport {
 	 */
 	public String addServer(){
 		user.setLevel(2);
+		user.setUsername(user.getTelephone());
+		user.setPassword(MD5Util.encode("123456"));
 		userService.addUser(user);
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -92,8 +99,71 @@ public class ManagerAction extends ActionSupport {
 	 * @return
 	 */
 	public String addMember(){
+		user.setUsername(user.getTelephone());
+		user.setPassword(MD5Util.encode("123456"));
 		user.setLevel(3);
 		userService.addUser(user);
+		jsonString = "{success:true}";
+		return SUCCESS;
+	}
+	
+	public String showThesises(){
+		thesises = thesisService.findThesisByUser(userId);
+		jsonString = JsonUtil.jsonForList(thesises);
+		return SUCCESS;
+	}
+	
+	public String showPatents(){
+		patents = patentService.findPatentByUser(userId);
+		jsonString = JsonUtil.jsonForList(patents);
+		return SUCCESS;
+	}
+	
+	public String showProjects(){
+		projects = projectService.findProjectByUser(userId);
+		jsonString = JsonUtil.jsonForList(projects);
+		return SUCCESS;
+	}
+	
+	public String showAwards(){
+		awards = awardService.findAwardByUser(userId);
+		jsonString = JsonUtil.jsonForList(awards);
+		return SUCCESS;
+	}
+	
+	public String addThesis(){
+		user = new User();
+		user.setId(userId);
+		thesis.setUser(user);
+		thesisService.addThesis(thesis);
+		jsonString = "{success:true}";
+		return SUCCESS;
+	}
+	
+	public String addPatent(){
+		user = new User();
+		user.setId(userId);
+		patent.setUser(user);
+		patentService.addPatent(patent);
+		jsonString = "{success:true}";
+		return SUCCESS;
+	}
+	
+	public String addProject(){
+		user = new User();
+		user.setId(userId);
+		project.setUser(user);
+		projectService.addProject(project);
+		jsonString = "{success:true}";
+		return SUCCESS;
+	}
+	
+	public String addAward(){
+		user = new User();
+		user.setId(userId);
+		award.setUser(user);
+		awardService.addAward(award);
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -108,6 +178,7 @@ public class ManagerAction extends ActionSupport {
 		String[] ids = selectIds.split(",");
 		for(int i = 0; i < ids.length; i++)
 			userService.deleteUser(Integer.parseInt(ids[i]));
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -119,6 +190,7 @@ public class ManagerAction extends ActionSupport {
 		String[] ids = selectIds.split(",");
 		for(int i = 0; i < ids.length; i++)
 			userService.deleteUser(Integer.parseInt(ids[i]));
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -130,6 +202,7 @@ public class ManagerAction extends ActionSupport {
 		String[] ids = selectIds.split(",");
 		for(int i = 0; i < ids.length; i++)
 			userService.deleteUser(Integer.parseInt(ids[i]));
+		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
@@ -139,6 +212,7 @@ public class ManagerAction extends ActionSupport {
 	 */
 	public String showLeaders(){
 		leaders = userService.findLeaders();
+		jsonString = JsonUtil.jsonForList(leaders);
 		return SUCCESS;
 	}
 	
@@ -148,11 +222,13 @@ public class ManagerAction extends ActionSupport {
 	 */
 	public String showMembers(){
 		members = userService.findMembers();
+		jsonString = JsonUtil.jsonForList(members);
 		return SUCCESS;
 	}
 	
 	public String showServers(){
 		servers = userService.findServers();
+		jsonString = JsonUtil.jsonForList(servers);
 		return SUCCESS;
 	}
 
@@ -168,16 +244,63 @@ public class ManagerAction extends ActionSupport {
 		this.userService = userService;
 	}
 
-	public List<User> getLeaders() {
-		return leaders;
+	public String getJsonString() {
+		return jsonString;
 	}
 
-	public List<User> getMembers() {
-		return members;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public List<User> getServers() {
-		return servers;
+	public Thesis getThesis() {
+		return thesis;
 	}
 
+	public void setThesis(Thesis thesis) {
+		this.thesis = thesis;
+	}
+
+	public Award getAward() {
+		return award;
+	}
+
+	public void setAward(Award award) {
+		this.award = award;
+	}
+
+	public Patent getPatent() {
+		return patent;
+	}
+
+	public void setPatent(Patent patent) {
+		this.patent = patent;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public void setThesisService(ThesisService thesisService) {
+		this.thesisService = thesisService;
+	}
+
+	public void setPatentService(PatentService patentService) {
+		this.patentService = patentService;
+	}
+
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public void setAwardService(AwardService awardService) {
+		this.awardService = awardService;
+	}
+
+	public void setSelectIds(String selectIds) {
+		this.selectIds = selectIds;
+	}
 }

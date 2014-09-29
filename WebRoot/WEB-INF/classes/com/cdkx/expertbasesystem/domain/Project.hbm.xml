@@ -28,8 +28,14 @@
         <property name="completeStatus" type="java.lang.Integer">
             <column name="complete_status" not-null="true" />
         </property>
+        <property name="allocation" type="java.lang.Integer">
+            <column name="allocation" />
+        </property>
+        <property name="selffinance" type="java.lang.Integer">
+            <column name="selffinance" />
+        </property>
         <many-to-one name="user" class="com.cdkx.expertbasesystem.domain.User" fetch="select">
-        	<column name="user" />
+        	<column name="user_id" />
         </many-to-one>
     </class>
 </hibernate-mapping>

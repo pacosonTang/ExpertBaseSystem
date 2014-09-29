@@ -16,17 +16,17 @@
         <property name="isDegree" type="java.lang.Integer">
             <column name="isdegree" not-null="true" />
         </property>
-        <set name="userDetailsForDegree" inverse="true">
+        <set name="usersForDegree" inverse="true">
             <key>
-                <column name="degree" not-null="true" />
+                <column name="degree" />
             </key>
-            <one-to-many class="com.cdkx.expertbasesystem.domain.UserDetail" />
+            <one-to-many class="com.cdkx.expertbasesystem.domain.User" />
         </set>
-        <set name="userDetailsForEducation" inverse="true">
+        <set name="usersForEducation" inverse="true">
             <key>
-                <column name="education" not-null="true" />
+                <column name="education" />
             </key>
-            <one-to-many class="com.cdkx.expertbasesystem.domain.UserDetail" />
+            <one-to-many class="com.cdkx.expertbasesystem.domain.User" />
         </set>
     </class>
 </hibernate-mapping>

@@ -19,6 +19,9 @@ public class Award {
 	//获奖日期
 	private String awardTime;
 	
+	//排名
+	private int rank;
+	
 	//奖励所属的会员
 	private User user;
 
@@ -60,5 +63,13 @@ public class Award {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 }

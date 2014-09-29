@@ -1,7 +1,11 @@
 package com.cdkx.expertbasesystem.dao.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.cdkx.expertbasesystem.dao.UserDao;
@@ -43,19 +47,19 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findMembers() {
-		return getHibernateTemplate().find("from User u where user.level=3");
+		return getHibernateTemplate().find("from User u where u.level=3");
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findLeaders() {
-		return getHibernateTemplate().find("from User u where user.level=1");
+		return getHibernateTemplate().find("from User u where u.level=1");
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findServers() {
-		return getHibernateTemplate().find("from User u where user.level=2");
+		return getHibernateTemplate().find("from User u where u.level=2");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -64,8 +68,23 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		return getHibernateTemplate().find("from User u left join fetch u.userDetail where u.userDetail." + searchCondition + " like '%" + searchValue + "%'");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findUncheckedUsers() {
 		return getHibernateTemplate().find("from User u left join fetch u.userDetail where u.checked=0");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> statisticMembers(String countCondition) {
+		return (List<Object[]>) getHibernateTemplate().execute(new HibernateCallback(){
+
+			@Override
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				return session.createQuery("select u.userDetail.major.name as major,count(*) as amount from User u where u.level=3 group by u.userDetail.major").list();
+			}
+			
+		});
 	}
 }

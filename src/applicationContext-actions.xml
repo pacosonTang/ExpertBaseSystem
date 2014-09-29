@@ -15,6 +15,10 @@
 	</bean>
 	<bean name="managerAction" class="com.cdkx.expertbasesystem.actions.ManagerAction">
 		<property name="userService" ref="userService"/>
+		<property name="awardService" ref="awardService"/>
+		<property name="patentService" ref="patentService"/>
+		<property name="projectService" ref="projectService"/>
+		<property name="thesisService" ref="thesisService"/>
 	</bean>
 	<bean name="memberAction" class="com.cdkx.expertbasesystem.actions.MemberAction">
 		<property name="userService" ref="userService"/>
@@ -28,5 +32,17 @@
 	</bean>
 	<bean name="searchAction" class="com.cdkx.expertbasesystem.actions.SearchAction">
 		<property name="userService" ref="userService" />
+	</bean>
+	<bean name="leaderAction" class="com.cdkx.expertbasesystem.actions.LeaderAction">
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean name="degreeAction" class="com.cdkx.expertbasesystem.actions.DegreeAction">
+		<property name="degreeService" ref="degreeService" />
+	</bean>
+	<bean name="institutionAction" class="com.cdkx.expertbasesystem.actions.InstitutionAction">
+		<property name="institutionService" ref="institutionService" />
+	</bean>
+	<bean name="subjectAction" class="com.cdkx.expertbasesystem.actions.SubjectAction">
+		<property name="subjectService" ref="subjectService"/>
 	</bean>
 </beans>

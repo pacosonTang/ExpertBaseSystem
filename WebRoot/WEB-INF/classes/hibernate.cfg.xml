@@ -24,7 +24,6 @@
 		<property name="hibernate.c3p0.breakAfterAcquireFailure">true</property>
 
 		<mapping resource="com/cdkx/expertbasesystem/domain/User.hbm.xml" />
-		<mapping resource="com/cdkx/expertbasesystem/domain/UserDetail.hbm.xml" />
 		<mapping resource="com/cdkx/expertbasesystem/domain/Subject.hbm.xml" />
 		<mapping resource="com/cdkx/expertbasesystem/domain/Degree.hbm.xml" />
 		<mapping resource="com/cdkx/expertbasesystem/domain/Institution.hbm.xml" />

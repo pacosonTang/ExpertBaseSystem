@@ -3,12 +3,16 @@ package com.cdkx.expertbasesystem.actions;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
+
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.cdkx.expertbasesystem.domain.User;
 import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.UserService;
-import com.cdkx.expertbasesystem.utils.MD5Util;
+import com.cdkx.expertbasesystem.utils.JsonUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -34,17 +38,7 @@ public class UserAction extends ActionSupport implements SessionAware {
 	
 	private UserService userService;
 	
-	/**
-	 * 用户注册<br>
-	 * 将信息的可用性验证放在前端，后端只负责处理数据
-	 * @return 注册成功与否的转向信息,成功转向登录页面，失败转向失败错误处理页面
-	 */
-	public String register(){
-		user.setChecked(0);
-		user.setPassword(MD5Util.encode(user.getPassword()));
-		userService.addUser(user);
-		return SUCCESS;
-	}
+	private String jsonString;
 	
 	/**
 	 * 修改用户信息
@@ -60,14 +54,25 @@ public class UserAction extends ActionSupport implements SessionAware {
 			int id = Integer.parseInt(session.get("userId").toString());
 			
 			user = userService.findUser(id);
-			if(user.getLevel() == 0)
-				return "manager_success";
-			else if(user.getLevel() == 1)
-				return "leader_success";
-			else if(user.getLevel() == 2)
-				return "server_success";
-			else
-				return "member_success";
+			//jsonString = JsonUtil.jsonForSingle(user);
+			JsonConfig cfg = new JsonConfig();
+			cfg.setExcludes(new String[]{"handler", "hibernateLazyInitializer"});
+			cfg.setJsonPropertyFilter(new PropertyFilter(){
+
+				@Override
+				public boolean apply(Object source, String name, Object value) {
+					if(name.equals("projects") || name.equals("awards") || name.equals("thesises") || name.equals("children")
+							|| name.equals("patents") || name.equals("parent")|| name.equals("usersForMajor") || name.equals("users")
+							|| name.equals("usersForCurrentMajor") || name.equals("usersForDegree") || name.equals("usersForEducation"))
+						return true;
+					else
+						return false;
+				}
+				
+			});
+			JSONArray jsonData = JSONArray.fromObject(user, cfg);
+			jsonString = "{success:true,totalCount:1,list:" + jsonData.toString() + "}";
+			return SUCCESS;
 		} else 
 			throw new AppException("用户没有登录");
 	}
@@ -91,6 +96,10 @@ public class UserAction extends ActionSupport implements SessionAware {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	public String getJsonString() {
+		return jsonString;
 	}
 
 }

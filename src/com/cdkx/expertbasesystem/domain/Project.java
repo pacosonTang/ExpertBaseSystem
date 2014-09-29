@@ -28,6 +28,12 @@ public class Project {
 	//项目状态
 	private int completeStatus;
 	
+	//财政拨款
+	private int allocation;
+	
+	//自筹款项
+	private int selffinance;
+	
 	//项目所属的会员
 	private User user;
 
@@ -93,5 +99,21 @@ public class Project {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public int getAllocation() {
+		return allocation;
+	}
+
+	public void setAllocation(int allocation) {
+		this.allocation = allocation;
+	}
+
+	public int getSelffinance() {
+		return selffinance;
+	}
+
+	public void setSelffinance(int selffinance) {
+		this.selffinance = selffinance;
 	}
 }

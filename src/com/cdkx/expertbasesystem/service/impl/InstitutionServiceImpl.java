@@ -49,7 +49,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 	}
 
 	@Override
-	public Institution findInstitutions(int id) {
+	public Institution findInstitution(int id) {
 		try {
 			return institutionDao.findInstitutionId(id);
 		} catch (Exception e) {

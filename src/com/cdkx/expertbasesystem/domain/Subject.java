@@ -19,13 +19,13 @@ public class Subject {
 	private Subject parent;
 	
 	//该学科的子学科
-	private Set<Subject> subjects;
+	private Set<Subject> children;
 	
-	//同一个用户所学专业包含的用户
-	private Set<UserDetail> userDetailsForMajor;
+	//所学专业相同的会员
+	private Set<User> usersForMajor;
 	
-	//同一个当前研究专业包含的用户
-	private Set<UserDetail> userDetailsForCurrentMajor;
+	//现从事专业相同的会员
+	private Set<User> usersForCurrentMajor;
 
 	public int getId() {
 		return id;
@@ -51,28 +51,27 @@ public class Subject {
 		this.parent = parent;
 	}
 
-	public Set<Subject> getSubjects() {
-		return subjects;
+	public Set<User> getUsersForMajor() {
+		return usersForMajor;
 	}
 
-	public void setSubjects(Set<Subject> subjects) {
-		this.subjects = subjects;
+	public void setUsersForMajor(Set<User> usersForMajor) {
+		this.usersForMajor = usersForMajor;
 	}
 
-	public Set<UserDetail> getUserDetailsForMajor() {
-		return userDetailsForMajor;
+	public Set<User> getUsersForCurrentMajor() {
+		return usersForCurrentMajor;
 	}
 
-	public void setUserDetailsForMajor(Set<UserDetail> userDetailsForMajor) {
-		this.userDetailsForMajor = userDetailsForMajor;
+	public void setUsersForCurrentMajor(Set<User> usersForCurrentMajor) {
+		this.usersForCurrentMajor = usersForCurrentMajor;
 	}
 
-	public Set<UserDetail> getUserDetailsForCurrentMajor() {
-		return userDetailsForCurrentMajor;
+	public Set<Subject> getChildren() {
+		return children;
 	}
 
-	public void setUserDetailsForCurrentMajor(
-			Set<UserDetail> userDetailsForCurrentMajor) {
-		this.userDetailsForCurrentMajor = userDetailsForCurrentMajor;
+	public void setChildren(Set<Subject> children) {
+		this.children = children;
 	}
 }

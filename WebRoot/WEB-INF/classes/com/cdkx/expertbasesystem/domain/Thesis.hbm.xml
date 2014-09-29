@@ -16,14 +16,8 @@
         <property name="pubTime" type="java.lang.String">
             <column name="pub_time" length="20" not-null="true" />
         </property>
-        <property name="isAccept" type="java.lang.Integer">
-            <column name="isaccept" />
-        </property>
-        <property name="isCore" type="java.lang.Integer">
-            <column name="iscore" />
-        </property>
         <many-to-one name="user" class="com.cdkx.expertbasesystem.domain.User" fetch="select">
-        	<column name="user" />
+        	<column name="user_id" />
         </many-to-one>
     </class>
 </hibernate-mapping>

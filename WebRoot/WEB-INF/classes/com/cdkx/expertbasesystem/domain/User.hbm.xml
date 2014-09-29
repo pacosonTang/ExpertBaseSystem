@@ -8,26 +8,40 @@
     <class name="com.cdkx.expertbasesystem.domain.User" table="t_user" catalog="expertinfobase">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="native" />
+            <generator class="native"/>
         </id>
-        <one-to-one name="userDetail" cascade="delete"/>
+        <many-to-one name="institution" class="com.cdkx.expertbasesystem.domain.Institution" fetch="select" lazy="false">
+            <column name="institution" />
+        </many-to-one>
+        <many-to-one name="degree" class="com.cdkx.expertbasesystem.domain.Degree" fetch="select" lazy="false">
+            <column name="degree" />
+        </many-to-one>
+        <many-to-one name="currentMajor" class="com.cdkx.expertbasesystem.domain.Subject" fetch="select" lazy="false">
+            <column name="current_major" />
+        </many-to-one>
+        <many-to-one name="major" class="com.cdkx.expertbasesystem.domain.Subject" fetch="select" lazy="false">
+            <column name="major" />
+        </many-to-one>
+        <many-to-one name="education" class="com.cdkx.expertbasesystem.domain.Degree" fetch="select" lazy="false">
+            <column name="education" />
+        </many-to-one>
         <property name="realname" type="java.lang.String">
-            <column name="realname" length="20" not-null="true" />
+            <column name="realname" length="20" not-null="true"/>
         </property>
         <property name="username" type="java.lang.String">
-            <column name="username" length="20" not-null="true" />
+            <column name="username" length="20" not-null="true"/>
         </property>
         <property name="password" type="java.lang.String">
-            <column name="password" length="18" not-null="true" />
+            <column name="password" length="32" not-null="true"/>
         </property>
         <property name="workUnit" type="java.lang.String">
-            <column name="work_unit" length="45" not-null="true" />
+            <column name="work_unit" length="45" />
         </property>
         <property name="telephone" type="java.lang.String">
             <column name="telephone" length="11" />
         </property>
         <property name="officePhone" type="java.lang.String">
-            <column name="officephone" length="11" />
+            <column name="officephone" length="13" />
         </property>
         <property name="postcode" type="java.lang.String">
             <column name="postcode" length="6" />
@@ -35,11 +49,11 @@
         <property name="email" type="java.lang.String">
             <column name="email" length="20" />
         </property>
+        <property name="idNo" type="java.lang.String">
+            <column name="id_no" length="18" />
+        </property>
         <property name="qq" type="java.lang.String">
             <column name="qq" length="10" />
-        </property>
-        <property name="idNo" type="java.lang.String">
-            <column name="id_no" length="10" />
         </property>
         <property name="avatar" type="java.lang.String">
             <column name="avatar" length="45" />
@@ -50,10 +64,27 @@
         <property name="level" type="java.lang.Integer">
             <column name="level" not-null="true" />
         </property>
-        <property name="checked" type="java.lang.Integer">
-            <column name="checked" not-null="true" />
+        <property name="sex" type="java.lang.String">
+            <column name="sex" length="4" />
         </property>
-
+        <property name="birthday" type="java.lang.String">
+            <column name="birthday" length="20" />
+        </property>
+        <property name="adept" type="java.lang.String">
+            <column name="adept" length="20" />
+        </property>
+        <property name="school" type="java.lang.String">
+            <column name="school" length="20" />
+        </property>
+        <property name="graduateTime" type="java.lang.String">
+            <column name="graduate_time" length="15" />
+        </property>
+        <property name="title" type="java.lang.String">
+            <column name="title" length="20" />
+        </property>
+        <property name="duty" type="java.lang.String">
+            <column name="duty" length="20" />
+        </property>
         <set name="projects" inverse="true" cascade="all-delete-orphan">
             <key>
                 <column name="user_id" not-null="true" />
