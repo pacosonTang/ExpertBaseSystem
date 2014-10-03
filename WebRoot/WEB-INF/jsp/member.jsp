@@ -20,9 +20,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="css/icon.css"/>
 	<link rel="stylesheet" type="text/css" href="ext4/resources/css/ext-all.css"/>
 	
+	<script type="text/javascript">
+		var username = '<%=session.getAttribute("username")%>';
+		var userId = '<%=session.getAttribute("userId")%>';
+	</script>
+	
 	<script type="text/javascript" src="ext4/bootstrap.js"></script>
 	<script type="text/javascript" src="ext4/locale/ext-lang-zh_CN.js"></script>
 	
+	<script type="text/javascript" src="app/model/Level.js"></script>
+	<script type="text/javascript" src="app/store/Levels.js"></script>
+	<script type="text/javascript" src="app/model/Status.js"></script>
+	<script type="text/javascript" src="app/store/Statuses.js"></script>
+	<script type="text/javascript" src="app/model/Thesis.js"></script>
+	<script type="text/javascript" src="app/model/Patent.js"></script>
+	<script type="text/javascript" src="app/model/Award.js"></script>
+	<script type="text/javascript" src="app/model/Project.js"></script>
+	<script type="text/javascript" src="app/store/Awards.js"></script>
+	<script type="text/javascript" src="app/store/Patents.js"></script>
+	<script type="text/javascript" src="app/store/Thesises.js"></script>
+	<script type="text/javascript" src="app/store/Projects.js"></script>
+	<script type="text/javascript" src="app/model/Major.js"></script>
+	<script type="text/javascript" src="app/store/FirstMajors.js"></script>
+	<script type="text/javascript" src="app/store/SecondMajors.js"></script>
+	<script type="text/javascript" src="app/store/ThirdMajors.js"></script>
+	<script type="text/javascript" src="app/model/Degree.js"></script>
+	<script type="text/javascript" src="app/store/Educations.js"></script>
+	<script type="text/javascript" src="app/store/Degrees.js"></script>
+	<script type="text/javascript" src="app/model/Institution.js"></script>
+	<script type="text/javascript" src="app/store/Institutions.js"></script>
+	<script type="text/javascript" src="app/model/Sex.js"></script>
+	<script type="text/javascript" src="app/store/Sexs.js"></script>
 	<script type="text/javascript" src="app/model/User.js"></script>
 	<script type="text/javascript" src="app/controller/memberCl.js"></script>
 	<script type="text/javascript" src="app/view/member/memberMenu.js"></script>

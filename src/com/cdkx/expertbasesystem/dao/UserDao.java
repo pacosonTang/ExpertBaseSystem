@@ -80,4 +80,11 @@ public interface UserDao {
 	 * @return Obeject
 	 */
 	public List<Object[]> statisticMembers(String countCondition);
+	
+	/**
+	 * 查找具有相同用户名的用户，以判断当前用户修改的帐号是唯一的
+	 * @param username 用户新的帐号
+	 * @return 使用该用户名的所有用户
+	 */
+	public List<User> findUsersByUsername(String username);
 }

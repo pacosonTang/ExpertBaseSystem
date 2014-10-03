@@ -86,4 +86,11 @@ public interface UserService {
 	 * @return
 	 */
 	public List<Object[]> statisticMembers(String countCondition);
+	
+	/**
+	 * 通过用户名来查找用户
+	 * @param username 需要查找的用户名
+	 * @return 使用该用户名的所有用户
+	 */
+	public List<User> findUsersByUsername(String username);
 }

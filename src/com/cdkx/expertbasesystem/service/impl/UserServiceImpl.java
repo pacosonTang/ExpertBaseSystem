@@ -133,4 +133,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.statisticMembers(countCondition);
 	}
 
+	@Override
+	public List<User> findUsersByUsername(String username) {
+		return userDao.findUsersByUsername(username);
+	}
+
 }

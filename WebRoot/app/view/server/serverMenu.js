@@ -1,5 +1,5 @@
 //管理员菜单
-var managerMenu = Ext.create('Ext.tree.Panel', {
+var serverMenu = Ext.create('Ext.tree.Panel', {
 	animate : true,
 	frame : true,
 	rootVisible : false,
@@ -20,8 +20,8 @@ var managerMenu = Ext.create('Ext.tree.Panel', {
 			text : '会员查询',
 			leaf : true
 		}, {
-			id : 'modifyPass',
-			text : '修改密码',
+			id : 'modifyCount',
+			text : '修改账户密码',
 			leaf : true
 		} ]
 	}

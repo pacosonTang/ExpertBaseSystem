@@ -3,7 +3,7 @@ Ext.create("Ext.data.Store", {
 	storeId : 'UserStore',
 	proxy : {
 		type : 'ajax',
-		url : 'manager/showMembers',
+		url : 'manager/showMembers.action',
 		reader : {
 			type : 'json',
 			root : 'list',

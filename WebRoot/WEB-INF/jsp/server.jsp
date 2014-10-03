@@ -20,9 +20,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="css/icon.css"/>
 	<link rel="stylesheet" type="text/css" href="ext4/resources/css/ext-all.css"/>
 	
+	<script type="text/javascript">
+		var username = '<%=session.getAttribute("username")%>';
+	</script>
+	
 	<script type="text/javascript" src="ext4/bootstrap.js"></script>
 	<script type="text/javascript" src="ext4/locale/ext-lang-zh_CN.js"></script>
 	
+	<script type="text/javascript" src="app/model/Thesis.js"></script>
+	<script type="text/javascript" src="app/model/Patent.js"></script>
+	<script type="text/javascript" src="app/model/Award.js"></script>
+	<script type="text/javascript" src="app/model/Project.js"></script>
+	<script type="text/javascript" src="app/store/Awards.js"></script>
+	<script type="text/javascript" src="app/store/Patents.js"></script>
+	<script type="text/javascript" src="app/store/Thesises.js"></script>
+	<script type="text/javascript" src="app/store/Projects.js"></script>
+	<script type="text/javascript" src="app/model/Sex.js"></script>
+	<script type="text/javascript" src="app/store/Sexs.js"></script>
+	<script type="text/javascript" src="app/model/User.js"></script>
+	<script type="text/javascript" src="app/store/Users.js"></script>
+	<script type="text/javascript" src="app/model/Server.js"></script>
+	<script type="text/javascript" src="app/controller/serverCl.js"></script>
 	<script type="text/javascript" src="app/view/server/serverMenu.js"></script>
 	<script type="text/javascript" src="app/view/server/serverPanel.js"></script>
 

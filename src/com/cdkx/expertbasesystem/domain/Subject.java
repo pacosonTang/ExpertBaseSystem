@@ -22,10 +22,7 @@ public class Subject {
 	private Set<Subject> children;
 	
 	//所学专业相同的会员
-	private Set<User> usersForMajor;
-	
-	//现从事专业相同的会员
-	private Set<User> usersForCurrentMajor;
+	private Set<User> users;
 
 	public int getId() {
 		return id;
@@ -51,20 +48,12 @@ public class Subject {
 		this.parent = parent;
 	}
 
-	public Set<User> getUsersForMajor() {
-		return usersForMajor;
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setUsersForMajor(Set<User> usersForMajor) {
-		this.usersForMajor = usersForMajor;
-	}
-
-	public Set<User> getUsersForCurrentMajor() {
-		return usersForCurrentMajor;
-	}
-
-	public void setUsersForCurrentMajor(Set<User> usersForCurrentMajor) {
-		this.usersForCurrentMajor = usersForCurrentMajor;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	public Set<Subject> getChildren() {

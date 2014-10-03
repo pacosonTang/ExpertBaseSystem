@@ -16,7 +16,7 @@
         <property name="name" type="java.lang.String">
             <column name="name" length="20" not-null="true" />
         </property>
-        <set name="usersForMajor" inverse="true">
+        <set name="users" inverse="true">
             <key>
                 <column name="major" />
             </key>
@@ -27,12 +27,6 @@
                 <column name="parent" />
             </key>
             <one-to-many class="com.cdkx.expertbasesystem.domain.Subject" />
-        </set>
-        <set name="usersForCurrentMajor" inverse="true">
-            <key>
-                <column name="current_major" />
-            </key>
-            <one-to-many class="com.cdkx.expertbasesystem.domain.User" />
         </set>
     </class>
 </hibernate-mapping>

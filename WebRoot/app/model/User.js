@@ -27,10 +27,9 @@ Ext.define("User", {
   		{name:'degree.id', type:'int', sortable:true},
   		{name:'degree.name', type:'string', sortable:true},
   		{name:'education.id', type:'int', sortable:true},
-  		{name : 'education.name', type : 'string', sortable : true},
+  		{name:'education.name', type : 'string', sortable : true},
   		{name:'major.id', type:'int', sortable:true},
   		{name:'major.name', type:'string', sortable:true},
-  		{name:'currentMajor.id', type:'int', sortable:true},
-  		{name:'currentMajor.name', type:'string', sortable:true}
+  		{name:'currentMajor', type:'string', sortable:true}
   	]
 });

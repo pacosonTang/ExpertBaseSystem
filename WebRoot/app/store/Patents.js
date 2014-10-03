@@ -3,7 +3,7 @@ Ext.create("Ext.data.Store", {
 	storeId : 'PatentStore',
 	proxy : {
 		type : 'ajax',
-		url : 'manager/showPatents.action',
+		url : 'common/showPatents.action',
 		reader : {
 			type : 'json',
 			root : 'list',

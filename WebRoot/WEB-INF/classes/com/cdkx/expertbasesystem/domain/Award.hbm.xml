@@ -11,10 +11,10 @@
             <generator class="native"/>
         </id>
         <property name="name" type="java.lang.String">
-            <column name="name" length="30" not-null="true" />
+            <column name="name" length="50" not-null="true" />
         </property>
         <property name="fruitName" type="java.lang.String">
-            <column name="fruit_name" length="30" not-null="true" />
+            <column name="fruit_name" length="50" not-null="true" />
         </property>
         <property name="awardTime" type="java.lang.String">
             <column name="award_time" length="20" not-null="true" />

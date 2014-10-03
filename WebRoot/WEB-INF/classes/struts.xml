@@ -6,7 +6,7 @@
 <struts>
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.multipart.maxSize" value="10485760" />
+    <constant name="struts.multipart.maxSize" value="2049152" />
     <constant name="struts.i18n.encoding" value="UTF-8" />
 
     <package name="default" namespace="/" extends="struts-default">
@@ -40,7 +40,10 @@
     
     <package name="common" namespace="/common" extends="default">
     	<action name="modifyUser" class="userAction" method="modifyUser">
-    		<result name="success" type="redirect">showUser.action</result>
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="modifyCount" class="userAction" method="modifyCount">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
     	</action>
     	<action name="showUser" class="userAction" method="showUser">
     		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
@@ -75,78 +78,6 @@
     	<action name="deleteThesises" class="memberAction" method="deleteThesises">
     		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
     	</action>
-    </package>
-    
-    <package name="member" namespace="/member" extends="default">
-    	<action name="showAward" class="memberAction" method="showAward">
-    		<result name="success" type="redirect">showUser.action</result>
-    	</action>
-    	<action name="showPatent" class="memberAction" method="showPatent">
-    		<result name="success" type="redirect">showUser.action</result>
-    	</action>
-    	<action name="showProject" class="memberAction" method="showProject">
-    		<result name="success" type="redirect">showUser.action</result>
-    	</action>
-    	<action name="showThesis" class="memberAction" method="showThesis">
-    		<result name="success" type="redirect">showUser.action</result>
-    	</action>
-    	<action name="addAward" class="memberAction" method="addAward">
-    		<result name="success" type="redirect">showUser.action</result>
-    	</action>
-    	<action name="addPatent" class="memberAction" method="addPatent">
-    		<result name="success" type="redirect">showUser.action</result>
-    	</action>
-    	<action name="addProject" class="memberAction" method="addProject">
-    		<result name="success" type="redirect">showUser.action</result>
-    	</action>
-    	<action name="addThesis" class="memberAction" method="addThesis">
-    		<result name="success" type="redirect">showUser.action</result>
-    	</action>
-    </package>
-    
-    <package name="leader" namespace="/leader" extends="default">
-    	<action name="showMembers" class="leaderAction" method="showMembers">
-    		<result name="success">/WEB-INF/jsp/test.jsp</result>
-    	</action>
-    	<action name="countMember" class="leaderAction" method="countMember">
-    		<result name="success">/WEB-INF/jsp/test.jsp</result>
-    	</action>
-    </package>
-    
-    <package name="server" namespace="/server" extends="default">
-    	<action name="showMembers" class="serverAction" method="showMembers">
-    		<result name="success">/WEB-INF/jsp/members.jsp</result>
-    	</action>
-    </package>
-    
-    <package name="manager" namespace="/manager" extends="default">
-    	<action name="addLeader" class="managerAction" method="addLeader">
-    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
-    	</action>
-    	<action name="addServer" class="managerAction" method="addServer">
-    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
-    	</action>
-    	<action name="addMember" class="managerAction" method="addMember">
-    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
-    	</action>
-    	<action name="deleteLeaders" class="managerAction" method="deleteLeaders">
-    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
-    	</action>
-    	<action name="deleteServers" class="managerAction" method="deleteServers">
-    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
-    	</action>
-    	<action name="deleteMembers" class="managerAction" method="deleteMembers">
-    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
-    	</action>
-    	<action name="showLeaders" class="managerAction" method="showLeaders">
-    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
-    	</action>
-    	<action name="showServers" class="managerAction" method="showServers">
-    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
-    	</action>
-    	<action name="showMembers" class="managerAction" method="showMembers">
-    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
-    	</action>
     	<action name="showAwards" class="managerAction" method="showAwards">
     		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
     	</action>
@@ -169,6 +100,69 @@
     		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
     	</action>
     	<action name="addAward" class="managerAction" method="addAward">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="member" namespace="/member" extends="default">
+    	<action name="upload" class="userAction" method="upload">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="leader" namespace="/leader" extends="default">
+    	<action name="showMembers" class="leaderAction" method="showMembers">
+    		<result name="success">/WEB-INF/jsp/test.jsp</result>
+    	</action>
+    	<action name="countMember" class="leaderAction" method="countMember">
+    		<result name="success">/WEB-INF/jsp/test.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="server" namespace="/server" extends="default">
+    	<action name="showMembers" class="serverAction" method="showMembers">
+    		<result name="success">/WEB-INF/jsp/members.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="manager" namespace="/manager" extends="default">
+    	<action name="showLeaders" class="managerAction" method="showLeaders">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="showServers" class="managerAction" method="showServers">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="showMembers" class="managerAction" method="showMembers">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="addLeader" class="managerAction" method="addLeader">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="addServer" class="managerAction" method="addServer">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="modifyMember" class="managerAction" method="modifyMember">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="addMember" class="managerAction" method="addMember">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="deleteLeaders" class="managerAction" method="deleteLeaders">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="deleteServers" class="managerAction" method="deleteServers">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="deleteMembers" class="managerAction" method="deleteMembers">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="upload" class="managerAction" method="upload">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="addSecondSubject" class="subjectAction" method="addSecondSubject">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="addSubject" class="subjectAction" method="addSubject">
     		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
     	</action>
     </package>

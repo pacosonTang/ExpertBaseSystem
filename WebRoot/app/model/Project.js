@@ -8,7 +8,7 @@ Ext.define("Project", {
 		{name : 'delegationUnit',type:'string',sortable:true},
 		{name : 'projectLevel',type:'int',sortable:true},
 		{name : 'completeStatus',type:'int',sortable:true},
-		{name : 'allocation',type:'int',sortable:true},
-		{name : 'selffinance',type:'int',sortable:true}
+		{name : 'allocation',type:'float',sortable:true},
+		{name : 'selffinance',type:'float',sortable:true}
 	]
 });

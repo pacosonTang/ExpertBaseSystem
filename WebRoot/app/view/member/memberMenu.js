@@ -32,7 +32,7 @@ var memberMenu = Ext.create('Ext.tree.Panel', {
 			text : '项目管理',
 			leaf : true
 		}, {
-			id : 'modifyPass',
+			id : 'modifyCount',
 			text : '修改密码',
 			leaf : true
 		} ]

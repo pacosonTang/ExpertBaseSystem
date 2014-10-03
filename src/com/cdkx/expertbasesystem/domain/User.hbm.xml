@@ -16,15 +16,15 @@
         <many-to-one name="degree" class="com.cdkx.expertbasesystem.domain.Degree" fetch="select" lazy="false">
             <column name="degree" />
         </many-to-one>
-        <many-to-one name="currentMajor" class="com.cdkx.expertbasesystem.domain.Subject" fetch="select" lazy="false">
-            <column name="current_major" />
-        </many-to-one>
         <many-to-one name="major" class="com.cdkx.expertbasesystem.domain.Subject" fetch="select" lazy="false">
             <column name="major" />
         </many-to-one>
         <many-to-one name="education" class="com.cdkx.expertbasesystem.domain.Degree" fetch="select" lazy="false">
             <column name="education" />
         </many-to-one>
+        <property name="currentMajor" type="java.lang.String">
+        	<column name="current_major" length="40"/>
+        </property>
         <property name="realname" type="java.lang.String">
             <column name="realname" length="20" not-null="true"/>
         </property>

@@ -43,6 +43,55 @@ var showServers = function(record, mainPanel, ServersGP, store){
 		ServersGP.hide();
 	}
 };
+/**
+ * 显示账户修改面板
+ */
+var showCount = function(record, mainPanel, countFP){
+	if(record.get('id')=='modifyCount'){
+		mainPanel.setTitle(record.get('text'));
+		mainPanel.add(countFP).doLayout();
+		countFP.show();
+	} else {
+		countFP.hide();
+	}
+};
+
+/**
+ * 显示我的资料
+ */
+var showMe = function(record, mainPanel, showUser){
+	if(record.get('id') == 'myInfo'){
+		mainPanel.setTitle(record.get('text'));
+		mainPanel.add(showUser).doLayout();
+		showUser.show();
+		showUser.form.load({
+			url : 'common/showUser.action',
+			method : 'POST',
+			waitMsg : '数据正在加载...',
+			waitTitle : '请稍后',
+			timeout : 5000,
+			failure : function(form, action){
+				Ext.Msg.alert('信息', '数据加载失败！');
+			}
+		});
+	}else{
+		showUser.hide();
+	}
+};
+
+var saveMe = function(userFP){
+	if(userFP.form.isValid()){
+		userFP.form.submit({
+			url : 'common/modifyUser.action',
+			success : function(form, action){
+				Ext.Msg.alert('信息', '保存成功！');
+			},
+			failure : function(form, action){
+				Ext.Msg.alert('信息', '保存失败，请重试...');
+			}
+		});
+	}
+};
 
 /**
  * 保存新的会员信息
@@ -55,6 +104,7 @@ var addMember = function(memberFP, store){
 				Ext.Msg.alert('信息', '保存成功！');
 				store.load();
 				memberFP.form.reset();
+				memberFP.down('image').setSrc('img/nopicture.jpg');
 			},
 			failure : function(form, action){
 				Ext.Msg.alert('信息', '保存失败，请重新再试！');
@@ -110,7 +160,7 @@ var addServer = function(serverFP, store){
 var addThesis = function(window, thesisForm, store, userId){
 	if(thesisForm.form.isValid()){
 		thesisForm.form.submit({
-			url : 'manager/addThesis.action?userId=' + userId,
+			url : 'common/addThesis.action?userId=' + userId,
 			success : function(form, action){
 				store.load({
 					params : {
@@ -132,7 +182,7 @@ var addThesis = function(window, thesisForm, store, userId){
 var addPatent = function(window, patentForm, store, userId){
 	if(patentForm.form.isValid()){
 		patentForm.form.submit({
-			url : 'manager/addPatent.action?userId=' + userId,
+			url : 'common/addPatent.action?userId=' + userId,
 			success : function(form, action){
 				store.load({
 					params : {
@@ -154,7 +204,7 @@ var addPatent = function(window, patentForm, store, userId){
 var addProject = function(window, projectForm, store, userId){
 	if(projectForm.form.isValid()){
 		projectForm.form.submit({
-			url : 'manager/addProject.action?userId=' + userId,
+			url : 'common/addProject.action?userId=' + userId,
 			success : function(form, action){
 				store.load({
 					params : {
@@ -176,7 +226,7 @@ var addProject = function(window, projectForm, store, userId){
 var addAward = function(window, awardForm, store, userId){
 	if(awardForm.form.isValid()){
 		awardForm.form.submit({
-			url : 'manager/addAward.action?userId=' + userId,
+			url : 'common/addAward.action?userId=' + userId,
 			success : function(form, action){
 				store.load({
 					params : {
@@ -607,5 +657,114 @@ var deleteAwards = function(grid){
 				});
 			}
 		});
+	}
+};
+/**
+ * 修改账户
+ */
+var modifyCount = function(modifyCountFP){
+	if(modifyCountFP.form.isValid()){
+		Ext.Msg.confirm('提示', '确定要修改你的账户吗？', function(opt){
+			if(opt == 'yes'){
+				modifyCountFP.form.submit({
+					url : 'common/modifyCount.action',
+					method : 'POST',
+					success : function(form, action){
+						Ext.Msg.alert('信息', '账户修改成功，请牢记你的账户！');
+					},
+					failure : function(form, action){
+						Ext.Msg.alert('信息', '账户修改失败，' + action.result.errorMessage);
+					}
+				});
+			}
+		});
+	}else{
+		Ext.Msg.alert('提示', '请正确填写信息！');
+	}
+};
+//上传图片
+var savaImg = function(imgFP, userFP){
+	if(imgFP.form.isValid()){
+		imgFP.form.submit({
+			url : 'manager/upload.action',
+			success : function(form, action){
+				userFP.down('image').setSrc('uploads/' + action.result.imgName);
+				userFP.down('[name=user.avatar]').setValue(action.result.imgName);
+				imgFP.form.reset();
+				imgFP.up('window').hide();
+				Ext.Msg.alert('信息', '照片修改成功...');
+			},
+			failure : function(form, action){
+				Ext.Msg.alert('信息', action.result.errorMessage);
+			}
+		});
+	}else{
+		Ext.Msg.alert('警告', '请选择文件...');
+	}
+};
+//查看会员详情
+var showMember = function(grid, row, modifyMemberWindow){
+	var record = grid.getStore().getAt(row);
+	var memberFP = modifyMemberWindow.down('form');
+	
+	memberFP.down('[name=user.id]').setValue(record.get('id'));
+	memberFP.down('[name=user.realname]').setValue(record.get('realname'));
+	memberFP.down('[name=user.username]').setValue(record.get('username'));
+	memberFP.down('[name=user.password]').setValue(record.get('password'));
+	memberFP.down('[name=user.sex]').setValue(record.get('sex'));
+	memberFP.down('[name=user.idNo]').setValue(record.get('idNo'));
+	memberFP.down('[name=user.school]').setValue(record.get('school'));
+	memberFP.down('[name=user.major.name]').setValue(record.get('major.id') + '-' + record.get('major.name'));
+	memberFP.down('[name=user.workUnit]').setValue(record.get('workUnit'));
+	memberFP.down('[name=user.title]').setValue(record.get('title'));
+	memberFP.down('[name=user.duty]').setValue(record.get('duty'));
+	memberFP.down('[name=user.address]').setValue(record.get('address'));
+	memberFP.down('[name=user.telephone]').setValue(record.get('telephone'));
+	memberFP.down('[name=user.officePhone]').setValue(record.get('officePhone'));
+	memberFP.down('[name=user.email]').setValue(record.get('email'));
+	memberFP.down('[name=user.postcode]').setValue(record.get('postcode'));
+	memberFP.down('[name=user.qq]').setValue(record.get('qq'));
+	memberFP.down('[name=user.currentMajor]').setValue(record.get('currentMajor'));
+	memberFP.down('[name=user.adept]').setValue(record.get('adept'));
+	memberFP.down('[name=user.avatar]').setValue(record.get('avatar'));
+	if(record.get('avatar') != null && record.get('avatar') != ''){
+		memberFP.down('image').setSrc('uploads/' + record.get('avatar'));
+	}
+	if(record.get('birthday') != null && record.get('birthday') != '')
+		memberFP.down('[name=user.birthday]').setValue(new Date(Date.parse(record.get('birthday').replace(/\./g,"/"))));
+	if(record.get('graduateTime') != null && record.get('graduateTime') != '')
+		memberFP.down('[name=user.graduateTime]').setValue(new Date(Date.parse(record.get('graduateTime').replace(/\./g,"/"))));
+	//加载好combobox数据并设置初始值
+	Ext.data.StoreManager.lookup('InstitutionStore').load({
+		callback : function(records, operation, success){
+			memberFP.form.findField('institution.id').setValue(record.get('institution.id'));
+		}
+	});
+	Ext.data.StoreManager.lookup('DegreeStore').load({
+		callback : function(records, operation, success){
+			memberFP.form.findField('degree.id').setValue(record.get('degree.id'));
+		}
+	});
+	Ext.data.StoreManager.lookup('EducationStore').load({
+		callback : function(records, operation, success){
+			memberFP.form.findField('education.id').setValue(record.get('education.id'));
+		}
+	});
+	modifyMemberWindow.show();
+};
+//修改用户
+var modifyMember = function(memberFP, store){
+	if(memberFP.form.isValid()){
+		memberFP.form.submit({
+			url : 'manager/modifyMember.action',
+			timeout : 5000,
+			method : 'POST',
+			success : function(){
+				store.load();
+				Ext.Msg.alert('信息', '修改成功...');
+			}
+		});
+	}else{
+		Ext.Msg.alert('信息', '请正确填写信息...');
 	}
 };

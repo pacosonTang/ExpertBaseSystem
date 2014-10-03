@@ -58,7 +58,7 @@ public class User {
 	private Subject major;
 	
 	//现从事专业
-	private Subject currentMajor;
+	private String currentMajor;
 	
 	//学历
 	private Degree education;
@@ -259,11 +259,11 @@ public class User {
 		this.major = major;
 	}
 
-	public Subject getCurrentMajor() {
+	public String getCurrentMajor() {
 		return currentMajor;
 	}
 
-	public void setCurrentMajor(Subject currentMajor) {
+	public void setCurrentMajor(String currentMajor) {
 		this.currentMajor = currentMajor;
 	}
 

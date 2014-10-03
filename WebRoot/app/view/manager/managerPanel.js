@@ -4,7 +4,7 @@ Ext.onReady(function(){
 	
 	//定义全局变量,用以存储当前操作的用户
 	var userId = '';
-	var flag = 0;
+	var flag=1;
 	
 	//将整个body分为3部分，top显示Logo，west显示菜单，main显示内容
 	Ext.create('Ext.container.Viewport', {
@@ -50,8 +50,6 @@ Ext.onReady(function(){
 	 */
 	var subjectWindow = Ext.create("Ext.window.Window", {
 		plain : true,
-		width : 670,
-		height : 80,
 		layout : 'fit',
 		resizable : false,
 		closeAction : 'hide',
@@ -60,7 +58,7 @@ Ext.onReady(function(){
 			xtype : 'form',
 			frame : true,
 			width : 670,
-			height : 70,
+			height : 80,
 			buttonAlign : 'center',
 			layout : {
 				type : 'table',
@@ -69,7 +67,7 @@ Ext.onReady(function(){
 			defaults : {
 				labelSeparator : ' : ',
 				labelAlign : 'right',
-				labelWidth : 60,
+				labelWidth : 60
 			},
 			items : [{
 				xtype : 'combobox',
@@ -78,6 +76,7 @@ Ext.onReady(function(){
 				id : 'firstSubject',
 				emptyText : '请选择',
 				queryMode : 'remote',
+				allowBlank : false,
 				store : Ext.data.StoreManager.lookup('FirstMajorStore'),
 				valueField : 'id',
 				displayField : 'name',
@@ -93,7 +92,7 @@ Ext.onReady(function(){
 						comS.clearValue();
 						comS.store.load({
 							params : {
-								subjectId : record[0].get('id')
+								subjectId : combo.getValue()
 							}
 						});
 					}
@@ -104,8 +103,12 @@ Ext.onReady(function(){
 				name : 'secondSubject',
 				id : 'secondSubject',
 				readOnly : true,
+				defaultListConfig : {
+					loadMask : false
+				},
 				emptyText : '请选择',
 				queryMode : 'local',
+				allowBlank : false,
 				store : Ext.data.StoreManager.lookup('SecondMajorStore'),
 				valueField : 'id',
 				displayField : 'name',
@@ -118,7 +121,7 @@ Ext.onReady(function(){
 						com.clearValue();
 						com.store.load({
 							params : {
-								subjectId : record[0].get('id')
+								subjectId : combo.getValue()
 							}
 						});
 					}
@@ -129,8 +132,12 @@ Ext.onReady(function(){
 				name : 'thirdSubject',
 				id : 'thirdSubject',
 				readOnly : true,
+				defaultListConfig : {
+					loadMask : false
+				},
 				emptyText : '请选择',
 				queryMode : 'local',
+				allowBlank : false,
 				store : Ext.data.StoreManager.lookup('ThirdMajorStore'),
 				valueField : 'id',
 				displayField : 'name',
@@ -142,26 +149,73 @@ Ext.onReady(function(){
 				iconCls : 'save',
 				disabled : false,
 				handler : function(){
-					var comboValue = subjectWindow.down('form').form.findField('thirdSubject').getValue();
-					if(flag==1)
-						addMemberWindow.down('form').form.findField('user.major.id').setValue(comboValue);
-					else if(flag==2)
-						addMemberWindow.down('form').form.findField('user.currentMajor.id').setValue(comboValue);
-					flag=0;
+					var combo = subjectWindow.down('form').form.findField('thirdSubject');
+					var record;
+				    combo.getStore().each(function(r){
+				        if(r.get('id') == combo.getValue()){
+				            record = r;
+				            return false;
+				        }
+				    });
+				    if(flag == 1)
+				    	addMemberWindow.down('form').form.findField('user.major.id').setValue(combo.getValue() + '-' + record.get('name'));
+				    else
+				    	modifyMemberWindow.down('form').form.findField('user.major.id').setValue(combo.getValue() + '-' + record.get('name'));
 					subjectWindow.hide();
 				}
 			}]
 		}]
 	});
-	
 	/**
-	 * 添加会员
+	 * 图片上传
 	 */
-	var addMemberWindow = Ext.create("Ext.window.Window", {
+	var imgUploadWindow = Ext.create("Ext.window.Window", {
+		title : '上传照片',
+		plain : true,
+		closeAction : 'hide',
+		resizable : false,
+		modal : true,
+		items : [{
+			xtype : 'form',
+			frame : true,
+			width : 250,
+			height : 60,
+			buttonAlign : 'center',
+			defaults : {
+				labelSeparator : ' : ',
+				labelAlign : 'right',
+				labelWidth : 90
+			},
+			items : [{
+				xtype : 'textfield',
+				fieldLabel : '选择照片<200K',
+				inputType : 'file',
+				name : 'img',
+				id : 'img',
+				allowBlank : false,
+				regex : /\.(jpg|gif|bmp|png|JPG|GIF|BMP|PNG)/,
+				regexText : '图片格式只能为.jpg/.gif/.bmp/.png',
+				msgTarget : 'side'
+			}],
+			buttons : [{
+				text : '上传',
+				iconCls : 'save',
+				disabled : false,
+				handler : function(){
+					if(flag == 1)
+						savaImg(imgUploadWindow.down('form'), addMemberWindow.down('form'));
+					else
+						savaImg(imgUploadWindow.down('form'), modifyMemberWindow.down('form'));
+				}
+			}]
+		}]
+	});
+	/**
+	 * 修改会员
+	 */
+	var modifyMemberWindow = Ext.create("Ext.window.Window", {
 		title : '添加用户',
 		plain : true,
-		width : 850,
-		height : 360,
 		layout : 'fit',
 		closeAction : 'hide',
 		resizable : false,
@@ -169,13 +223,13 @@ Ext.onReady(function(){
 		items : [{
 			xtype : 'form',
 			frame : true,
-			height : 330,
+			height : 400,
 			width : 850,
 			buttonAlign : 'center',
 			defaults : {
 				labelSeparator : ' : ',
 				labelAlign : 'right',
-				labelWidth : 85,
+				labelWidth : 85
 			},
 			layout : {
 				type : 'table',
@@ -183,10 +237,9 @@ Ext.onReady(function(){
 			},
 			items : [{
 				xtype : 'image',
-				name : 'user.avatar',
-				id : 'avatar',
 				width : 100,
 				height : 134,
+				src : 'img/nopicture.jpg',
 				rowspan : 4
 			}, {
 				xtype : 'textfield',
@@ -231,7 +284,7 @@ Ext.onReady(function(){
 				xtype : 'combobox',
 				fieldLabel : '学历',
 				name : 'user.education.id',
-				id : 'education.name',
+				id : 'education.id',
 				allowBlank : false,
 				emptyText : '请选择',
 				queryMode : 'remote',
@@ -259,15 +312,15 @@ Ext.onReady(function(){
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '所学专业',
-				name : 'user.major.id',
+				name : 'user.major.name',
 				id : 'user.major.id',
 				allowBlank : false,
 				readOnly : true,
 				listeners : {
 					render : function(p){
 						p.getEl().on('click', function(p){
+							flag=0;
 							subjectWindow.show();
-							flag=1;
 						});
 					}
 				}
@@ -275,7 +328,7 @@ Ext.onReady(function(){
 				xtype : 'combobox',
 				fieldLabel : '学位',
 				name : 'user.degree.id',
-				id : 'degree.name',
+				id : 'degree.id',
 				allowBlank : false,
 				emptyText : '请选择',
 				queryMode : 'remote',
@@ -288,7 +341,7 @@ Ext.onReady(function(){
 				xtype : 'combobox',
 				fieldLabel : '所属学会/协会',
 				name : 'user.institution.id',
-				id : 'institution.name',
+				id : 'institution.id',
 				editale : false,
 				allowBlank : false,
 				emptyText : '请选择',
@@ -298,6 +351,17 @@ Ext.onReady(function(){
 				displayField : 'name',
 				forceSelection : true,
 				typeAhead : true
+			}, {
+				xtype : 'button',
+				text : '上传',
+				style : 'margin-left:25px;',
+				colspan : 4,
+				iconCls : 'upload',
+				disabled : false,
+				handler : function(){
+					flag=0;
+					imgUploadWindow.show();
+				}
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '工作单位',
@@ -359,8 +423,8 @@ Ext.onReady(function(){
 				name : 'user.postcode',
 				id : 'postcode',
 				style : 'margin-top:10px;',
-				maxValue : 6,
-				minValue : 6
+				maxLength : 6,
+				minLength : 6
 			}, {
 				xtype : 'textfield',
 				fieldLabel : 'QQ号',
@@ -370,29 +434,297 @@ Ext.onReady(function(){
 				maxLength : 10,
 				minLength : 6
 			}, {
-				xtype : 'textfield',
+				xtype : 'textarea',
 				fieldLabel : '现从事专业',
-				name : 'user.currentMajor.id',
-				id : 'user.currentMajor.id',
+				name : 'user.currentMajor',
+				id : 'user.currentMajor',
 				allowBlank : false,
-				readOnly : true,
-				listeners : {
-					render : function(p){
-						p.getEl().on('click', function(p){
-							subjectWindow.show();
-							flag=2;
-						});
-					}
-				},
-				colspan : 2
+				colspan : 2,
+				autoScroll : true,
+				style : 'margin-top:10px;',
+				width : 340
 			}, {
-				xtype : 'textfield',
+				xtype : 'textarea',
 				fieldLabel : '擅长领域',
 				name : 'user.adept',
 				id : 'adept',
 				style : 'margin-top:10px;',
 				width : 480,
+				autoScroll : true,
+				colspan : 2
+			}, {
+				xtype : 'textfield',
+				hidden : true,
+				name : 'user.avatar',
+			}, {
+				xtype : 'textfield',
+				hidden : true,
+				name : 'user.id',
+			}, {
+				xtype : 'textfield',
+				hidden : true,
+				name : 'user.username',
+			}, {
+				xtype : 'textfield',
+				hidden : true,
+				name : 'user.password',
+			}],
+			buttons : [{
+				text : '保存',
+				iconCls : 'save',
+				disabled : false,
+				handler : function(){
+					modifyMember(modifyMemberWindow.down('form'), Ext.data.StoreManager.lookup('UserStore'));
+				}
+			}]
+		}]
+	});
+	/**
+	 * 添加会员
+	 */
+	var addMemberWindow = Ext.create("Ext.window.Window", {
+		title : '添加用户',
+		plain : true,
+		layout : 'fit',
+		closeAction : 'hide',
+		resizable : false,
+		modal : true,
+		items : [{
+			xtype : 'form',
+			frame : true,
+			height : 400,
+			width : 850,
+			buttonAlign : 'center',
+			defaults : {
+				labelSeparator : ' : ',
+				labelAlign : 'right',
+				labelWidth : 85
+			},
+			layout : {
+				type : 'table',
+				columns : 4,
+			},
+			items : [{
+				xtype : 'image',
+				width : 100,
+				height : 134,
+				src : 'img/nopicture.jpg',
+				rowspan : 4
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '姓名',
+				name : 'user.realname',
+				id : 'realname',
+				maxLength : 20,
+				allowBlank : false,
+			}, {
+				xtype : 'combobox',
+				fieldLabel : '性别',
+				name : 'user.sex',
+				id : 'sex',
+				allowBlank : false,
+				emptyText : '请选择',
+				queryMode : 'local',//本地选择模式
+				store : Ext.data.StoreManager.lookup('SexStore'),
+				valueField : 'sexname',
+				displayField : 'sexname',
+				forceSelection : true,
+				typeAhead : true,
+			}, {
+				xtype : 'datefield',
+				fieldLabel : '出生日期',
+				name : 'user.birthday',
+				id : 'birthday',
+				allowBlank : false,
+				format : 'Y.m.d',
+				fieldLabel : '出生日期',
+				maxValue : new Date(),
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '身份证号',
+				name : 'user.idNo',
+				id : 'idNo',
 				colspan : 2,
+				width : 470,
+				allowBlank : false,
+				maxLength : 18,
+				minLength : 18,
+			}, {
+				xtype : 'combobox',
+				fieldLabel : '学历',
+				name : 'user.education.id',
+				id : 'education.id',
+				allowBlank : false,
+				emptyText : '请选择',
+				queryMode : 'remote',
+				store : Ext.data.StoreManager.lookup('EducationStore'),
+				valueField : 'id',
+				displayField : 'name',
+				forceSelection : true,
+				typeAhead : true,
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '毕业院校',
+				name : 'user.school',
+				id : 'school',
+				colspan : 2,
+				width : 470,
+				allowBlank : false
+			}, {
+				xtype : 'datefield',
+				fieldLabel : '毕业时间',
+				format : 'Y.m.d',
+				name : 'user.graduateTime',
+				id : 'graduateTime',
+				maxValue : new Date(),
+				allowBlank : false
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '所学专业',
+				name : 'user.major.name',
+				id : 'user.major.id',
+				allowBlank : false,
+				readOnly : true,
+				listeners : {
+					render : function(p){
+						p.getEl().on('click', function(p){
+							flag=1;
+							subjectWindow.show();
+						});
+					}
+				}
+			}, {
+				xtype : 'combobox',
+				fieldLabel : '学位',
+				name : 'user.degree.id',
+				id : 'degree.id',
+				allowBlank : false,
+				emptyText : '请选择',
+				queryMode : 'remote',
+				store : Ext.data.StoreManager.lookup('DegreeStore'),
+				valueField : 'id',
+				displayField : 'name',
+				forceSelection : true,
+				typeAhead : true,
+			}, {
+				xtype : 'combobox',
+				fieldLabel : '所属学会/协会',
+				name : 'user.institution.id',
+				id : 'institution.id',
+				editale : false,
+				allowBlank : false,
+				emptyText : '请选择',
+				queryMode : 'remote',
+				store : Ext.data.StoreManager.lookup('InstitutionStore'),
+				valueField : 'id',
+				displayField : 'name',
+				forceSelection : true,
+				typeAhead : true
+			}, {
+				xtype : 'button',
+				text : '上传',
+				style : 'margin-left:25px;',
+				colspan : 4,
+				iconCls : 'upload',
+				disabled : false,
+				handler : function(){
+					flag=1;
+					imgUploadWindow.show();
+				}
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '工作单位',
+				name : 'user.workUnit',
+				id : 'workUnit',
+				style : 'margin-top:10px;',
+				colspan : 2,
+				width : 340,
+				allowBlank : false,
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '专业技术职称',
+				name : 'user.title',
+				id : 'title',
+				style : 'margin-top:10px;',
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '职务',
+				name : 'user.duty',
+				id : 'duty',
+				style : 'margin-top:10px;',
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '通讯地址',
+				name : 'user.address',
+				id : 'address',
+				style : 'margin-top:10px;',
+				width : 340,
+				colspan : 2
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '手机',
+				name : 'user.telephone',
+				id : 'telephone',
+				style : 'margin-top:10px;',
+				allowBlank : false,
+				maxLength : 11,
+				regex : /^[1][3-8]+\d{9}/,
+				regexText : '请输入正确的手机号',
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '办公电话',
+				name : 'user.officePhone',
+				id : 'officePhone',
+				style : 'margin-top:10px;',
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '电子邮箱',
+				name : 'user.email',
+				id : 'email',
+				style : 'margin-top:10px;',
+				colspan : 2,
+				width : 340,
+				regex : /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/,
+				regexText : '邮箱格式为XXX@XXX.com',
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '邮编',
+				name : 'user.postcode',
+				id : 'postcode',
+				style : 'margin-top:10px;',
+				maxLength : 6,
+				minLength : 6
+			}, {
+				xtype : 'textfield',
+				fieldLabel : 'QQ号',
+				name : 'user.qq',
+				id : 'qq',
+				style : 'margin-top:10px;',
+				maxLength : 10,
+				minLength : 6
+			}, {
+				xtype : 'textarea',
+				fieldLabel : '现从事专业',
+				name : 'user.currentMajor',
+				id : 'user.currentMajor',
+				allowBlank : false,
+				colspan : 2,
+				autoScroll : true,
+				style : 'margin-top:10px;',
+				width : 340
+			}, {
+				xtype : 'textarea',
+				fieldLabel : '擅长领域',
+				name : 'user.adept',
+				id : 'adept',
+				style : 'margin-top:10px;',
+				width : 480,
+				autoScroll : true,
+				colspan : 2
+			}, {
+				xtype : 'textfield',
+				hidden : true,
+				name : 'user.avatar',
 			}],
 			buttons : [{
 				text : '保存',
@@ -431,7 +763,7 @@ Ext.onReady(function(){
 			defaults : {
 				labelSeparator : ' : ',
 				labelAlign : 'right',
-				labelWidth : 85,
+				labelWidth : 85
 			},
 			items : [{
 				xtype : 'textfield',
@@ -522,7 +854,7 @@ Ext.onReady(function(){
 			defaults : {
 				labelSeparator : ' : ',
 				labelAlign : 'right',
-				labelWidth : 90,
+				labelWidth : 90
 			},
 			layout : {
 				type : 'table',
@@ -540,22 +872,26 @@ Ext.onReady(function(){
 				fieldLabel : '委托单位',
 				name : 'project.delegationUnit',
 			}, {
-				xtype : 'datefield',
+				xtype : 'textfield',
 				fieldLabel : '项目时间',
 				name : 'project.projectTime',
-				format : 'Y.m.d',
-				maxValue : new Date(),
 				allowBlank : false
 			}, {
 				xtype : 'numberfield',
 				fieldLabel : '项目拨款(万元)',
-				name : 'project.grant',
-				minValue : 0
+				name : 'project.allocation',
+				minValue : 0,
+				decimalPrecision : 2,
+				allowDecimals : true,
+				allowNegative :false
 			}, {
 				xtype : 'numberfield',
 				fieldLabel : '自筹款项(万元)',
 				name : 'project.selffinance',
-				minValue : 0
+				minValue : 0,
+				decimalPrecision : 2,
+				allowDecimals : true,
+				allowNegative :false
 			}, {
 				xtype : 'combobox',
 				fieldLabel : '项目级别',
@@ -615,7 +951,7 @@ Ext.onReady(function(){
 			defaults : {
 				labelSeparator : ' : ',
 				labelAlign : 'right',
-				labelWidth : 85,
+				labelWidth : 85
 			},
 			layout : {
 				type : 'table',
@@ -638,11 +974,9 @@ Ext.onReady(function(){
 				name : 'award.fruitName',
 				allowBlank : false
 			}, {
-				xtype : 'datefield',
+				xtype : 'textfield',
 				fieldLabel : '获奖时间',
 				name : 'award.awardTime',
-				format : 'Y.m.d',
-				maxValue : new Date(),
 				allowBlank : false
 			}],
 			buttons : [{
@@ -662,23 +996,22 @@ Ext.onReady(function(){
 	var showAchieves = Ext.create("Ext.window.Window", {
 		title : '成就',
 		plain : true,
-		width : 700,
-		height : 500,
 		modal : true,
+		height : 520,
 		layout : 'fit',
 		closeAction : 'hide',
 		resizable : false,
 		items : [{
 			xtype : 'tabpanel',
-			width : 580,
-			heigth : 480,
+			width : 700,
+			heigth : 500,
 			activeTab : 0,
 			items : [{
 				title : '论文',
 				xtype : 'gridpanel',
 				columns : [
 				    {xtype : 'rownumberer'},
-				    {text:'论文名称', dataIndex:'name', width : 250},
+				    {text:'论文名称', dataIndex:'name', width : 550},
 					{text:'收录日期', dataIndex:'pubTime', width :80},
 					{header:'操作', xtype : 'actioncolumn', width : 40,
 						items : [{
@@ -704,7 +1037,7 @@ Ext.onReady(function(){
 				xtype : 'gridpanel',
 				columns : [
 				    {xtype : 'rownumberer'},
-				    {text:'专利名称', dataIndex:'name', width : 250},
+				    {text:'专利名称', dataIndex:'name', width : 350},
 					{text:'授权日期', dataIndex:'authorityTime', width :70},
 					{text:'专利号', dataIndex:'patentNo', width : 150},
 					{header:'操作', xtype : 'actioncolumn', width : 40,
@@ -864,6 +1197,12 @@ Ext.onReady(function(){
 			{text:'QQ号', dataIndex:'qq', width : 80},
 			{header : "操作", xtype : 'actioncolumn', width : 80,
 				items : [{
+					icon : 'img/look.ico',
+					tooltip : '查看',
+					handler : function(grid, row, col){
+						showMember(grid, row, modifyMemberWindow);
+					}
+				}, {
 					icon : 'img/delete.ico',
 					tooltip : '删除',
 					handler : function(grid, row, col){
@@ -905,8 +1244,6 @@ Ext.onReady(function(){
 	var addLeaderWindow = Ext.create("Ext.window.Window", {
 		title : '添加领导',
 		plain : true,
-		width : 850,
-		height : 230,
 		layout : 'fit',
 		closeAction : 'hide',
 		resizable : false,
@@ -915,25 +1252,18 @@ Ext.onReady(function(){
 			xtype : 'form',
 			frame : true,
 			height : 200,
-			width : 850,
+			width : 700,
 			buttonAlign : 'center',
 			defaults : {
 				labelSeparator : ' : ',
 				labelAlign : 'right',
-				labelWidth : 60,
+				labelWidth : 60
 			},
 			layout : {
 				type : 'table',
-				columns : 4,
+				columns : 3,
 			},
 			items : [{
-				xtype : 'image',
-				name : 'user.avatar',
-				id : 'avatar',
-				width : 100,
-				height : 134,
-				rowspan : 4
-			}, {
 				xtype : 'textfield',
 				fieldLabel : '姓名',
 				name : 'user.realname',
@@ -1068,8 +1398,6 @@ Ext.onReady(function(){
 	var addServerWindow = Ext.create("Ext.window.Window", {
 		title : '添加领导',
 		plain : true,
-		width : 850,
-		height : 230,
 		layout : 'fit',
 		closeAction : 'hide',
 		resizable : false,
@@ -1078,25 +1406,18 @@ Ext.onReady(function(){
 			xtype : 'form',
 			frame : true,
 			height : 200,
-			width : 850,
+			width : 700,
 			buttonAlign : 'center',
 			defaults : {
 				labelSeparator : ' : ',
 				labelAlign : 'right',
-				labelWidth : 60,
+				labelWidth : 60
 			},
 			layout : {
 				type : 'table',
-				columns : 4,
+				columns : 3,
 			},
 			items : [{
-				xtype : 'image',
-				name : 'user.avatar',
-				id : 'avatar',
-				width : 100,
-				height : 134,
-				rowspan : 4
-			}, {
 				xtype : 'textfield',
 				fieldLabel : '姓名',
 				name : 'user.realname',
@@ -1229,32 +1550,180 @@ Ext.onReady(function(){
 		loadMask : true
 	});
 	
+	//为修改密码提供的自定义数据验证
+	Ext.apply(Ext.form.field.VTypes, {
+		pass : function(value, field){
+			if(field.confirmTo){
+				var pwd=Ext.getCmp(field.confirmTo);
+				if(value == pwd.getValue()){
+					return true;
+				} else {
+					return false;
+				}
+			}
+		},
+		passText : '两次密码输入不同'
+	});
 	var modifyCountFP = Ext.create("Ext.form.Panel", {
 		title : '修改账户',
 		frame : true,
-		height : 300,
-		width : 300,
+		height : 200,
+		width : 250,
+		style : 'margin-left:35%;margin-top:10%;',
 		buttonAlign : 'center',
 		defaults : {
 			labelSeparator : ' : ',
 			labelAlign : 'right',
-			labelWidth : 60,
+			labelWidth : 60
 		},
 		items : [{
 			xtype : 'textfield',
 			fieldLabel : '用户名',
 			name : 'userDTO.username',
-			value : '<%=session.get("username");%>',
+			value : username,
 			allowBlank : false
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '原密码',
-			name : 'userDTO.username',
+			name : 'userDTO.password',
+			inputType : 'password',
 			allowBlank : false
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '新密码',
-			allowBlank : false
+			name : 'userDTO.newpass',
+			id : 'newpass',
+			allowBlank : false,
+			maxLength : 20,
+			inputType : 'password',
+			regex : /^[\w]{6,}$/,
+			regexText : '密码只能包含数字、字母、下划线，长度不少于6位',
+			msgTarget : 'side'
+		}, {
+			xtype : 'textfield',
+			fieldLabel : '确认密码',
+			name : 'userDTO.confirmpass',
+			maxLength : 20,
+			inputType : 'password',
+			regex : /^[\w]{6,}$/,
+			regexText : '密码只能包含数字、字母、下划线，长度不少于6位',
+			msgTarget : 'side',
+			vtype : 'pass',
+			confirmTo : 'newpass'
+		}],
+		buttons : [{
+			text : '保存',
+			iconCls : 'save',
+			disabled : false,
+			handler : function(btn){
+				modifyCount(btn.ownerCt.ownerCt);
+			}
+		}]
+	});
+	
+	//显示用户信息的json读取器
+	var leaderJsonReader = Ext.create('Ext.data.JsonReader', {
+		root : 'list',
+	    totalProperty : 'totalCount',
+	    id : 'id',
+	    successProperty : '@success',
+	    model : 'Leader'
+	});
+	var showUser = Ext.create("Ext.form.Panel", {
+		title : '我的资料',
+		frame : true,
+		height : 200,
+		width : 700,
+		style : 'margin-left:20%;margin-top:8%;',
+		reader : leaderJsonReader,
+		buttonAlign : 'center',
+		defaults : {
+			labelSeparator : ' : ',
+			labelAlign : 'right',
+			labelWidth : 60
+		},
+		layout : {
+			type : 'table',
+			columns : 3,
+		},
+		items : [{
+			xtype : 'textfield',
+			fieldLabel : '姓名',
+			name : 'user.realname',
+			id : 'realname',
+			maxLength : 20,
+			allowBlank : false,
+		}, {
+			xtype : 'combobox',
+			fieldLabel : '性别',
+			name : 'user.sex',
+			id : 'sex',
+			allowBlank : false,
+			emptyText : '请选择',
+			queryMode : 'local',//本地选择模式
+			store : Ext.data.StoreManager.lookup('SexStore'),
+			valueField : 'sexname',
+			displayField : 'sexname',
+			forceSelection : true,
+			typeAhead : true,
+		}, {
+			xtype : 'textfield',
+			fieldLabel : '职务',
+			name : 'user.duty',
+			id : 'duty',
+		}, {
+			xtype : 'textfield',
+			fieldLabel : '工作单位',
+			name : 'user.workUnit',
+			id : 'workUnit',
+			colspan : 2,
+			width : 470,
+			allowBlank : false,
+		}, {
+			xtype : 'textfield',
+			fieldLabel : '邮编',
+			name : 'user.postcode',
+			id : 'postcode',
+			maxValue : 6,
+			minValue : 6
+		}, {
+			xtype : 'textfield',
+			fieldLabel : '通讯地址',
+			name : 'user.address',
+			id : 'address',
+			width : 470,
+			colspan : 2
+		}, {
+			xtype : 'textfield',
+			fieldLabel : '手机',
+			name : 'user.telephone',
+			id : 'telephone',
+			allowBlank : false,
+			maxLength : 11,
+			regex : /^[1][3-8]+\d{9}/,
+			regexText : '请输入正确的手机号',
+		}, {
+			xtype : 'textfield',
+			fieldLabel : '电子邮箱',
+			name : 'user.email',
+			id : 'email',
+			colspan : 2,
+			width : 470,
+			regex : /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/,
+			regexText : '邮箱格式为XXX@XXX.com',
+		}, {
+			xtype : 'textfield',
+			fieldLabel : '办公电话',
+			name : 'user.officePhone',
+			id : 'officePhone',
+		}],
+		buttons : [{
+			text : '保存',
+			iconCls : 'save',
+			disabled : false,
+			handler : function(btn){
+				saveMe(btn.ownerCt.ownerCt);
+			}
 		}]
 	});
 	
@@ -1265,13 +1734,8 @@ Ext.onReady(function(){
 				showMembers(record, mainPanel, membersGP, Ext.data.StoreManager.lookup('UserStore'));
 				showLeaders(record, mainPanel, leadersGP, Ext.data.StoreManager.lookup('LeaderStore'));
 				showServers(record, mainPanel, serversGP, Ext.data.StoreManager.lookup('ServerStore'));
-//				showModifyPass(record, mainPanel, modifyPass);
-//				showMyMessage(record, mainPanel, OldMessagePanel, Ext.data.StoreManager.lookup('userMessageStore'));
-//				showUserAudit(record, mainPanel, RegisterUserPanel, Ext.data.StoreManager.lookup('RegisterUserStore'));
-//				showTempBorrowAudit(record, mainPanel, TempBorrowPanel, Ext.data.StoreManager.lookup('adminTempBorrowStore'));
-//				showTempPorAudit(record, mainPanel, TempPorPanel, Ext.data.StoreManager.lookup('adminTempPorStore'));
-//				showBorrowRecordPanel(record, mainPanel, BorrowRecordPanel, Ext.data.StoreManager.lookup('adminPassBorrowStore'));
-//				showPorRecordPanel(record, mainPanel, PorRecordPanel, Ext.data.StoreManager.lookup('adminPassPorStore'));
+				showCount(record, mainPanel, modifyCountFP);
+				showMe(record, mainPanel, showUser);
 				//消除HTML div上的内容
 				var mainDiv = Ext.getDom('main');
 				mainDiv.innerHTML = '';

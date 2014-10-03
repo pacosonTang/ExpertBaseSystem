@@ -11,7 +11,7 @@
             <generator class="native" />
         </id>
         <property name="name" type="java.lang.String">
-            <column name="name" length="45" not-null="true" />
+            <column name="name" length="50" not-null="true" />
         </property>
         <property name="projectTime" type="java.lang.String">
             <column name="project_time" length="20" not-null="true" />
@@ -20,7 +20,7 @@
             <column name="self_func" length="20" not-null="true" />
         </property>
         <property name="delegationUnit" type="java.lang.String">
-            <column name="delegation_unit" length="30" />
+            <column name="delegation_unit" length="50" />
         </property>
         <property name="projectLevel" type="java.lang.Integer">
             <column name="project_level" not-null="true" />
@@ -28,10 +28,10 @@
         <property name="completeStatus" type="java.lang.Integer">
             <column name="complete_status" not-null="true" />
         </property>
-        <property name="allocation" type="java.lang.Integer">
+        <property name="allocation" type="java.lang.Float">
             <column name="allocation" />
         </property>
-        <property name="selffinance" type="java.lang.Integer">
+        <property name="selffinance" type="java.lang.Float">
             <column name="selffinance" />
         </property>
         <many-to-one name="user" class="com.cdkx.expertbasesystem.domain.User" fetch="select">

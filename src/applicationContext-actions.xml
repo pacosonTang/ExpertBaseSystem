@@ -21,7 +21,6 @@
 		<property name="thesisService" ref="thesisService"/>
 	</bean>
 	<bean name="memberAction" class="com.cdkx.expertbasesystem.actions.MemberAction">
-		<property name="userService" ref="userService"/>
 		<property name="awardService" ref="awardService"/>
 		<property name="patentService" ref="patentService"/>
 		<property name="projectService" ref="projectService"/>

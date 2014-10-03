@@ -29,10 +29,10 @@ public class Project {
 	private int completeStatus;
 	
 	//财政拨款
-	private int allocation;
+	private float allocation;
 	
 	//自筹款项
-	private int selffinance;
+	private float selffinance;
 	
 	//项目所属的会员
 	private User user;
@@ -101,19 +101,19 @@ public class Project {
 		this.user = user;
 	}
 
-	public int getAllocation() {
+	public float getAllocation() {
 		return allocation;
 	}
 
-	public void setAllocation(int allocation) {
+	public void setAllocation(float allocation) {
 		this.allocation = allocation;
 	}
 
-	public int getSelffinance() {
+	public float getSelffinance() {
 		return selffinance;
 	}
 
-	public void setSelffinance(int selffinance) {
+	public void setSelffinance(float selffinance) {
 		this.selffinance = selffinance;
 	}
 }

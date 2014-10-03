@@ -1,14 +1,19 @@
 package com.cdkx.expertbasesystem.actions;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
-import sun.security.provider.MD5;
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 
 import com.cdkx.expertbasesystem.domain.Award;
 import com.cdkx.expertbasesystem.domain.Patent;
 import com.cdkx.expertbasesystem.domain.Project;
 import com.cdkx.expertbasesystem.domain.Thesis;
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.AwardService;
 import com.cdkx.expertbasesystem.service.PatentService;
 import com.cdkx.expertbasesystem.service.ProjectService;
@@ -40,6 +45,10 @@ public class ManagerAction extends ActionSupport {
 	private String selectIds;
 	
 	private int userId;
+	
+	private File img;
+	
+	private String imgFileName;
 	
 	private List<Thesis> thesises;
 	
@@ -94,6 +103,17 @@ public class ManagerAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String modifyMember(){
+		if(user.getMajor() != null && user.getMajor().getName() != null){
+			user.getMajor().setId(Integer.parseInt(user.getMajor().getName().substring(0, user.getMajor().getName().indexOf("-"))));
+			user.getMajor().setName(null);
+		}
+		user.setLevel(3);
+		userService.modifyUser(user);
+		jsonString = "{success:true}";
+		return SUCCESS;
+	}
+	
 	/**
 	 * 添加会员
 	 * @return
@@ -102,35 +122,57 @@ public class ManagerAction extends ActionSupport {
 		user.setUsername(user.getTelephone());
 		user.setPassword(MD5Util.encode("123456"));
 		user.setLevel(3);
+		user.getMajor().setId(Integer.parseInt(user.getMajor().getName().substring(0, user.getMajor().getName().indexOf("-"))));
+		user.getMajor().setName(null);
 		userService.addUser(user);
 		jsonString = "{success:true}";
 		return SUCCESS;
 	}
 	
+	/**
+	 * 显示指定用户所有的论文
+	 * @return
+	 */
 	public String showThesises(){
 		thesises = thesisService.findThesisByUser(userId);
 		jsonString = JsonUtil.jsonForList(thesises);
 		return SUCCESS;
 	}
 	
+	/**
+	 * 显示指定用户所有的专利
+	 * @return
+	 */
 	public String showPatents(){
 		patents = patentService.findPatentByUser(userId);
 		jsonString = JsonUtil.jsonForList(patents);
 		return SUCCESS;
 	}
 	
+	/**
+	 * 显示指定用户所有的项目
+	 * @return
+	 */
 	public String showProjects(){
 		projects = projectService.findProjectByUser(userId);
 		jsonString = JsonUtil.jsonForList(projects);
 		return SUCCESS;
 	}
 	
+	/**
+	 * 显示指定用户所有的奖励
+	 * @return
+	 */
 	public String showAwards(){
 		awards = awardService.findAwardByUser(userId);
 		jsonString = JsonUtil.jsonForList(awards);
 		return SUCCESS;
 	}
 	
+	/**
+	 * 为指定用户添加论文
+	 * @return
+	 */
 	public String addThesis(){
 		user = new User();
 		user.setId(userId);
@@ -140,6 +182,10 @@ public class ManagerAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	/**
+	 * 为指定用户添加专利
+	 * @return
+	 */
 	public String addPatent(){
 		user = new User();
 		user.setId(userId);
@@ -149,6 +195,10 @@ public class ManagerAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	/**
+	 * 为指定用户添加项目
+	 * @return
+	 */
 	public String addProject(){
 		user = new User();
 		user.setId(userId);
@@ -158,6 +208,10 @@ public class ManagerAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	/**
+	 * 为指定用户添加奖励
+	 * @return
+	 */
 	public String addAward(){
 		user = new User();
 		user.setId(userId);
@@ -226,9 +280,39 @@ public class ManagerAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	/**
+	 * 显示所有市场化服务人员
+	 * @return
+	 */
 	public String showServers(){
 		servers = userService.findServers();
 		jsonString = JsonUtil.jsonForList(servers);
+		return SUCCESS;
+	}
+	
+	public String upload(){
+		String realPath = ServletActionContext.getServletContext().getRealPath("/uploads");
+		if(img != null && !"".equals(imgFileName)){
+			if(img.length() < 204800){
+				String imgName = UUID.randomUUID().toString() + imgFileName.substring(imgFileName.indexOf("."));
+				File imgDist = new File(new File(realPath), imgName);
+				if(!imgDist.getParentFile().exists()){
+					imgDist.getParentFile().mkdirs();
+				}
+				try {
+					FileUtils.copyFile(img, imgDist);
+					jsonString = "{success:true, imgName:'" + imgName + "'}";
+				} catch (IOException e) {
+					e.printStackTrace();
+					jsonString = "{success:false,errorMessage:'图片上传失败！'}";
+					throw new AppException("图片上传失败！");
+				}
+			} else {
+				jsonString = "{success : false, errorMessage:'图片最大只能为200K，请重新选择...'}";
+			}
+		}else{
+			jsonString = "{success:false, errorMessage:'图片上传失败！'}";
+		}
 		return SUCCESS;
 	}
 
@@ -302,5 +386,21 @@ public class ManagerAction extends ActionSupport {
 
 	public void setSelectIds(String selectIds) {
 		this.selectIds = selectIds;
+	}
+
+	public String getImgFileName() {
+		return imgFileName;
+	}
+
+	public void setImgFileName(String imgFileName) {
+		this.imgFileName = imgFileName;
+	}
+
+	public File getImg() {
+		return img;
+	}
+
+	public void setImg(File img) {
+		this.img = img;
 	}
 }

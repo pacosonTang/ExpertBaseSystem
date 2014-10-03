@@ -1,18 +1,21 @@
 package com.cdkx.expertbasesystem.actions;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.PropertyFilter;
-
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.domain.UserDTO;
 import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.UserService;
 import com.cdkx.expertbasesystem.utils.JsonUtil;
+import com.cdkx.expertbasesystem.utils.MD5Util;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -36,6 +39,12 @@ public class UserAction extends ActionSupport implements SessionAware {
 	
 	private List<User> users;
 	
+	private UserDTO userDTO;
+	
+	private File img;
+	
+	private String imgFileName;
+	
 	private UserService userService;
 	
 	private String jsonString;
@@ -45,36 +54,73 @@ public class UserAction extends ActionSupport implements SessionAware {
 	 * @return 根据用户类型转向相应用户的页面
 	 */
 	public String modifyUser(){
+		if(user.getMajor() != null && user.getMajor().getName() != null){
+			user.getMajor().setId(Integer.parseInt(user.getMajor().getName().substring(0, user.getMajor().getName().indexOf("-"))));
+		}
 		userService.modifyUser(user);
+		jsonString = "{success:true}";
+		return SUCCESS;
+	}
+	
+	public String modifyCount(){
+		int userId = Integer.parseInt(session.get("userId").toString());
+		user = userService.findUser(userId);
+		userDTO.setPassword(MD5Util.encode(userDTO.getPassword()));
+		if(userDTO.getPassword().equals(user.getPassword())){
+			users = userService.findUsersByUsername(userDTO.getUsername());
+			users.remove(user);
+			if(users != null && users.size() > 0)
+				jsonString = "{success:false, errorMessage:'该用户名已被其它用户占用'}";
+			else{
+				user.setUsername(userDTO.getUsername());
+				user.setPassword(MD5Util.encode(userDTO.getNewpass()));
+				userService.modifyUser(user);
+				jsonString = "{success:true}";
+			}
+		}else{
+			jsonString = "{success:false, errorMessage:'密码不正确，请重新输入'}";
+		}
 		return SUCCESS;
 	}
 	
 	public String showUser(){
 		if(session.get("userId") != null){
 			int id = Integer.parseInt(session.get("userId").toString());
-			
 			user = userService.findUser(id);
-			//jsonString = JsonUtil.jsonForSingle(user);
-			JsonConfig cfg = new JsonConfig();
-			cfg.setExcludes(new String[]{"handler", "hibernateLazyInitializer"});
-			cfg.setJsonPropertyFilter(new PropertyFilter(){
-
-				@Override
-				public boolean apply(Object source, String name, Object value) {
-					if(name.equals("projects") || name.equals("awards") || name.equals("thesises") || name.equals("children")
-							|| name.equals("patents") || name.equals("parent")|| name.equals("usersForMajor") || name.equals("users")
-							|| name.equals("usersForCurrentMajor") || name.equals("usersForDegree") || name.equals("usersForEducation"))
-						return true;
-					else
-						return false;
-				}
-				
-			});
-			JSONArray jsonData = JSONArray.fromObject(user, cfg);
-			jsonString = "{success:true,totalCount:1,list:" + jsonData.toString() + "}";
+			jsonString = JsonUtil.jsonForSingle(user);
 			return SUCCESS;
 		} else 
 			throw new AppException("用户没有登录");
+	}
+	
+	public String upload(){
+		String realPath = ServletActionContext.getServletContext().getRealPath("/uploads");
+		if(img != null && !"".equals(imgFileName)){
+			if(img.length() < 204800){
+				String imgName = UUID.randomUUID().toString() + imgFileName.substring(imgFileName.indexOf("."));
+				File imgDist = new File(new File(realPath), imgName);
+				if(!imgDist.getParentFile().exists()){
+					imgDist.getParentFile().mkdirs();
+				}
+				try {
+					FileUtils.copyFile(img, imgDist);
+					File oldImg = new File(new File(realPath), user.getAvatar());
+					oldImg.delete();
+					user.setAvatar(imgName);
+					userService.modifyUser(user);
+					jsonString = "{success:true, imgName:'" + imgName + "'}";
+				} catch (IOException e) {
+					e.printStackTrace();
+					jsonString = "{success:false,errorMessage:'图片上传失败！'}";
+					throw new AppException("图片上传失败！");
+				}
+			} else {
+				jsonString = "{success : false, errorMessage:'图片最大只能为200K，请重新选择...'}";
+			}
+		}else{
+			jsonString = "{success:false, errorMessage:'图片上传失败！'}";
+		}
+		return SUCCESS;
 	}
 
 	@Override
@@ -100,6 +146,30 @@ public class UserAction extends ActionSupport implements SessionAware {
 
 	public String getJsonString() {
 		return jsonString;
+	}
+
+	public UserDTO getUserDTO() {
+		return userDTO;
+	}
+
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
+	}
+
+	public File getImg() {
+		return img;
+	}
+
+	public void setImg(File img) {
+		this.img = img;
+	}
+
+	public String getImgFileName() {
+		return imgFileName;
+	}
+
+	public void setImgFileName(String imgFileName) {
+		this.imgFileName = imgFileName;
 	}
 
 }
