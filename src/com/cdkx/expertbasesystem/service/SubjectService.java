@@ -53,4 +53,10 @@ public interface SubjectService {
 	 * @return List 所有一级学科实体
 	 */
 	public List<Subject> findFirstSubjects();
+	
+	/**
+	 * 查询所有学科专业
+	 * @return List 所有学科专业集合
+	 */
+	public List<Subject> findAllSubjects();
 }

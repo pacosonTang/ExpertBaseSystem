@@ -165,5 +165,11 @@
     	<action name="addSubject" class="subjectAction" method="addSubject">
     		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
     	</action>
+    	<action name="deleteSubjects" class="subjectAction" method="deleteSubjects">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
+    	<action name="showAllSubjects" class="subjectAction" method="showAllSubjects">
+    		<result name="success">/WEB-INF/jsp/jsonData.jsp</result>
+    	</action>
     </package>
 </struts>

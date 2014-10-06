@@ -70,12 +70,6 @@ public interface UserDao {
 	public List<User> searchUsers(String searchCondition, String searchValue);
 	
 	/**
-	 * 查找还没有审核的会员
-	 * @return List 所有未审核的会员的信息
-	 */
-	public List<User> findUncheckedUsers();
-	
-	/**
 	 * 对会员信息进行统计
 	 * @return Obeject
 	 */
@@ -87,4 +81,11 @@ public interface UserDao {
 	 * @return 使用该用户名的所有用户
 	 */
 	public List<User> findUsersByUsername(String username);
+	
+	/**
+	 * 通过指定hql语句查询会员
+	 * @param hql
+	 * @return List 符合hql条件的所有会员集合
+	 */
+	public List<User> searchMember(String hql);
 }

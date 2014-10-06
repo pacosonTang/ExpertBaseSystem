@@ -44,4 +44,9 @@ public class SubjectDaoImpl extends HibernateDaoSupport implements SubjectDao {
 		return getHibernateTemplate().find("from Subject s where s.parent=null");
 	}
 
+	@Override
+	public List<Subject> findAllSubjects() {
+		return getHibernateTemplate().find("from Subject s left join fetch s.parent left join fetch s.parent.parent");
+	}
+
 }

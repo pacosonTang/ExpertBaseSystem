@@ -1168,79 +1168,153 @@ Ext.onReady(function(){
 				}
 			});
 	});
-	
 	/**
-	 * 显示所有会员
+	 * 会员搜索面板以及用户管理面板的集成
 	 */
-	var membersGP = Ext.create("Ext.grid.Panel", {
-		title : '会员管理',
-		width : 1100,
-		height : 530,
-		style : 'margin:10px 2% 0;',
-		columns : [
-			{xtype : 'rownumberer'},
-			{text:'用户名', dataIndex:'username', width :60},
-			{text:'姓名', dataIndex:'realname', width : 60},
-			{text:'性别', dataIndex:'sex', width : 40},
-			{text:'手机', dataIndex:'telephone', width : 80},
-			{text:'办公电话', dataIndex:'officePhone', width : 80},
-			{text:'邮编', dataIndex:'postcode', width : 50},
-			{text:'邮箱', dataIndex:'email', width : 120},
-			{text:'通讯地址', dataIndex:'address', width : 160},
-			{text:'工作单位', dataIndex:'workUnit', width : 100},
-			{text:'协会', dataIndex:'institution.name', width : 80},
-			{text:'专业技术职称', dataIndex:'title', width : 80},
-			{text:'毕业院校', dataIndex:'school', width : 80},
-			{text:'学历', dataIndex:'education.name', width : 60},
-			{text:'学位', dataIndex:'degree.name', width : 60},
-			{text:'所学专业', dataIndex:'major.name', width : 80},
-			{text:'QQ号', dataIndex:'qq', width : 80},
-			{header : "操作", xtype : 'actioncolumn', width : 80,
-				items : [{
-					icon : 'img/look.ico',
-					tooltip : '查看',
-					handler : function(grid, row, col){
-						showMember(grid, row, modifyMemberWindow);
-					}
-				}, {
-					icon : 'img/delete.ico',
-					tooltip : '删除',
-					handler : function(grid, row, col){
-						deleteMember(grid, row, col);
-					}
-				}, {
-					icon : 'img/add-achieve.ico',
-					tooltip : '成就',
-					handler : function(grid, row, col){
-						userId = grid.getStore().getAt(row).get('id');
-						showAchieves.down('tabpanel').setActiveTab(0);
-						showAchieves.show();
-						Ext.data.StoreManager.lookup('ThesisStore').load({
-							params : {
-								userId : userId
-							}
-						});
-					}
-				}]
-			}
-		],
-		tbar : [
-		    {xtype : 'button', text : '添加', iconCls:'add', style:'margin-left:40px;', handler: function(btn){addMemberWindow.show();}},
-			{xtype : 'button', text : '删除', iconCls:'delete', style:'margin-left:20px;', handler: function(btn){deleteMembers(btn.ownerCt.ownerCt);}}
-		],
-		store : Ext.data.StoreManager.lookup('UserStore'),
-		selType : 'checkboxmodel',
-		multiSelect : true,
-		dockedItems : [{
-			xtype : 'pagingtoolbar',
-			store : Ext.data.StoreManager.lookup('UserStore'),
-			dock : 'bottom',
-			displayInfo : true
-		}],
+	var membersPanel = Ext.create("Ext.panel.Panel", {
+		title : '会员查询',
+		layout : 'fit',
+		style : 'margin:5px 2% 0;',
+		width : 1120,
+		heigth : 540,
 		frame : true,
-		loadMask : true
+		items : [{
+			xtype : 'form',
+			width : 1100,
+			height : 60,
+			frame : true,
+			layout : {
+				type : 'table',
+				columns : 4
+			},
+			buttonAlign : 'center',
+			defaults : {
+				labelSeparator : ' : ',
+				labelAlign : 'right',
+				labelWidth : 80
+			},
+			items : [{
+				xtype : 'combobox',
+				fieldLabel : '学位',
+				style : 'margin-left:80px;',
+				name : 'conditionDTO.degree',
+				emptyText : '请选择',
+				queryMode : 'remote',
+				store : Ext.data.StoreManager.lookup('DegreeStore'),
+				valueField : 'id',
+				displayField : 'name',
+				forceSelection : true,
+				typeAhead : true,
+			}, {
+				xtype : 'combobox',
+				fieldLabel : '学历',
+				name : 'conditionDTO.education',
+				emptyText : '请选择',
+				queryMode : 'remote',
+				store : Ext.data.StoreManager.lookup('EducationStore'),
+				valueField : 'id',
+				displayField : 'name',
+				forceSelection : true,
+				typeAhead : true,
+			}, {
+				xtype : 'combobox',
+				fieldLabel : '协会',
+				name : 'conditionDTO.institution',
+				emptyText : '请选择',
+				queryMode : 'remote',
+				store : Ext.data.StoreManager.lookup('InstitutionStore'),
+				valueField : 'id',
+				displayField : 'name',
+				forceSelection : true,
+				typeAhead : true,
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '专业技术职称',
+				name : 'conditionDTO.title'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '现从事专业',
+				style : 'margin-left:80px;',
+				name : 'conditionDTO.currentMajor'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '擅长领域',
+				name : 'conditionDTO.adept',
+			}, {
+				xtype : 'button',
+				text : '搜索',
+				iconCls : 'search',
+				disabled : false,
+				style : 'margin-left:50px;',
+				handler : function(btn){
+					searchMember(btn.ownerCt.ownerCt);
+				}
+			}]
+		}, {
+			xtype : 'gridpanel',
+			width : 1110,
+			height : 450,
+			columns : [
+				{xtype : 'rownumberer'},
+				{text:'姓名', dataIndex:'realname', width : 60},
+				{text:'性别', dataIndex:'sex', width : 40},
+				{text:'专业技术职称', dataIndex:'title', width : 80},
+				{text:'毕业院校', dataIndex:'school', width : 80},
+				{text:'学历', dataIndex:'education.name', width : 40},
+				{text:'学位', dataIndex:'degree.name', width : 40},
+				{text:'所学专业', dataIndex:'major.name', width : 80},
+				{text:'邮箱', dataIndex:'email', width : 120},
+				{text:'手机', dataIndex:'telephone', width : 80},
+				{text:'办公电话', dataIndex:'officePhone', width : 80},
+				{text:'通讯地址', dataIndex:'address', width : 160},
+				{text:'工作单位', dataIndex:'workUnit', width : 120},
+				{header : "操作", xtype : 'actioncolumn', width : 60,
+					items : [{
+						icon : 'img/look.ico',
+						tooltip : '查看',
+						handler : function(grid, row, col){
+							showMember(grid, row, modifyMemberWindow);
+						}
+					}, {
+						icon : 'img/delete.ico',
+						tooltip : '删除',
+						handler : function(grid, row, col){
+							deleteMember(grid, row, col);
+						}
+					}, {
+						icon : 'img/add-achieve.ico',
+						tooltip : '成就',
+						handler : function(grid, row, col){
+							userId = grid.getStore().getAt(row).get('id');
+							showAchieves.down('tabpanel').setActiveTab(0);
+							showAchieves.show();
+							Ext.data.StoreManager.lookup('ThesisStore').load({
+								params : {
+									userId : userId
+								}
+							});
+						}
+					}]
+				}
+			],
+			tbar : [
+			    {xtype : 'button', text : '添加', iconCls:'add', style:'margin-left:40px;', handler: function(btn){addMemberWindow.show();}},
+				{xtype : 'button', text : '删除', iconCls:'delete', style:'margin-left:20px;', handler: function(btn){deleteMembers(btn.ownerCt.ownerCt);}}
+			],
+			store : Ext.data.StoreManager.lookup('UserStore'),
+			selType : 'checkboxmodel',
+			multiSelect : true,
+			dockedItems : [{
+				xtype : 'pagingtoolbar',
+				store : Ext.data.StoreManager.lookup('UserStore'),
+				dock : 'bottom',
+				displayInfo : true
+			}],
+			frame : true,
+			loadMask : true
+		}]
 	});
-	
+	//领导添加窗口
 	var addLeaderWindow = Ext.create("Ext.window.Window", {
 		title : '添加领导',
 		plain : true,
@@ -1727,13 +1801,220 @@ Ext.onReady(function(){
 		}]
 	});
 	
+	//一级学科专业添加窗口
+	var addFirstWindow = Ext.create("Ext.window.Window", {
+		title : '添加一级学科',
+		closeAction : 'hide',
+		plain : true,
+		layout : 'fit',
+		modal : true,
+		items : [{
+			xtype : 'form',
+			width : 220,
+			heght : 50,
+			frame : true,
+			buttonAlign : 'center',
+			defaults : {
+				labelSeparator : ' : ',
+				labelAlign : 'right',
+				labelWidth : 40
+			},
+			items : [{
+				xtype : 'textfield',
+				fieldLabel : '名称',
+				name : 'subject.name',
+				allowBlank : false
+			}],
+			buttons : [{
+				text : '保存',
+				iconCls : 'save',
+				disabled : false,
+				handler : function(btn){
+					addFirst(btn.ownerCt.ownerCt, Ext.data.StoreManager.lookup('SubjectStore'));
+				}
+			}]
+		}]
+	});
+	
+	//二级学科专业添加窗口
+	var addSecondWindow = Ext.create("Ext.window.Window", {
+		title : '添加二级学科',
+		closeAction : 'hide',
+		plain : true,
+		layout : 'fit',
+		modal : true,
+		items : [{
+			xtype : 'form',
+			width : 230,
+			heght : 100,
+			frame : true,
+			buttonAlign : 'center',
+			defaults : {
+				labelSeparator : ' : ',
+				labelAlign : 'right',
+				labelWidth : 60
+			},
+			items : [{
+				xtype : 'combobox',
+				fieldLabel : '一级学科',
+				name : 'subject.parent.id',
+				emptyText : '请选择',
+				queryMode : 'remote',
+				allowBlank : false,
+				store : Ext.data.StoreManager.lookup('FirstMajorStore'),
+				valueField : 'id',
+				displayField : 'name',
+				forceSelection : true,
+				typeAhead : true
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '名称',
+				name : 'subject.name',
+				allowBlank : false
+			}],
+			buttons : [{
+				text : '保存',
+				iconCls : 'save',
+				disabled : false,
+				handler : function(btn){
+					addSecond(btn.ownerCt.ownerCt, Ext.data.StoreManager.lookup('SubjectStore'));
+				}
+			}]
+		}]
+	});
+	
+	//一级学科专业添加窗口
+	var addThirdWindow = Ext.create("Ext.window.Window", {
+		title : '添加一级学科',
+		closeAction : 'hide',
+		plain : true,
+		layout : 'fit',
+		modal : true,
+		items : [{
+			xtype : 'form',
+			width : 230,
+			heght : 150,
+			frame : true,
+			buttonAlign : 'center',
+			defaults : {
+				labelSeparator : ' : ',
+				labelAlign : 'right',
+				labelWidth : 60
+			},
+			items : [{
+				xtype : 'combobox',
+				fieldLabel : '一级学科',
+				emptyText : '请选择',
+				queryMode : 'remote',
+				allowBlank : false,
+				store : Ext.data.StoreManager.lookup('FirstMajorStore'),
+				valueField : 'id',
+				displayField : 'name',
+				forceSelection : true,
+				typeAhead : true,
+				listeners : {
+					select : function(combo, record, opt){
+						var comS = Ext.getCmp('second');
+						comS.setReadOnly(false);
+						comS.clearValue();
+						comS.store.load({
+							params : {
+								subjectId : combo.getValue()
+							}
+						});
+					}
+				}
+			}, {
+				xtype : 'combobox',
+				fieldLabel : '二级学科',
+				name : 'subject.parent.id',
+				id : 'second',
+				readOnly : true,
+				defaultListConfig : {
+					loadMask : false
+				},
+				emptyText : '请选择',
+				queryMode : 'local',
+				allowBlank : false,
+				store : Ext.data.StoreManager.lookup('SecondMajorStore'),
+				valueField : 'id',
+				displayField : 'name',
+				forceSelection : true,
+				typeAhead : true,
+			}, {
+				xtype : 'textfield',
+				fieldLabel : '名称',
+				name : 'subject.name',
+				allowBlank : false
+			}],
+			buttons : [{
+				text : '保存',
+				iconCls : 'save',
+				disabled : false,
+				handler : function(btn){
+					addThird(btn.ownerCt.ownerCt, Ext.data.StoreManager.lookup('SubjectStore'));
+				}
+			}]
+		}]
+	});
+	
+	//学科管理界面
+	var subjectsGP = Ext.create("Ext.grid.Panel", {
+		title : '学科专业管理',
+		width : 580,
+		height : 530,
+		style : 'margin:10px 25% 0;',
+		columns : [
+			{xtype : 'rownumberer'},
+			{text:'编号', dataIndex:'id', width :80},
+			{text:'名称', dataIndex:'name', width : 150},
+			{text:'父级学科编号', dataIndex:'parent.id', width : 80,
+				renderer : function(value){
+					if(value == 0){
+						return '';
+					}else{
+						return value;
+					}
+				}
+			},
+			{text:'父级学科名称', dataIndex:'parent.name', width : 150},
+			{header : "操作", xtype : 'actioncolumn', width : 40,
+				items : [{
+					icon : 'img/delete.ico',
+					tooltip : '删除',
+					handler : function(grid, row, col){
+						deleteSubject(grid, row, col);
+					}
+				}]
+			}
+		],
+		tbar : [
+		    {xtype : 'button', text : '添加一级学科', iconCls:'add', style:'margin-left:10px;', handler: function(btn){addFirstWindow.show();}},
+		    {xtype : 'button', text : '添加二级学科', iconCls:'add', style:'margin-left:20px;', handler: function(btn){addSecondWindow.show();}},
+		    {xtype : 'button', text : '添加三级学科', iconCls:'add', style:'margin-left:20px;', handler: function(btn){addThirdWindow.show();}},
+			{xtype : 'button', text : '删除', iconCls:'delete', style:'margin-left:20px;', handler: function(btn){deleteSubjects(btn.ownerCt.ownerCt);}}
+		],
+		store : Ext.data.StoreManager.lookup('SubjectStore'),
+		selType : 'checkboxmodel',
+		multiSelect : true,
+		dockedItems : [{
+			xtype : 'pagingtoolbar',
+			store : Ext.data.StoreManager.lookup('SubjectStore'),
+			dock : 'bottom',
+			displayInfo : true
+		}],
+		frame : true,
+		loadMask : true
+	});
+	
 	//为树形菜单增加单击时间，根据id判断要添加的面板
 	managerMenu.on({
 		'itemclick' : function(view, record, item, index, event, options){
 			if(record.get('leaf')){
-				showMembers(record, mainPanel, membersGP, Ext.data.StoreManager.lookup('UserStore'));
+				showMembers(record, mainPanel, membersPanel, Ext.data.StoreManager.lookup('UserStore'));
 				showLeaders(record, mainPanel, leadersGP, Ext.data.StoreManager.lookup('LeaderStore'));
 				showServers(record, mainPanel, serversGP, Ext.data.StoreManager.lookup('ServerStore'));
+				showSubjects(record, mainPanel, subjectsGP, Ext.data.StoreManager.lookup('SubjectStore'));
 				showCount(record, mainPanel, modifyCountFP);
 				showMe(record, mainPanel, showUser);
 				//消除HTML div上的内容

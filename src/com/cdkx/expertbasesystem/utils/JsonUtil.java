@@ -7,7 +7,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.PropertyFilter;
 
-import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.domain.Subject;
 
 public class JsonUtil {
 
@@ -70,5 +70,23 @@ public class JsonUtil {
 		
 		JSONArray jsonData = JSONArray.fromObject(clazz, cfg);
 		return "{success:true,totalCount:" + clazz.size() + ",list:" + jsonData.toString() + "}";
+	}
+	
+	public static String jsonForSubject(List<Subject> subjects){
+		JsonConfig cfg = new JsonConfig();
+		cfg.setJsonPropertyFilter(new PropertyFilter(){
+
+			@Override
+			public boolean apply(Object source, String name, Object value) {
+				if(name.equals("users") || name.equals("children"))
+					return true;
+				else
+					return false;
+			}
+			
+		});
+		
+		JSONArray jsonData = JSONArray.fromObject(subjects, cfg);
+		return "{success:true,totalCount:" + subjects.size() + ",list:" + jsonData.toString() + "}";
 	}
 }

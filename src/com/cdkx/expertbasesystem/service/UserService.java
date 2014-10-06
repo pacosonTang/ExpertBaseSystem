@@ -2,6 +2,7 @@ package com.cdkx.expertbasesystem.service;
 
 import java.util.List;
 
+import com.cdkx.expertbasesystem.domain.ConditionDTO;
 import com.cdkx.expertbasesystem.domain.User;
 
 /**
@@ -68,18 +69,11 @@ public interface UserService {
 	public void deleteUser(int id);
 	
 	/**
-	 * 根据用户给出的条件查询相应的用户
-	 * @param searchCondition 查询条件
-	 * @param searchValue 需要查询的值
-	 * @return List 满足条件的所有用户的集合
+	 * 通过指定的条件查询会员
+	 * @param conditionDTO 用户给定的查询条件
+	 * @return 符合用户给定条件的所有会员集合
 	 */
-	public List<User> searchMembers(String searchCondition, String searchValue);
-	
-	/**
-	 * 查找所有未审核的会员
-	 * @return List 所有未审核的用户信息
-	 */
-	public List<User> findUncheckedUsers();
+	public List<User> searchMember(ConditionDTO conditionDTO);
 	
 	/**
 	 * 对会员进行统计

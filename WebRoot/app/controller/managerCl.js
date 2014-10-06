@@ -1,11 +1,11 @@
 /**
  * 显示或隐藏用户管理面板
  */
-var showMembers = function(record, mainPanel, MembersGP, store){
+var showMembers = function(record, mainPanel, MembersPanel, store){
 	if(record.get('id')=='memberManage'){
 		mainPanel.setTitle(record.get('text'));
-		mainPanel.add(MembersGP).doLayout();
-		MembersGP.show();
+		mainPanel.add(MembersPanel).doLayout();
+		MembersPanel.show();
 		store.load({
 			params : {
 				start : 0,
@@ -14,7 +14,7 @@ var showMembers = function(record, mainPanel, MembersGP, store){
 			}
 		});
 	} else {
-		MembersGP.hide();
+		MembersPanel.hide();
 	}
 };
 /**
@@ -76,6 +76,19 @@ var showMe = function(record, mainPanel, showUser){
 		});
 	}else{
 		showUser.hide();
+	}
+};
+/**
+ * 显示学科管理面板
+ */
+var showSubjects = function(record, mainPanel, subjectsGP, store){
+	if(record.get('id') == 'subjectManage'){
+		mainPanel.setTitle(record.get('text'));
+		mainPanel.add(subjectsGP).doLayout();
+		subjectsGP.show();
+		store.load();
+	}else{
+		subjectsGP.hide();
 	}
 };
 
@@ -660,6 +673,111 @@ var deleteAwards = function(grid){
 	}
 };
 /**
+ * 删除学科专业
+ */
+var deleteSubject = function(grid, row, col){
+	var record = grid.getStore().getAt(row);
+	Ext.Msg.confirm('提示', '删除该专业将删除该学科下的所有子专业，确认删除吗？', function(opt){
+		if(opt == 'yes'){
+			var selectIds = record.get('id');
+			
+			Ext.Ajax.request({
+				url : 'manager/deleteSubjects.action',
+				params : {selectIds : selectIds},
+				method : 'POST',
+				timeout : 5000,
+				success : function(response){
+					Ext.Msg.alert('信息', '删除成功！');
+					grid.getStore().remove(record);
+				},
+				failure : function(response){
+					Ext.Msg.alert('信息', '删除失败，请重试...');
+				}
+			});
+		}
+	});
+};
+var deleteSubjects = function(grid){
+	var record = grid.getSelectionModel().getSelection();
+	if(record.length == 0){
+		Ext.Msg.alert('提示', '没有选择要删除的学科！');
+	}else{
+		Ext.Msg.confirm('提示', '确定要删除吗？', function(opt){
+			if(opt == 'yes'){
+				var selectIds = '';
+				for(var i = 0; i < record.length; i++){
+					if(i == 0){
+						selectIds += record[i].get('id');
+					} else {
+						selectIds += ',' + record[i].get('id');
+					}
+				}
+		
+				Ext.Ajax.request({
+					url : 'manager/deleteSubjects.action',
+					params : {selectIds : selectIds},
+					method : 'POST',
+					timeout : 5000,
+					success : function(response){
+						Ext.Msg.alert('信息', '删除成功！');
+						for(var i = 0; i < record.length; i++){
+							grid.getStore().remove(record[i]);
+						}
+					},
+					failure : function(response){
+						Ext.Msg.alert('信息', '删除失败，请重试...');
+					}
+				});
+			}
+		});
+	}
+};
+//添加一级学科
+var addFirst = function(firstFP, store){
+	if(firstFP.form.isValid()){
+		firstFP.form.submit({
+			url : 'manager/addSubject.action',
+			method : 'POST',
+			success : function(form, aciton){
+				firstFP.form.reset();
+				store.load();
+			}
+		});
+	}else{
+		Ext.Msg.alert('警告', '请正确填写信息...');
+	}
+};
+//添加二级学科
+var addSecond = function(secondFP, store){
+	if(secondFP.form.isValid()){
+		secondFP.form.submit({
+			url : 'manager/addSecondSubject.action',
+			method : 'POST',
+			success : function(form, aciton){
+				secondFP.form.reset();
+				store.load();
+			}
+		});
+	}else{
+		Ext.Msg.alert('警告', '请正确填写信息...');
+	}
+};
+//添加三级学科
+var addThird = function(thirdFP, store){
+	if(thirdFP.form.isValid()){
+		thirdFP.form.submit({
+			url : 'manager/addSecondSubject.action',
+			method : 'POST',
+			success : function(form, aciton){
+				thirdFP.form.reset();
+				store.load();
+			}
+		});
+	}else{
+		Ext.Msg.alert('警告', '请正确填写信息...');
+	}
+};
+/**
  * 修改账户
  */
 var modifyCount = function(modifyCountFP){
@@ -767,4 +885,17 @@ var modifyMember = function(memberFP, store){
 	}else{
 		Ext.Msg.alert('信息', '请正确填写信息...');
 	}
+};
+//会员搜索
+var searchMember = function(searchFP){
+	Ext.data.StoreManager.lookup('UserStore').load({
+		params : {
+			'conditionDTO.degree' : searchFP.down('[name=conditionDTO.degree]').getValue(),
+			'conditionDTO.education' : searchFP.down('[name=conditionDTO.education]').getValue(),
+			'conditionDTO.institution' : searchFP.down('[name=conditionDTO.institution]').getValue(),
+			'conditionDTO.title' : searchFP.down('[name=conditionDTO.title]').getValue(),
+			'conditionDTO.adept' : searchFP.down('[name=conditionDTO.adept]').getValue(),
+			'conditionDTO.currentMajor' : searchFP.down('[name=conditionDTO.currentMajor]').getValue(),
+		}
+	});
 };

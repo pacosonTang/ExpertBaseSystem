@@ -28,6 +28,10 @@ var managerMenu = Ext.create('Ext.tree.Panel', {
 			text : '会员管理',
 			leaf : true
 		}, {
+			id : 'subjectManage',
+			text : '学科专业管理',
+			leaf : true
+		}, {
 			id : 'modifyCount',
 			text : '修改账户密码',
 			leaf : true

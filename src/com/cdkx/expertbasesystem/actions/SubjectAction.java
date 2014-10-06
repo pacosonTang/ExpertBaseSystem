@@ -37,6 +37,27 @@ public class SubjectAction extends ActionSupport {
 	}
 	
 	/**
+	 * 显示所有的学科专业
+	 * @return
+	 */
+	public String showAllSubjects(){
+		subjects = subjectService.findAllSubjects();
+		for(int i = 0; i < subjects.size(); i ++)
+			if(subjects.get(i).getName().equals("其它")){
+				subjects.remove(subjects.get(i));
+			}
+		for(int i = 0; i < subjects.size(); i ++)
+			if(subjects.get(i).getParent() == null){
+				Subject parent = new Subject();
+				parent.setId(0);
+				parent.setName("");
+				subjects.get(i).setParent(parent);
+			}
+		jsonString = JsonUtil.jsonForSubject(subjects);
+		return SUCCESS;
+	}
+	
+	/**
 	 * 添加二级学科<br>
 	 * 二级学科下，始终添加一个其它，用以满足前端必须选择三级学科的需求
 	 * @return
@@ -63,7 +84,7 @@ public class SubjectAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String deleteSubject(){
+	public String deleteSubjects(){
 		String[] ids = selectIds.split(",");
 		for(int i = 0; i < ids.length; i++)
 			subjectService.deleteSubjectById(Integer.parseInt(ids[i]));

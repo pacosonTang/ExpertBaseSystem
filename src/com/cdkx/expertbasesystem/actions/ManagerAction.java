@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.cdkx.expertbasesystem.domain.Award;
+import com.cdkx.expertbasesystem.domain.ConditionDTO;
 import com.cdkx.expertbasesystem.domain.Patent;
 import com.cdkx.expertbasesystem.domain.Project;
 import com.cdkx.expertbasesystem.domain.Thesis;
@@ -75,6 +76,8 @@ public class ManagerAction extends ActionSupport {
 	private ProjectService projectService;
 	
 	private AwardService awardService;
+	
+	private ConditionDTO conditionDTO;
 	
 	/**
 	 * 领导统一视为没有详情信息，只有必要信息
@@ -275,8 +278,13 @@ public class ManagerAction extends ActionSupport {
 	 * @return
 	 */
 	public String showMembers(){
-		members = userService.findMembers();
+		if(conditionDTO != null){
+			members = userService.searchMember(conditionDTO);
+		} else {
+			members = userService.findMembers();
+		}
 		jsonString = JsonUtil.jsonForList(members);
+		conditionDTO = null;
 		return SUCCESS;
 	}
 	
@@ -402,5 +410,13 @@ public class ManagerAction extends ActionSupport {
 
 	public void setImg(File img) {
 		this.img = img;
+	}
+
+	public ConditionDTO getConditionDTO() {
+		return conditionDTO;
+	}
+
+	public void setConditionDTO(ConditionDTO conditionDTO) {
+		this.conditionDTO = conditionDTO;
 	}
 }

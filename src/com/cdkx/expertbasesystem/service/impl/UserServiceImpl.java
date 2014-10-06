@@ -3,6 +3,7 @@ package com.cdkx.expertbasesystem.service.impl;
 import java.util.List;
 
 import com.cdkx.expertbasesystem.dao.UserDao;
+import com.cdkx.expertbasesystem.domain.ConditionDTO;
 import com.cdkx.expertbasesystem.domain.User;
 import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.UserService;
@@ -118,24 +119,48 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> searchMembers(String searchCondition, String searchValue) {
-		return userDao.searchUsers(searchCondition, searchValue);
-	}
-
-	@Override
-	public List<User> findUncheckedUsers() {
-		return userDao.findUncheckedUsers();
-	}
-
-	@Override
 	public List<Object[]> statisticMembers(String countCondition) {
 		//if(countCondition.equals(""))
-		return userDao.statisticMembers(countCondition);
+		try {
+			return userDao.statisticMembers(countCondition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("统计用户失败！");
+		}
 	}
 
 	@Override
 	public List<User> findUsersByUsername(String username) {
-		return userDao.findUsersByUsername(username);
+		try {
+			return userDao.findUsersByUsername(username);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("查询用户名=【" + username + "】的用户失败！");
+		}
+	}
+
+	@Override
+	public List<User> searchMember(ConditionDTO conditionDTO) {
+		String hql = "from User u left join fetch u.institution left join fetch u.degree left join fetch u.education where u.level=3";
+		if(conditionDTO.getDegree() != 0){
+			hql += "and u.degree.id=" + conditionDTO.getDegree();
+		}
+		if(conditionDTO.getEducation() != 0){
+			hql += "and u.education.id=" + conditionDTO.getEducation();
+		}
+		if(conditionDTO.getInstitution() != 0){
+			hql += "and u.institution.id=" + conditionDTO.getInstitution();
+		}
+		if(conditionDTO.getCurrentMajor() !=null && !"".equals(conditionDTO.getCurrentMajor())){
+			hql += "and u.currentMajor like '%" + conditionDTO.getCurrentMajor() + "%'";
+		}
+		if(conditionDTO.getAdept() != null && !"".equals(conditionDTO.getAdept())){
+			hql += "and u.adept like '%" + conditionDTO.getAdept() + "%'";
+		}
+		if(conditionDTO.getTitle() != null && !"".equals(conditionDTO.getTitle())){
+			hql += "and u.title like '%" + conditionDTO.getTitle() + "%'";
+		}
+		return userDao.searchMember(hql);
 	}
 
 }

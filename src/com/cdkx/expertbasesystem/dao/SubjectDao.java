@@ -47,4 +47,10 @@ public interface SubjectDao {
 	 * @return List 所有的一级学科
 	 */
 	public List<Subject> findFirstSubjects();
+	
+	/**
+	 * 找到所有的学科目录
+	 * @return List 所有学科目录集合
+	 */
+	public List<Subject> findAllSubjects();
 }

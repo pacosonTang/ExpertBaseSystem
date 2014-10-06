@@ -92,4 +92,14 @@ public class SubjectServiceImpl implements SubjectService {
 		this.subjectDao = subjectDao;
 	}
 
+	@Override
+	public List<Subject> findAllSubjects() {
+		try {
+			return subjectDao.findAllSubjects();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("查找所有学科专业失败！");
+		}
+	}
+
 }

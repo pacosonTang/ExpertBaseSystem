@@ -70,12 +70,6 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> findUncheckedUsers() {
-		return getHibernateTemplate().find("from User u where u.checked=0");
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
 	public List<Object[]> statisticMembers(String countCondition) {
 		return (List<Object[]>) getHibernateTemplate().execute(new HibernateCallback(){
 
@@ -92,5 +86,11 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	@Override
 	public List<User> findUsersByUsername(String username) {
 		return getHibernateTemplate().find("from User u where u.username='" + username + "'");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> searchMember(String hql) {
+		return getHibernateTemplate().find(hql);
 	}
 }

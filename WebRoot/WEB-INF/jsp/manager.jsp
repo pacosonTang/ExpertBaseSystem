@@ -27,6 +27,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="ext4/bootstrap.js"></script>
 	<script type="text/javascript" src="ext4/locale/ext-lang-zh_CN.js"></script>
 	
+	<script type="text/javascript" src="app/model/Subject.js"></script>
+	<script type="text/javascript" src="app/store/Subjects.js"></script>
 	<script type="text/javascript" src="app/model/Level.js"></script>
 	<script type="text/javascript" src="app/store/Levels.js"></script>
 	<script type="text/javascript" src="app/model/Status.js"></script>
