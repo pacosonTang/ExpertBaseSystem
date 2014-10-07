@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
     </div>
     <div id="main">
-    	<h1>欢迎登录大学生科技创新园设备与耗材管理系统</h1>
+    	<h1>欢迎登录专家信息库管理系统</h1>
     </div>
     <div id="bottom">
     	Copyright &copy; 2014, 四川省成都市科学技术协会,All Rights Reserved.
