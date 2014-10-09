@@ -12,63 +12,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-      <div class="panel panel-primary">
-	   <div class="panel-heading">
-	      <h3 class="panel-title">添加专家[唐荣]科技论文</h3>
-	   </div><!-- ./panel-heading -->
-	   
-	   <div class="panel-body">
-
-		<form class="form-horizontal" role="form" style="width: 600px;"><!-- 科技论文表单 -->
-			
-			<table style="margin-left: 20px;"><tr>
-      	 		<td style="vertical-align: top">
-      	 			
-      	 			<div class="form-group" style="margin-bottom: 5px;margin-top: 10px;"><!-- 论文名称 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">论文名称</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <input type="text" class="form-control" id="firstname" placeholder="请输入论文名称" />
-				      </div>
-				   </div>
-				   
-				   <div class="form-group" style="margin-bottom: 5px;"><!-- 发表时间 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">发表时间</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <input type="text" class="form-control" id="firstname" placeholder="请输入发表时间" />
-				      </div>
-				   </div>
-				   
-      	 		</td>
-      	 	
-      	 		<td style="vertical-align: top">
-      	 			
-      	 			<div class="form-group" style="margin:10px 0px 5px 50px"><!-- 是否收录 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">是否收录</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <select class="form-control">
-					         <option>是</option>
-					         <option>否</option>
-					      </select>
-				      </div>
-				   	</div>
-				   	
-				   	<div class="form-group" style="margin:10px 0px 5px 50px"><!-- 是否核心期刊 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">是否录为<br/>核心期刊</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <select class="form-control">
-					         <option>是</option>
-					         <option>否</option>
-					      </select>
-				      </div>
-				   	</div>
-				   	
-      	 		</td>
-      	 		
-      	 	</tr></table>
-      	 	
-		</form><!-- 科技论文表单 -->
-
-	   </div><!-- ./panel-body-->
-	 </div><!-- ./panel panel-primary-->
+     <table class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center">
+     	<thead><tr>
+     		<th width="7%" style="text-align: center">编号</th>
+     		<th width="60%" style="text-align: center">论文名称</th>
+     		<th width="10%" style="text-align: center">收录年份 </th>
+     		<th width="10%" style="text-align: center">作者</th>
+     	</tr></thead><tbody>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">1</span></td>
+     		<td>舒红平,游志胜,王运锋,费向东.空中交通管理系统中航迹发散判据及抑制处理 控制与决策 2005年第3期[EI:2005189081892]</td>
+     		<td>2010 </td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">2</span></td>
+     		<td>舒红平,游志胜,王运锋,费向东.空中交通管理系统中航迹发散判据及抑制处理 控制与决策 2005年第3期[EI:2005189081892]</td>
+     		<td>2010 </td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">3</span></td>
+     		<td>舒红平,游志胜,王运锋,费向东.空中交通管理系统中航迹发散判据及抑制处理 控制与决策 2005年第3期[EI:2005189081892]</td>
+     		<td>2010 </td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">4</span></td>
+     		<td>舒红平,游志胜,王运锋,费向东.空中交通管理系统中航迹发散判据及抑制处理 控制与决策 2005年第3期[EI:2005189081892]</td>
+     		<td>2010 </td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+    </tbody> </table>
   </body>
 </html>

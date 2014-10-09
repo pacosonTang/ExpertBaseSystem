@@ -4,53 +4,61 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+  <head>
+    <base href="<%=basePath%>">
+    <title>My JSP 'basic.jsp' starting page</title>
+  </head>
   
   <body>
-      <div class="panel panel-primary">
-	   <div class="panel-heading">
-	      <h3 class="panel-title">添加专家[唐荣]成果奖励</h3>
-	   </div><!-- ./panel-heading -->
-	   
-	   <div class="panel-body">
-
-		<form class="form-horizontal" role="form" style="width: 600px;"><!-- 成果奖励表单 -->
-			
-			<table style="margin-left: 20px;"><tr>
-      	 		<td style="vertical-align: top">
-      	 			
-      	 			<div class="form-group" style="margin-bottom: 5px;margin-top: 10px;"><!-- 奖励名称 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">奖励名称</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <input type="text" class="form-control" id="firstname" placeholder="请输入奖励名称" />
-				      </div>
-				   </div>
-				   
-				   <div class="form-group" style="margin-bottom: 5px;"><!-- 委托单位 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">委托单位</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <input type="text" class="form-control" id="firstname" placeholder="请输入委托单位" />
-				      </div>
-				   </div>
-				   
-      	 		</td>
-      	 	
-      	 		<td style="vertical-align: top">
-      	 			
-      	 			<div class="form-group" style="margin-top: 10px;margin-left: 50px;"><!-- 成果名称-->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">成果名称</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <input type="text" class="form-control" id="firstname" placeholder="请输入成果名称"/>
-				      </div>
-				   </div>
-				   
-      	 		</td>
-      	 		
-      	 	</tr></table>
-      	 	
-		</form><!-- 成果奖励表单 -->
-
-	   </div><!-- ./panel-body-->
-	 </div><!-- ./panel panel-primary-->
+     <table class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center">
+     	<thead><tr>
+     		<th width="7%" style="text-align: center">编号</th>
+     		<th width="25%" style="text-align: center">奖励名称</th>
+     		<th width="35%" style="text-align: center">获奖项目名称</th>
+     		<th width="10%" style="text-align: center">排名</th>
+     		<th width="15%" style="text-align: center">获奖时间</th>
+     		<th width="15%" style="text-align: center">获奖者</th>
+     	</tr></thead><tbody>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">1</span></td>
+     		<td>成都市科技进步奖</td>
+     		<td>基于JavaEE的可配置信息化应用平台 </td>
+     		<td>一等奖</td>
+     		<td>1991年9月</td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     		<tr>
+     		<td style="text-align: center"><span class="badge badge-info">2</span></td>
+     		<td>成都市科技进步奖</td>
+     		<td>基于JavaEE的可配置信息化应用平台 </td>
+     		<td>一等奖</td>
+     		<td>1991年9月</td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     		<tr>
+     		<td style="text-align: center"><span class="badge badge-info">3</span></td>
+     		<td>成都市科技进步奖</td>
+     		<td>基于JavaEE的可配置信息化应用平台 </td>
+     		<td>一等奖</td>
+     		<td>1991年9月</td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">4</span></td>
+     		<td>成都市科技进步奖</td>
+     		<td>基于JavaEE的可配置信息化应用平台 </td>
+     		<td>一等奖</td>
+     		<td>1991年9月</td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     	
+    </tbody> </table>
   </body>
 </html>

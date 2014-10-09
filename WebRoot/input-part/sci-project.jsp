@@ -12,79 +12,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-      <div class="panel panel-primary">
-	   <div class="panel-heading">
-	      <h3 class="panel-title">添加专家[唐荣]科研项目</h3>
-	   </div><!-- ./panel-heading -->
-	   
-	   <div class="panel-body">
-
-		<form class="form-horizontal" role="form" style="width: 600px;"><!-- 科研项目表单 -->
-			
-			<table style="margin-left: 20px;"><tr>
-      	 		<td style="vertical-align: top">
-      	 			
-      	 			<div class="form-group" style="margin-bottom: 5px;margin-top: 10px;"><!-- 项目名称 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">项目名称</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <input type="text" class="form-control" id="firstname" placeholder="请输入项目名称" />
-				      </div>
-				   </div>
-				   
-				   <div class="form-group" style="margin-bottom: 5px;"><!-- 项目时间 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">项目时间</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <input type="text" class="form-control" id="firstname" placeholder="时间格式 : 1999-09-09" />
-				      </div>
-				   </div>
-				   
-				   <div class="form-group" style="margin-bottom: 5px;"><!-- 委托单位 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">委托单位</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <input type="text" class="form-control" id="firstname" placeholder="请输入委托单位" />
-				      </div>
-				   </div>
-      	 		</td>
-      	 	
-      	 		<td style="vertical-align: top">
-      	 			
-      	 			<div class="form-group" style="margin:10px 0px 5px 50px"><!-- 本人作用 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">本人作用</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <select class="form-control">
-					         <option>主研</option>
-					         <option>主持</option>
-					      </select>
-				      </div>
-				   	</div>
-				   	
-				   	<div class="form-group" style="margin:10px 0px 5px 50px"><!-- 项目级别 -->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">项目级别</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <select class="form-control">
-					         <option>国家级</option>
-					         <option>省级</option>
-					         <option>市级</option>
-					      </select>
-				      </div>
-				   	</div>
-				   	
-				   	<div class="form-group" style="margin:10px 0px 5px 50px"><!-- 完成状态-->
-				      <label for="firstname" class="col-sm-2 control-label" style="width: 80px;padding: 5px;">完成状态</label>
-				      <div class="col-sm-10" style="width: 200px;height: 40px">
-				         <select class="form-control">
-					         <option>在研</option>
-					         <option>已完成</option>
-					      </select>
-				      </div>
-				   	</div>
-				   	
-      	 		</td>
-      	 		
-      	 	</tr></table>
-		</form><!-- 教育信息表单 -->
-
-	   </div><!-- ./panel-body-->
-	 </div><!-- ./panel panel-primary-->
+     <table class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center">
+     	<thead><tr>
+     		<th width="6%" style="text-align: center">编号</th>
+     		<th width="30%" style="text-align: center">项目名称</th>
+     		<th width="13%" style="text-align: center">委托单位</th>
+     		<th width="10%" style="text-align: center">项目级别</th>
+     		<th width="10%" style="text-align: center">完成状态</th>
+     		<th width="10%" style="text-align: center">本人作用</th>
+     		<th width="12%" style="text-align: center">项目经费</th>
+     		<th style="text-align: center">负责人</th>
+     	</tr></thead><tbody>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">1</span></td>
+     		<td>综合不确定因素影响的短期冲突检测模型研究</td>
+     		<td>西南交通大学</td>
+     		<td>国家级</td>
+     		<td>已验收</td>
+     		<td>住持</td>
+     		<td>自筹2.0<br/>拨款2.5</td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">1</span></td>
+     		<td>综合不确定因素影响的短期冲突检测模型研究</td>
+     		<td>西南交通大学</td>
+     		<td>国家级</td>
+     		<td>已验收</td>
+     		<td>住持</td>
+     		<td>自筹2.0<br/>拨款2.5</td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">1</span></td>
+     		<td>综合不确定因素影响的短期冲突检测模型研究</td>
+     		<td>西南交通大学</td>
+     		<td>国家级</td>
+     		<td>已验收</td>
+     		<td>住持</td>
+     		<td>自筹2.0<br/>拨款2.5</td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">1</span></td>
+     		<td>综合不确定因素影响的短期冲突检测模型研究</td>
+     		<td>西南交通大学</td>
+     		<td>国家级</td>
+     		<td>已验收</td>
+     		<td>住持</td>
+     		<td>自筹2.0<br/>拨款2.5</td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+     	<tr>
+     		<td style="text-align: center"><span class="badge badge-info">1</span></td>
+     		<td>综合不确定因素影响的短期冲突检测模型研究</td>
+     		<td>西南交通大学</td>
+     		<td>国家级</td>
+     		<td>已验收</td>
+     		<td>住持</td>
+     		<td>自筹2.0<br/>拨款2.5</td>
+     		<td>舒红平</td>
+     	</tr>
+     	
+    </tbody> </table>
   </body>
 </html>

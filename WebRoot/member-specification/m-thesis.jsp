@@ -54,6 +54,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <td align="right"><label>科研项目 </label></td>
                   <td colspan="3">已验收211项，未验收311项，在研141项</td>
                 </tr>
+                <tr>
+                  <td align="right"><label>所属学会</label></td>
+                  <td colspan="3">青年科学联合会</td>
+                </tr>
+                <tr>
+                  <td align="right"><label>现从事专业</label></td>
+                  <td colspan="3">数据挖掘</td>
+                </tr>
+                
             </table>
       	 	 
 	   </div><!-- ./panel-body-->
