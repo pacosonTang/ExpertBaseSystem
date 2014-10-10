@@ -11,10 +11,10 @@
             <generator class="native" />
         </id>
         <property name="name" type="java.lang.String">
-            <column name="name" length="50" not-null="true" />
+            <column name="name" length="100" not-null="true" />
         </property>
         <property name="projectTime" type="java.lang.String">
-            <column name="project_time" length="20" not-null="true" />
+            <column name="project_time" length="30" not-null="true" />
         </property>
         <property name="selfFunc" type="java.lang.String">
             <column name="self_func" length="20" not-null="true" />

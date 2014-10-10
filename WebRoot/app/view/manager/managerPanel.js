@@ -6,7 +6,7 @@ Ext.onReady(function(){
 	var userId = '';
 	var flag=1;
 	
-	//将整个body分为3部分，top显示Logo，west显示菜单，main显示内容
+	//将整个body分为4部分，top显示Logo，west显示菜单，main显示内容,bottom显示底部信息
 	Ext.create('Ext.container.Viewport', {
 		layout : 'border',
 		frame : true,
@@ -158,9 +158,9 @@ Ext.onReady(function(){
 				        }
 				    });
 				    if(flag == 1)
-				    	addMemberWindow.down('form').form.findField('user.major.id').setValue(combo.getValue() + '-' + record.get('name'));
+				    	addMemberWindow.down('form').down('[name=user.major.name]').setValue(combo.getValue() + '-' + record.get('name'));
 				    else
-				    	modifyMemberWindow.down('form').form.findField('user.major.id').setValue(combo.getValue() + '-' + record.get('name'));
+				    	modifyMemberWindow.down('form').down('[name=user.major.name]').setValue(combo.getValue() + '-' + record.get('name'));
 					subjectWindow.hide();
 				}
 			}]
@@ -514,14 +514,12 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '姓名',
 				name : 'user.realname',
-				id : 'realname',
 				maxLength : 20,
 				allowBlank : false,
 			}, {
 				xtype : 'combobox',
 				fieldLabel : '性别',
 				name : 'user.sex',
-				id : 'sex',
 				allowBlank : false,
 				emptyText : '请选择',
 				queryMode : 'local',//本地选择模式
@@ -534,7 +532,6 @@ Ext.onReady(function(){
 				xtype : 'datefield',
 				fieldLabel : '出生日期',
 				name : 'user.birthday',
-				id : 'birthday',
 				allowBlank : false,
 				format : 'Y.m.d',
 				fieldLabel : '出生日期',
@@ -543,7 +540,6 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '身份证号',
 				name : 'user.idNo',
-				id : 'idNo',
 				colspan : 2,
 				width : 470,
 				allowBlank : false,
@@ -553,7 +549,6 @@ Ext.onReady(function(){
 				xtype : 'combobox',
 				fieldLabel : '学历',
 				name : 'user.education.id',
-				id : 'education.id',
 				allowBlank : false,
 				emptyText : '请选择',
 				queryMode : 'remote',
@@ -566,7 +561,6 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '毕业院校',
 				name : 'user.school',
-				id : 'school',
 				colspan : 2,
 				width : 470,
 				allowBlank : false
@@ -575,14 +569,12 @@ Ext.onReady(function(){
 				fieldLabel : '毕业时间',
 				format : 'Y.m.d',
 				name : 'user.graduateTime',
-				id : 'graduateTime',
 				maxValue : new Date(),
 				allowBlank : false
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '所学专业',
 				name : 'user.major.name',
-				id : 'user.major.id',
 				allowBlank : false,
 				readOnly : true,
 				listeners : {
@@ -597,7 +589,6 @@ Ext.onReady(function(){
 				xtype : 'combobox',
 				fieldLabel : '学位',
 				name : 'user.degree.id',
-				id : 'degree.id',
 				allowBlank : false,
 				emptyText : '请选择',
 				queryMode : 'remote',
@@ -610,7 +601,6 @@ Ext.onReady(function(){
 				xtype : 'combobox',
 				fieldLabel : '所属学会/协会',
 				name : 'user.institution.id',
-				id : 'institution.id',
 				editale : false,
 				allowBlank : false,
 				emptyText : '请选择',
@@ -635,7 +625,6 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '工作单位',
 				name : 'user.workUnit',
-				id : 'workUnit',
 				style : 'margin-top:10px;',
 				colspan : 2,
 				width : 340,
@@ -644,19 +633,16 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '专业技术职称',
 				name : 'user.title',
-				id : 'title',
 				style : 'margin-top:10px;',
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '职务',
 				name : 'user.duty',
-				id : 'duty',
 				style : 'margin-top:10px;',
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '通讯地址',
 				name : 'user.address',
-				id : 'address',
 				style : 'margin-top:10px;',
 				width : 340,
 				colspan : 2
@@ -664,7 +650,6 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '手机',
 				name : 'user.telephone',
-				id : 'telephone',
 				style : 'margin-top:10px;',
 				allowBlank : false,
 				maxLength : 11,
@@ -674,13 +659,11 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '办公电话',
 				name : 'user.officePhone',
-				id : 'officePhone',
 				style : 'margin-top:10px;',
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '电子邮箱',
 				name : 'user.email',
-				id : 'email',
 				style : 'margin-top:10px;',
 				colspan : 2,
 				width : 340,
@@ -690,7 +673,6 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '邮编',
 				name : 'user.postcode',
-				id : 'postcode',
 				style : 'margin-top:10px;',
 				maxLength : 6,
 				minLength : 6
@@ -698,7 +680,6 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : 'QQ号',
 				name : 'user.qq',
-				id : 'qq',
 				style : 'margin-top:10px;',
 				maxLength : 10,
 				minLength : 6
@@ -706,7 +687,6 @@ Ext.onReady(function(){
 				xtype : 'textarea',
 				fieldLabel : '现从事专业',
 				name : 'user.currentMajor',
-				id : 'user.currentMajor',
 				allowBlank : false,
 				colspan : 2,
 				autoScroll : true,
@@ -716,7 +696,6 @@ Ext.onReady(function(){
 				xtype : 'textarea',
 				fieldLabel : '擅长领域',
 				name : 'user.adept',
-				id : 'adept',
 				style : 'margin-top:10px;',
 				width : 480,
 				autoScroll : true,
@@ -997,14 +976,13 @@ Ext.onReady(function(){
 		title : '成就',
 		plain : true,
 		modal : true,
-		height : 520,
 		layout : 'fit',
 		closeAction : 'hide',
 		resizable : false,
 		items : [{
 			xtype : 'tabpanel',
 			width : 700,
-			heigth : 500,
+			height : 500,
 			activeTab : 0,
 			items : [{
 				title : '论文',
@@ -1203,8 +1181,6 @@ Ext.onReady(function(){
 				store : Ext.data.StoreManager.lookup('DegreeStore'),
 				valueField : 'id',
 				displayField : 'name',
-				forceSelection : true,
-				typeAhead : true,
 			}, {
 				xtype : 'combobox',
 				fieldLabel : '学历',
@@ -1214,8 +1190,6 @@ Ext.onReady(function(){
 				store : Ext.data.StoreManager.lookup('EducationStore'),
 				valueField : 'id',
 				displayField : 'name',
-				forceSelection : true,
-				typeAhead : true,
 			}, {
 				xtype : 'combobox',
 				fieldLabel : '协会',
@@ -1225,8 +1199,6 @@ Ext.onReady(function(){
 				store : Ext.data.StoreManager.lookup('InstitutionStore'),
 				valueField : 'id',
 				displayField : 'name',
-				forceSelection : true,
-				typeAhead : true,
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '专业技术职称',

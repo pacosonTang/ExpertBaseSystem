@@ -23,7 +23,7 @@
             <column name="education" />
         </many-to-one>
         <property name="currentMajor" type="java.lang.String">
-        	<column name="current_major" length="40"/>
+        	<column name="current_major" length="150"/>
         </property>
         <property name="realname" type="java.lang.String">
             <column name="realname" length="20" not-null="true"/>
@@ -71,7 +71,7 @@
             <column name="birthday" length="20" />
         </property>
         <property name="adept" type="java.lang.String">
-            <column name="adept" length="20" />
+            <column name="adept" length="150" />
         </property>
         <property name="school" type="java.lang.String">
             <column name="school" length="20" />
