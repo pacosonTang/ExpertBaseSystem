@@ -42,4 +42,12 @@ public interface ThesisDao {
 	 * @return Thesis 对应编号的论文
 	 */
 	public Thesis findThesis(int id);
+	
+	//【以下方法用于统计】
+	/**
+	 * 查找对应编号的论文list
+	 * @param id
+	 * @return List<Thesis> 对应编号的论文列表
+	 */
+	public List findKeyword(String sql);
 }

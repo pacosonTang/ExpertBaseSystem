@@ -42,4 +42,5 @@ public interface PatentService {
 	 * @return List 相应用户所有的专利
 	 */
 	public List<Patent> findPatentByUser(int userId);
+	 
 }

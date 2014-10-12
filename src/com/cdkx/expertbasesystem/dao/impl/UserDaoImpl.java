@@ -93,4 +93,9 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	public List<User> searchMember(String hql) {
 		return getHibernateTemplate().find(hql);
 	}
+
+	@Override
+	public List findKeyword(String sql) {
+		return this.getHibernateTemplate().find(sql);
+	}
 }

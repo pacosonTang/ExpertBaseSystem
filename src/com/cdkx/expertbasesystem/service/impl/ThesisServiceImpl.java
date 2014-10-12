@@ -72,4 +72,10 @@ public class ThesisServiceImpl implements ThesisService {
 		this.thesisDao = thesisDao;
 	}
 
+	@Override
+	public List<Thesis> countThesis(int userId) {
+		
+		String sql = "from Thesis s where s.user.id = '" + userId + "'"; 
+		return thesisDao.findThesisByUser(userId);
+	}
 }

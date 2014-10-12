@@ -163,4 +163,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.searchMember(hql);
 	}
 
+	@Override
+	public List<User> findUsers(String username) {
+
+		String sql = "from User u where u.realname = '" + username + "'";
+		return userDao.findKeyword(sql);
+	}
 }

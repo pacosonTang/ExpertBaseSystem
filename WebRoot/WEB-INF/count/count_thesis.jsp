@@ -57,11 +57,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div class="panel panel-default" style="width: 1100px;height: 1100px;margin: 0px 160px 0px 100px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
-		   <li><a href="<%=path%>/count-member.jsp" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
-		   <li ><a href="<%=path%>/count-sci-project.jsp">科研项目</a></li>
-		   <li ><a href="<%=path%>/count-result-award.jsp">成果奖励</a></li>
-		   <li class="active"><a href="<%=path%>/count-sci-thesis.jsp">科技论文</a></li>
-		   <li><a href="<%=path%>/count-invent-patent.jsp">发明专利</a></li>
+		   <li><a href="count/skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
+		   <li ><a href="count/skip_project">科研项目</a></li>
+		   <li ><a href="count/skip_award">成果奖励</a></li>
+		   <li class="active"><a href="count/skip_thesis">科技论文</a></li>
+		   <li ><a href="count/skip_patent">发明专利</a></li>
+		   <li ><a href="count/skip_someone">找人</a></li>
 		   
 		   <li style="float: right;">
     	 		<div class="col-sm-10" style="width: 200px;height: 40px">

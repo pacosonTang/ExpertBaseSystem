@@ -33,6 +33,7 @@ public class SearchAction extends ActionSupport implements SessionAware {
 	 * 提供对用户的各种搜索，用户可以根据页面的提示进行选择，然后给出相应的值，根据用户选定的查询类别和查询值给出符合条件的会员信息
 	 * @return
 	 */
+	/*
 	public String searchMembers(){
 		if(!(searchValue == null || searchValue.equals("")))
 			members = userService.searchMembers(searchCondition, searchValue);
@@ -48,7 +49,7 @@ public class SearchAction extends ActionSupport implements SessionAware {
 				return "member_success";
 		} else
 			throw new AppException("你没有登录，请登录后执行此操作！");
-	}
+	}*/
 	
 	@Override
 	public void setSession(Map<String, Object> session) {

@@ -59,4 +59,11 @@ public interface SubjectService {
 	 * @return List 所有学科专业集合
 	 */
 	public List<Subject> findAllSubjects();
+	
+	//以下是统计所用方法
+	/**
+	 * 查询所有学科专业
+	 * @return List 所有学科专业集合
+	 */
+	public List<Subject> subjectByParent(String name);
 }

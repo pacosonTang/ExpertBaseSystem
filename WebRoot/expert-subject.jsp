@@ -13,6 +13,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="<%=path %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="<%=path %>/bootstrap/js/jquery.js"></script>
     <script src="<%=path %>/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+    	
+    	$("")
+    	
+    </script>
   </head>
   
   <body>
@@ -63,14 +69,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					      <div class="modal-content">
 					         
 					         <div class="modal-header">
+					         	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					            <h4 class="modal-title" id="myModalLabel">选择专家</h4>
 					         </div>
 					         
 					         <div class="modal-body">在这里添加一些文本</div>
 					         
 					         <div class="modal-footer">
-					            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					            <button type="button" class="btn btn-primary">确认</button>
+					            
+					            <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
 					         </div>
 					         
 					      </div><!-- /.modal-content -->

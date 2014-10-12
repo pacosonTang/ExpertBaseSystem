@@ -33,5 +33,9 @@ public class ThesisDaoImpl extends HibernateDaoSupport implements ThesisDao {
 	public Thesis findThesis(int id) {
 		return (Thesis) getHibernateTemplate().load(Thesis.class, id);
 	}
-
+	
+	@Override
+	public List findKeyword(String sql) {
+		return this.getHibernateTemplate().find(sql);
+	}
 }

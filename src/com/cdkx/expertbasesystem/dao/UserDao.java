@@ -88,4 +88,7 @@ public interface UserDao {
 	 * @return List 符合hql条件的所有会员集合
 	 */
 	public List<User> searchMember(String hql);
+	
+	//【以下方法用于统计】
+	public List findKeyword(String sql);
 }

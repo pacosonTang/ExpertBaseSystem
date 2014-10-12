@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author Guojun
  *
  */
+
 public class LoginAction extends ActionSupport implements SessionAware {
 
 	private static final long serialVersionUID = 1L;
@@ -42,8 +43,10 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			session.remove("loginError");
 			if(user.getLevel() == 0)
 				return "manager_success";
-			else if(user.getLevel() == 1)
+			else if(user.getLevel() == 1){
+				
 				return "leader_success";
+			}
 			else if(user.getLevel() == 2)
 				return "server_success";
 			else if(user.getLevel() == 3)
@@ -55,6 +58,38 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			return ERROR;
 		}
 	}
+	
+	public String skip_patent(){
+		
+		return "skip_patent";
+	}
+	
+	public String skip_award(){
+			
+			return "skip_award";
+		}
+	
+	public String skip_project(){
+		
+		return "skip_project";
+	}
+	public String skip_thesis(){
+		
+		return "skip_thesis";
+	}
+	
+	public String skip_member(){
+		
+		return "skip_member";
+	}
+	
+	public String skip_someone(){
+		
+		return "skip_someone";
+	}
+	
+	
+	
 	
 	/**
 	 * ÓÃ»§×¢Ïú

@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.cdkx.expertbasesystem.domain.User;
@@ -27,10 +28,12 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author Guojun
  *
  */
-public class UserAction extends ActionSupport implements SessionAware {
+
+public class UserAction extends ActionSupport implements RequestAware, SessionAware {
 
 	private static final long serialVersionUID = 1L;
 	
+	private Map<String, Object> request;
 	private Map<String, Object> session;
 	
 	//前端需要传入User和UserDetail的信息，使用方法是：如果是User的属性，
@@ -127,6 +130,10 @@ public class UserAction extends ActionSupport implements SessionAware {
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+	@Override
+	public void setRequest(Map<String, Object> arg0) {
+		this.request = arg0;
+	}
 
 	public User getUser() {
 		return user;
@@ -171,5 +178,4 @@ public class UserAction extends ActionSupport implements SessionAware {
 	public void setImgFileName(String imgFileName) {
 		this.imgFileName = imgFileName;
 	}
-
 }

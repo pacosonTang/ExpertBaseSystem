@@ -87,4 +87,13 @@ public interface UserService {
 	 * @return 使用该用户名的所有用户
 	 */
 	public List<User> findUsersByUsername(String username);
+	
+	// 以下是统计功能
+	/**
+	 * 通过用户名来查找用户 【统计】
+	 * @param username 需要查找的用户名
+	 * @return 使用该用户名的所有用户
+	 */
+	public List<User> findUsers(String username);
+	
 }

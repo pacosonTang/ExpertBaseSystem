@@ -42,4 +42,12 @@ public interface ThesisService {
 	 * @return List 对应用户所拥有的论文实体
 	 */
 	public List<Thesis> findThesisByUser(int userId);
+	
+	//【以下方法用于统计】
+	/**
+	 * 通过用户编号来查找该用户所拥有的论文实体
+	 * @param userId 用户编号
+	 * @return List 对应用户所拥有的论文实体
+	 */
+	public List<Thesis> countThesis(int userId);
 }

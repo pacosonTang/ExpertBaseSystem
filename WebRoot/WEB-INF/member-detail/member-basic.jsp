@@ -1,3 +1,4 @@
+
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
@@ -29,10 +30,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		
-		$(function(){
-			$(div[id='content']).html("<jsp:include page='/input-part/result-award.jsp' flush='true'></jsp:include>");
-		});
-		
 		function toggleMenu(index){
 			
 			$("ul > li").removeClass("active");
@@ -44,8 +41,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		}
 		
-		
-		
 	</script>
   </head>
   
@@ -55,14 +50,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
    	</div>
 	
-	<div class="panel panel-default" style="width: 1100px;height: 1100px;margin: 0px 160px 0px 100px;"><div class="panel-body">
+	<div class="panel panel-default" style="width: 1150px;height: 1100px;margin: 0px 160px 0px 100px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
 		   <li><a href="<%=path%>/count-member.jsp" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
 		   <li ><a href="<%=path%>/count-sci-project.jsp">科研项目</a></li>
-		   <li class="active"><a href="<%=path%>/count-result-award.jsp">成果奖励</a></li>
+		   <li ><a href="<%=path%>/count-result-award.jsp">成果奖励</a></li>
 		   <li ><a href="<%=path%>/count-sci-thesis.jsp">科技论文</a></li>
-		   <li><a href="<%=path%>/count-invent-patent.jsp">发明专利</a></li>
-		   
+		   <li ><a href="<%=path%>/count-invent-patent.jsp">发明专利</a></li>
+		   <li  class="active"><a href="<%=path%>/member-specific.jsp">找人</a></li>
 		   <li style="float: right;">
     	 		<div class="col-sm-10" style="width: 200px;height: 40px">
 			    	<input type="text" class="form-control" data-toggle="modal" data-target="#myModal" placeholder="点击选择学科" style="width: 160px; "/> 
@@ -90,21 +85,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   </li>
 		</ul>
 		
-		<div id="container" style="width: 100%;height: 100%;margin-top: 10px;">
+		<div id="container" style="width: 100%;margin-top: 10px;">
 			 
-			<div id="menu" class="well well-lg" style="margin-top: 0px;float: top;width: 20%;"><!-- 左边 -->
-				
+			<div id="menu" class="well well-lg" style="margin-top: 0px;float: top;width: 220px;"><!-- 左边 -->
+				 <ul class="nav nav-pills nav-stacked">
+	              <li class="active"><a href="#">会员详细资料</a></li>
+	              <li><a href="#">科研项目</a></li>
+	              <li><a href="#">成果奖励</a></li>
+	              <li><a href="#">科技论文</a></li>
+	              <li><a href="#">发明专利</a></li>
+	            </ul>
 			</div><!-- ./well well-lg -->
 				
-			<div id="content"  style="margin: 0px 0px 0px 20px;width: 74%" ><!-- 右边 -->
-				
-				<jsp:include page="/input-part/result-award.jsp" flush="true"></jsp:include><!-- 顶部 -->
-				
+			<div id="content"  style="margin: 0px 0px 0px 10px;width: 78%"><!-- 右边 -->
+				<jsp:include page="/member-specification/m-basic.jsp" flush="true"></jsp:include><!-- 顶部 -->
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		
 	</div></div>	
   </body>
-  
   
 </html>
