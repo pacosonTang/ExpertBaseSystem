@@ -73,6 +73,7 @@ Ext.onReady(function(){
 				emptyText : '请选择',
 				queryMode : 'remote',
 				allowBlank : false,
+				msgTarget : 'under',
 				store : Ext.data.StoreManager.lookup('FirstMajorStore'),
 				valueField : 'id',
 				displayField : 'name',
@@ -105,6 +106,7 @@ Ext.onReady(function(){
 				emptyText : '请选择',
 				queryMode : 'local',
 				allowBlank : false,
+				msgTarget : 'under',
 				store : Ext.data.StoreManager.lookup('SecondMajorStore'),
 				valueField : 'id',
 				displayField : 'name',
@@ -134,6 +136,7 @@ Ext.onReady(function(){
 				emptyText : '请选择',
 				queryMode : 'local',
 				allowBlank : false,
+				msgTarget : 'under',
 				store : Ext.data.StoreManager.lookup('ThirdMajorStore'),
 				valueField : 'id',
 				displayField : 'name',
@@ -170,7 +173,7 @@ Ext.onReady(function(){
 			xtype : 'form',
 			frame : true,
 			width : 250,
-			height : 60,
+			height : 80,
 			buttonAlign : 'center',
 			defaults : {
 				labelSeparator : ' : ',
@@ -184,9 +187,9 @@ Ext.onReady(function(){
 				name : 'img',
 				id : 'img',
 				allowBlank : false,
+				msgTarget : 'under',
 				regex : /\.(jpg|gif|bmp|png|JPG|GIF|BMP|PNG)/,
 				regexText : '图片格式只能为.jpg/.gif/.bmp/.png',
-				msgTarget : 'side'
 			}],
 			buttons : [{
 				text : '上传',
@@ -214,7 +217,7 @@ Ext.onReady(function(){
 	var showUser = Ext.create('Ext.form.Panel', {
 		title : '我的信息',
 		frame : true,
-		height : 450,
+		//height : 450,
 		width : 850,
 		style : 'margin-left:15%;margin-top:5%;',
 		reader : userJsonReader,
@@ -231,7 +234,6 @@ Ext.onReady(function(){
 		items : [{
 			xtype : 'image',
 			name : 'user.avatar',
-			id : 'avatar',
 			width : 100,
 			height : 134,
 			src : 'img/nopicture.jpg',
@@ -242,7 +244,8 @@ Ext.onReady(function(){
 			name : 'user.realname',
 			id : 'realname',
 			maxLength : 20,
-			allowBlank : false,
+			msgTarget : 'under',
+			allowBlank : false
 		}, {
 			xtype : 'combobox',
 			fieldLabel : '性别',
@@ -255,7 +258,8 @@ Ext.onReady(function(){
 			valueField : 'sexname',
 			displayField : 'sexname',
 			forceSelection : true,
-			typeAhead : true,
+			msgTarget : 'under',
+			typeAhead : true
 		}, {
 			xtype : 'datefield',
 			fieldLabel : '出生日期',
@@ -264,7 +268,8 @@ Ext.onReady(function(){
 			allowBlank : false,
 			format : 'Y.m.d',
 			fieldLabel : '出生日期',
-			maxValue : new Date(),
+			msgTarget : 'under',
+			maxValue : new Date()
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '身份证号',
@@ -274,7 +279,8 @@ Ext.onReady(function(){
 			width : 470,
 			allowBlank : false,
 			maxLength : 18,
-			minLength : 18,
+			msgTarget : 'under',
+			minLength : 18
 		}, {
 			xtype : 'combobox',
 			fieldLabel : '学历',
@@ -290,7 +296,8 @@ Ext.onReady(function(){
 			valueField : 'id',
 			displayField : 'name',
 			forceSelection : true,
-			typeAhead : true,
+			msgTarget : 'under',
+			typeAhead : true
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '毕业院校',
@@ -298,6 +305,7 @@ Ext.onReady(function(){
 			id : 'school',
 			colspan : 2,
 			width : 470,
+			msgTarget : 'under',
 			allowBlank : false
 		}, {
 			xtype : 'datefield',
@@ -306,6 +314,7 @@ Ext.onReady(function(){
 			name : 'user.graduateTime',
 			id : 'graduateTime',
 			maxValue : new Date(),
+			msgTarget : 'under',
 			allowBlank : false
 		}, {
 			xtype : 'textfield',
@@ -313,6 +322,7 @@ Ext.onReady(function(){
 			name : 'user.major.name',
 			id : 'major.id',
 			allowBlank : false,
+			msgTarget : 'under',
 			readOnly : true,
 			listeners : {
 				render : function(p){
@@ -327,6 +337,7 @@ Ext.onReady(function(){
 			name : 'user.degree.id',
 			id : 'degree.id',
 			allowBlank : false,
+			msgTarget : 'under',
 			defaultListConfig : {
 				loadMask : false
 			},
@@ -346,6 +357,7 @@ Ext.onReady(function(){
 				loadMask : false
 			},
 			allowBlank : false,
+			msgTarget : 'under',
 			emptyText : '请选择',
 			queryMode : 'local',
 			store : Ext.data.StoreManager.lookup('InstitutionStore'),
@@ -370,6 +382,7 @@ Ext.onReady(function(){
 			id : 'workUnit',
 			colspan : 2,
 			width : 340,
+			msgTarget : 'under',
 			allowBlank : false
 		}, {
 			xtype : 'textfield',
@@ -397,15 +410,15 @@ Ext.onReady(function(){
 			style : 'margin-top:10px;',
 			allowBlank : false,
 			maxLength : 11,
+			msgTarget : 'under',
 			regex : /^[1][3-8]+\d{9}/,
-			regexText : '请输入正确的手机号',
+			regexText : '请输入正确的手机号'
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '办公电话',
 			name : 'user.officePhone',
 			id : 'officePhone',
-			style : 'margin-top:10px;',
-			emptyText : '例:028-12345678-01'
+			style : 'margin-top:10px;'
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '电子邮箱',
@@ -415,8 +428,9 @@ Ext.onReady(function(){
 			colspan : 2,
 			width : 340,
 			allowBlank : false,
+			msgTarget : 'under',
 			regex : /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/,
-			regexText : '邮箱格式为XXX@XXX.com',
+			regexText : '邮箱格式为XXX@XXX.com'
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '邮编',
@@ -431,7 +445,7 @@ Ext.onReady(function(){
 			name : 'user.qq',
 			id : 'qq',
 			style : 'margin-top:10px;',
-			maxLength : 10,
+			maxLength : 12,
 			minLength : 6
 		}, {
 			xtype : 'textarea',
@@ -440,6 +454,7 @@ Ext.onReady(function(){
 			id : 'currentMajor',
 			style : 'margin-top:10px;',
 			allowBlank : false,
+			msgTarget : 'under',
 			width : 340,
 			autoScroll : true,
 			colspan : 2
@@ -482,7 +497,7 @@ Ext.onReady(function(){
 	var modifyCountFP = Ext.create("Ext.form.Panel", {
 		title : '修改账户',
 		frame : true,
-		height : 200,
+		//height : 200,
 		width : 250,
 		style : 'margin-left:35%;margin-top:10%;',
 		buttonAlign : 'center',
@@ -496,12 +511,14 @@ Ext.onReady(function(){
 			fieldLabel : '用户名',
 			name : 'userDTO.username',
 			value : username,
+			msgTarget : 'under',
 			allowBlank : false
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '原密码',
 			name : 'userDTO.password',
 			inputType : 'password',
+			msgTarget : 'under',
 			allowBlank : false
 		}, {
 			xtype : 'textfield',
@@ -513,7 +530,7 @@ Ext.onReady(function(){
 			inputType : 'password',
 			regex : /^[\w]{6,}$/,
 			regexText : '密码只能包含数字、字母、下划线，长度不少于6位',
-			msgTarget : 'side'
+			msgTarget : 'under'
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '确认密码',
@@ -522,7 +539,7 @@ Ext.onReady(function(){
 			inputType : 'password',
 			regex : /^[\w]{6,}$/,
 			regexText : '密码只能包含数字、字母、下划线，长度不少于6位',
-			msgTarget : 'side',
+			msgTarget : 'under',
 			vtype : 'pass',
 			confirmTo : 'newpass'
 		}],
@@ -548,7 +565,7 @@ Ext.onReady(function(){
 		items : [{
 			xtype : 'form',
 			frame : true,
-			height : 100,
+			//height : 100,
 			width : 350,
 			buttonAlign : 'center',
 			defaults : {
@@ -561,11 +578,13 @@ Ext.onReady(function(){
 				fieldLabel : '论文名称<br/>(核心期刊)',
 				name : 'thesis.name',
 				width : 300,
+				msgTarget : 'under',
 				allowBlank : false
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '收录年份',
 				name : 'thesis.pubTime',
+				msgTarget : 'under',
 				allowBlank : false
 			}],
 			buttons : [{
@@ -630,7 +649,7 @@ Ext.onReady(function(){
 		items : [{
 			xtype : 'form',
 			frame : true,
-			height : 150,
+			//height : 150,
 			width : 350,
 			buttonAlign : 'center',
 			defaults : {
@@ -643,16 +662,19 @@ Ext.onReady(function(){
 				fieldLabel : '专利名称',
 				name : 'patent.name',
 				width : 300,
+				msgTarget : 'under',
 				allowBlank : false
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '授权时间',
 				name : 'patent.authorityTime',
+				msgTarget : 'under',
 				allowBlank : false
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '专利号',
 				name : 'patent.patentNo',
+				msgTarget : 'under',
 				allowBlank : false
 			}],
 			buttons : [{
@@ -717,7 +739,7 @@ Ext.onReady(function(){
 		items : [{
 			xtype : 'form',
 			frame : true,
-			height : 200,
+			//height : 200,
 			width : 550,
 			buttonAlign : 'center',
 			defaults : {
@@ -735,6 +757,7 @@ Ext.onReady(function(){
 				name : 'project.name',
 				colspan : 2,
 				width : 480,
+				msgTarget : 'under',
 				allowBlank : false
 			}, {
 				xtype : 'textfield',
@@ -744,6 +767,7 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '项目时间',
 				name : 'project.projectTime',
+				msgTarget : 'under',
 				allowBlank : false
 			}, {
 				xtype : 'numberfield',
@@ -766,6 +790,7 @@ Ext.onReady(function(){
 				fieldLabel : '项目级别',
 				name : 'project.projectLevel',
 				allowBlank : false,
+				msgTarget : 'under',
 				emptyText : '请选择',
 				queryMode : 'local',
 				store : Ext.data.StoreManager.lookup('LevelStore'),
@@ -784,11 +809,13 @@ Ext.onReady(function(){
 				valueField : 'id',
 				displayField : 'name',
 				forceSelection : true,
+				msgTarget : 'under',
 				typeAhead : true
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '本人作用',
 				name : 'project.selfFunc',
+				msgTarget : 'under',
 				allowBlank : false
 			}],
 			buttons : [{
@@ -876,7 +903,7 @@ Ext.onReady(function(){
 		items : [{
 			xtype : 'form',
 			frame : true,
-			height : 100,
+			//height : 100,
 			width : 500,
 			buttonAlign : 'center',
 			defaults : {
@@ -892,6 +919,7 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '奖励名称',
 				name : 'award.name',
+				msgTarget : 'under',
 				allowBlank : false
 			}, {
 				xtype : 'numberfield',
@@ -903,11 +931,13 @@ Ext.onReady(function(){
 				xtype : 'textfield',
 				fieldLabel : '成果名称',
 				name : 'award.fruitName',
+				msgTarget : 'under',
 				allowBlank : false
 			}, {
 				xtype : 'textfield',
 				fieldLabel : '获奖时间',
 				name : 'award.awardTime',
+				msgTarget : 'under',
 				allowBlank : false
 			}],
 			buttons : [{
