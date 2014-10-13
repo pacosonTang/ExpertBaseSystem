@@ -33,6 +33,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	 * 用户登录
 	 */
 	public String login(){
+		
+		this.session.put("access", "member");
 		user.setPassword(MD5Util.encode(user.getPassword()));
 		List<User> users = userService.login(user);
 		if(users != null && !users.isEmpty()){
@@ -59,36 +61,46 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		}
 	}
 	
+	/**
+	 * 以下是跳转页面的访问
+	 * @return success
+	 */
+	
 	public String skip_patent(){
 		
-		return "skip_patent";
+		this.session.put("access", "patent");
+		return SUCCESS;
 	}
 	
 	public String skip_award(){
-			
-			return "skip_award";
-		}
+		
+		this.session.put("access", "award");
+		return SUCCESS;
+	}
 	
 	public String skip_project(){
 		
-		return "skip_project";
+		this.session.put("access", "project");
+		return SUCCESS;
 	}
 	public String skip_thesis(){
 		
-		return "skip_thesis";
+		this.session.put("access", "thesis");
+		return SUCCESS;
 	}
 	
 	public String skip_member(){
 		
-		return "skip_member";
+		this.session.put("access", "member");
+		return SUCCESS;
 	}
 	
 	public String skip_someone(){
 		
-		return "skip_someone";
+		
+		this.session.put("access", "someone");
+		return SUCCESS;
 	}
-	
-	
 	
 	
 	/**

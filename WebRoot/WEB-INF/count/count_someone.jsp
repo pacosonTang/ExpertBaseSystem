@@ -4,7 +4,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -53,12 +53,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="panel panel-default" style="width: 1150px;height: 1100px;margin: 0px 160px 0px 100px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
 		   
-		   <li><a href="count/skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
-		   <li ><a href="count/skip_project">科研项目</a></li>
-		   <li ><a href="count/skip_award">成果奖励</a></li>
-		   <li ><a href="count/skip_thesis">科技论文</a></li>
-		   <li ><a href="count/skip_patent">发明专利</a></li>
-		   <li class="active"><a href="count/skip_someone">找人</a></li>
+		  <li ><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
+		   <li ><a href="count/skip_project!skip_project">科研项目</a></li>
+		   <li ><a href="count/skip_award!skip_award">成果奖励</a></li>
+		   <li ><a href="count/skip_thesis!skip_thesis">科技论文</a></li>
+		   <li ><a href="count/skip_patent!skip_patent">发明专利</a></li>
+		   <li class="active"><a href="count/skip_someone!skip_someone">找人</a></li>
 		   <li style="float: right;">
 			   	<jsp:include page="/WEB-INF/count/common-subject.jsp" flush="true"></jsp:include><!-- 顶部 -->
 		   </li>
@@ -82,7 +82,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div><!-- ./container -->
 		
 	</div></div>	
+	<s:debug></s:debug>
+	<s:property value="#session.access" />
   </body>
-  
   
 </html>

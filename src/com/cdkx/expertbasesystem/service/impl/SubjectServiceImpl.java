@@ -105,7 +105,19 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public List<Subject> subjectByParent(String name) {
 
-		String sql = "from Subject s where s.parent.name = '" + name + "'";
+		String sql = "select s.name from Subject s where s.parent.name = '" + name + "' and s.parent <> null";
+		try {
+			return subjectDao.subjectByParent(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("查看子目录失败");
+		}
+	}
+
+	@Override
+	public List findFirstSub() {
+		// TODO Auto-generated method stub
+		String sql = "select s.name from Subject s where s.parent=null";
 		try {
 			return subjectDao.subjectByParent(sql);
 		} catch (Exception e) {

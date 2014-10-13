@@ -59,6 +59,6 @@ public interface SubjectDao {
 	 * 通过父目录名称查看子目录
 	 * @return List 所有学科目录集合
 	 */
-	public List<Subject> subjectByParent(String sql);
+	public List subjectByParent(String sql);
 	
 }

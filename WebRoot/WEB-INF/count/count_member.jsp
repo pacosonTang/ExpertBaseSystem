@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -51,38 +51,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div class="panel panel-default" style="width: 1150px;height: 1100px;margin: 0px 160px 0px 100px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
-		   <li class="active"><a href="skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
-		   <li ><a href="count/skip_project">科研项目</a></li>
-		   <li ><a href="count/skip_award">成果奖励</a></li>
-		   <li ><a href="count/skip_thesis">科技论文</a></li>
-		   <li ><a href="count/skip_patent">发明专利</a></li>
-		   <li ><a href="count/skip_someone">找人</a></li>
+		   <li class="active"><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
+		   <li ><a href="count/skip_project!skip_project">科研项目</a></li>
+		   <li ><a href="count/skip_award!skip_award">成果奖励</a></li>
+		   <li ><a href="count/skip_thesis!skip_thesis">科技论文</a></li>
+		   <li ><a href="count/skip_patent!skip_patent">发明专利</a></li>
+		   <li ><a href="count/skip_someone!skip_someone">找人</a></li>
 		   
 		   <li style="float: right;">
-    	 		<div class="col-sm-10" style="width: 200px;height: 40px">
-			    	<input type="text" class="form-control" data-toggle="modal" data-target="#myModal" placeholder="点击选择学科" style="width: 160px; "/> 
-			    </div>
-				
-				<!-- 模态框（Modal） -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				   <div class="modal-dialog">
-				      <div class="modal-content">
-				         <div class="modal-header">
-				            <h4 class="modal-title" id="myModalLabel">选择学科</h4>
-				         </div>
-				         
-				         <div class="modal-body">在这里添加一些文本</div>
-				         
-				         <div class="modal-footer">
-				            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				            <button type="button" class="btn btn-primary">确认</button>
-				         </div>
-				         
-				      </div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
-				</div><!-- /.modal fade -->
-				<button type="button" class="btn btn-default" style="margin-bottom: 2px;width: 80px;">查询</button>
+			   	<jsp:include page="/WEB-INF/count/common-subject.jsp" flush="true"></jsp:include><!-- 顶部 -->
 		   </li>
+		  
 		</ul>
 		
 		<div id="container" style="width: 100%;margin-top: 10px;">
@@ -117,7 +96,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div><!-- ./container -->
 		
 	</div></div>	
+	
+	<s:debug></s:debug>
+		
   </body>
-  
   
 </html>

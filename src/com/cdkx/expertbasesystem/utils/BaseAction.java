@@ -24,12 +24,12 @@ public class BaseAction extends ActionSupport implements RequestAware,SessionAwa
 		this.session = session;
 		
 	}
-	/* 
+	
 	public Map<String, Object> getRequest() {
 		return request;
 	}
 	public Map<String, Object> getSession() {
 		return session;
-	}*/
+	}
 	 
 }

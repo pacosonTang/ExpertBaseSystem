@@ -50,7 +50,7 @@ public class SubjectDaoImpl extends HibernateDaoSupport implements SubjectDao {
 	}
 
 	@Override
-	public List<Subject> subjectByParent(String sql) {
+	public List subjectByParent(String sql) {
 		// TODO Auto-generated method stub
 		return getHibernateTemplate().find(sql);
 	}

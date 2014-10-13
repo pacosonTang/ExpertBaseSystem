@@ -65,5 +65,11 @@ public interface SubjectService {
 	 * 查询所有学科专业
 	 * @return List 所有学科专业集合
 	 */
-	public List<Subject> subjectByParent(String name);
+	public List subjectByParent(String name);
+	/**
+	 * 查询一级学科
+	 * @return List 所有学科专业集合
+	 */
+	public List findFirstSub();
+	
 }
