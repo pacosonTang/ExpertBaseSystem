@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -31,9 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-      <div class="panel panel-primary" style="width: 270px;">
+      <div class="panel panel-primary" style="width: 230px;margin-bottom: 10px;">
 	   <div class="panel-heading" >
-	      <h3 class="panel-title" align="center">会员-舒红平</h3>
+	      <h3 class="panel-title" align="center">会员-${param.username}</h3>
 	   </div><!-- ./panel-heading -->
 	   
 	   <div class="panel-body" style="padding: 5px;">
@@ -42,15 +42,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                 <tr>
                   <td width="30%" align="right"><label>科技论文</label></td>
-                  <td width="25%">521项</td>
-                  <td width="25%" align="right"><label>发明专利 </label></td>
-                  <td>600项</td>
+                  <td width="20%">${param.thesis}项</td>
+                  <td width="30%" align="right"><label>发明专利 </label></td>
+                  <td>${param.patent}项</td>
                 </tr>
                  <tr>
                   <td width="30%" align="right"><label>成果奖励</label></td>
-                  <td width="25%">521项</td>
-                  <td width="25%" align="right"><label>科研项目 </label></td>
-                  <td>600项</td>
+                  <td width="20%">${param.award}项</td>
+                  <td width="30%" align="right"><label>科研项目 </label></td>
+                  <td>${param.project}项</td>
                 </tr>
             </table>
       	 	 

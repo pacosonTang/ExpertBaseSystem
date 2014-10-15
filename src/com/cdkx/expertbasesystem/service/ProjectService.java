@@ -42,4 +42,22 @@ public interface ProjectService {
 	 * @return List 对应用户的科研项目实体集合
 	 */
 	public List<Project> findProjectByUser(int userId);
+	
+	
+	/**
+	 * 根据用户名(id)统计项目数量
+	 * @param userId 用户编号
+	 * @return List 对应用户的科研项目数量
+	 */
+	public int findProNum(String userId);
+	
+	/**
+	 * 根据科目统计项目数量
+	 * @param 学科科目编号
+	 * @return List 对应用户的科研项目数量
+	 */
+	public List<Project> countProNum(String sub);
+	
+	
+	
 }

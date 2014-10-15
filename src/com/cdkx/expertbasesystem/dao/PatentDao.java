@@ -36,4 +36,6 @@ public interface PatentDao {
 	 * @return List 包含对应会员的所有专利对象
 	 */
 	public List<Patent> findPatentByUser(int userId);
+	
+	public List findkey(String sql);
 }

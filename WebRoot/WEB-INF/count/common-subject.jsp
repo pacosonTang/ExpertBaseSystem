@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*"  contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*"  pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -77,9 +77,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		function findKey(){
-			alert(keyword);
-			//window.location="login?keyword="+ keyword;
-			
+			//alert(keyword);
+			var access = "<%=session.getAttribute("access")%>";
+			window.location= "count/" + access + "!total_"+ access + "?keyword=" + keyword;
 		}
 	</script>
 </head>

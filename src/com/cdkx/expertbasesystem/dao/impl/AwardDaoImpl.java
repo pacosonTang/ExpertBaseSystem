@@ -38,4 +38,10 @@ public class AwardDaoImpl extends HibernateDaoSupport implements AwardDao {
 	public void modifyAward(Award award) {
 		getHibernateTemplate().update(award);
 	}
+
+	@Override
+	public List findkey(String sql) {
+
+		return this.getHibernateTemplate().find(sql);
+	}
 }

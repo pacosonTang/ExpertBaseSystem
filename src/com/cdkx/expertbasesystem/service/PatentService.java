@@ -42,5 +42,21 @@ public interface PatentService {
 	 * @return List 相应用户所有的专利
 	 */
 	public List<Patent> findPatentByUser(int userId);
-	 
+	
+	//以下为统计方法
+	/**
+	 * 根据用户名(id)统计 专利  数量
+	 * @param userId 用户编号
+	 * @return List 对应用户的 专利 数量
+	 */
+	public int findPatentNum(String userId);
+	
+	/**
+	 * 根据 学科科目 统计 专利  数量
+	 * @param sub 学科名称　
+	 * @return List 对应用户的 专利 数量
+	 */
+	public List<Patent> countPatentNum(String sub);
+	
+	
 }

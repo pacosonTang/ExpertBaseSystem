@@ -2,6 +2,7 @@ package com.cdkx.expertbasesystem.actions;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -13,8 +14,10 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.cdkx.expertbasesystem.domain.User;
 import com.cdkx.expertbasesystem.domain.UserDTO;
+import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.UserService;
+import com.cdkx.expertbasesystem.utils.BaseAction;
 import com.cdkx.expertbasesystem.utils.JsonUtil;
 import com.cdkx.expertbasesystem.utils.MD5Util;
 import com.opensymphony.xwork2.ActionSupport;
@@ -29,7 +32,7 @@ import com.opensymphony.xwork2.ActionSupport;
  *
  */
 
-public class UserAction extends ActionSupport implements RequestAware, SessionAware {
+public class UserAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -51,6 +54,10 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
 	private UserService userService;
 	
 	private String jsonString;
+	
+	private String keyword;
+	
+	private List<UserTotalDTO> list_total; 
 	
 	/**
 	 * 修改用户信息
@@ -126,13 +133,24 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
 		return SUCCESS;
 	}
 
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-	@Override
-	public void setRequest(Map<String, Object> arg0) {
-		this.request = arg0;
+	//以下为统计所需的方法啦
+	/**
+	 * 统计会员的综合信息如: 项目, 奖励, 论文,and 专利 数量 
+	 * @return success
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String total_member() throws UnsupportedEncodingException{
+		
+		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
+		System.out.println("关键字 :  " + str);
+		try {
+			list_total = userService.countnum(str);
+			this.getRequest().put("list_total", list_total);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("查询用户综合信息失败");
+		}
+		return "success";
 	}
 
 	public User getUser() {
@@ -178,4 +196,14 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
 	public void setImgFileName(String imgFileName) {
 		this.imgFileName = imgFileName;
 	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
+	
 }

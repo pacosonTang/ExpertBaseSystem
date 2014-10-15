@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
    	</div>
 	
-	<div class="panel panel-default" style="width: 1100px;height: 1100px;margin: 0px 160px 0px 100px;"><div class="panel-body">
+	<div class="panel panel-default" style="width: 1220px;height: 1100px;margin: 0px 160px 0px 70px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
 		
 		   <li ><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
@@ -79,7 +79,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 			<div id="content"  style="margin: 0px 0px 0px 20px;width: 74%" ><!-- 右边 -->
 				
-				<jsp:include page="/input-part/result-award.jsp" flush="true"></jsp:include><!-- 顶部 -->
+				<s:if test="#request.list_total!=null">
+				<table class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center;vertical-align: middle;">
+			     	<thead><tr style="vertical-align: middle;">
+			     		<th width="7%" style="text-align: center;vertical-align: middle;">编号</th>
+			     		<th width="25%" style="text-align: center;vertical-align: middle;">奖励名称</th>
+			     		<th width="35%" style="text-align: center;vertical-align: middle;">获奖项目名称</th>
+			     		<th width="10%" style="text-align: center;vertical-align: middle;">排名</th>
+			     		<th width="15%" style="text-align: center;vertical-align: middle;">获奖时间</th>
+			     		<th width="15%" style="text-align: center;vertical-align: middle;">获奖者</th>
+			     	</tr></thead><tbody>
+				 <s:iterator value="#request.list_total" status="st" id="awardDto">
+		    		<tr>
+			     		<td style="text-align: center;vertical-align: middle;"><span class="label label-info"><s:property  value="#st.count"/></span></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#awardDto.name"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property  value="#awardDto.fruitName"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property  value="#awardDto.rank"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property  value="#awardDto.awardTime"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property  value="#awardDto.user.realname"/></td>
+			     	</tr>
+			     	
+					</s:iterator>
+				</tbody></table>
+				</s:if>
 				
 			</div><!-- ./content  -->
 		</div><!-- ./container -->

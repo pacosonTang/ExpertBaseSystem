@@ -78,4 +78,30 @@ public class ThesisServiceImpl implements ThesisService {
 		String sql = "from Thesis s where s.user.id = '" + userId + "'"; 
 		return thesisDao.findThesisByUser(userId);
 	}
+	
+	@Override
+	public int findThesisNum(String userId) {
+		
+		String sql = "select count(*) from Thesis t where t.user.realname = '" + userId + "'";
+		try {
+			List list = thesisDao.findKeyword(sql); 
+			
+			return Integer.parseInt(list.get(0).toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("统计该用户的论文数量失败");
+		}
+	}
+
+	@Override
+	public List<Thesis> countThesisNum(String sub) {
+		
+		String sql = "from Thesis p where p.user.major.name = '" + sub + "'";
+		try {
+			return  thesisDao.findKeyword(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("统计该用户的  论文 数量失败");
+		}
+	}
 }

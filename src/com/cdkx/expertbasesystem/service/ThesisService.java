@@ -50,4 +50,19 @@ public interface ThesisService {
 	 * @return List 对应用户所拥有的论文实体
 	 */
 	public List<Thesis> countThesis(int userId);
+	
+	/**
+	 * 根据用户名(id)统计 论文  数量
+	 * @param userId 用户编号
+	 * @return List 对应用户的论文数量
+	 */
+	public int findThesisNum(String userId);
+	
+	/**
+	 * 查询所有论文
+	 * @param sub 学科科目
+	 * @return List 对应用户的论文数量
+	 */
+	public List<Thesis> countThesisNum(String sub);
+	
 }

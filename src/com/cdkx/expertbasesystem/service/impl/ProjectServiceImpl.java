@@ -72,4 +72,30 @@ public class ProjectServiceImpl implements ProjectService {
 		this.projectDao = projectDao;
 	}
 
+	@Override
+	public int findProNum(String userId) {
+		
+		String sql = "select count(*) from Project p where p.user.realname = '" + userId + "'";
+		try {
+			List list = projectDao.findkey(sql); 
+			
+			return Integer.parseInt(list.get(0).toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("统计该用户的项目数量失败");
+		}
+	}
+
+	@Override
+	public List<Project> countProNum(String sub) {
+		// TODO Auto-generated method stub
+		
+		String sql = "from Project p where p.user.major.name = '" + sub + "'";
+		try {
+			return  projectDao.findkey(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("统计该用户的项目数量失败");
+		}
+	}
 }

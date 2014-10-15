@@ -21,6 +21,27 @@
     			<param name="root">result</param>
     		</result>	
     	</action>
+    	
+    	<action name="member" class="userAction">
+    		<result>/WEB-INF/count/count_member.jsp</result>
+    	</action>
+    	
+    	<action name="project" class="memberAction">
+    		<result>/WEB-INF/count/count_project.jsp</result>
+    	</action>
+    	
+    	<action name="award" class="memberAction">
+    		<result>/WEB-INF/count/count_award.jsp</result>
+    	</action>
+    	
+    	<action name="patent" class="memberAction">
+    		<result>/WEB-INF/count/count_patent.jsp</result>
+    	</action>
+    	
+    	<action name="thesis" class="memberAction">
+    		<result>/WEB-INF/count/count_thesis.jsp</result>
+    	</action>
+    	
     </package>
     
     

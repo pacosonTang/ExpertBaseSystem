@@ -72,4 +72,32 @@ public class PatentServiceImpl implements PatentService {
 		this.patentDao = patentDao;
 	}
 
+	//以下是统计方法的啦
+	
+	@Override
+	public int findPatentNum(String userId) {
+		
+		String sql = "select count(*) from Patent p where p.user.realname = '" + userId + "'";
+		try {
+			List list = patentDao.findkey(sql); 
+			
+			return Integer.parseInt(list.get(0).toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("统计该用户的 专利  数量失败");
+		}
+	}
+
+	@Override
+	public List<Patent> countPatentNum(String sub) {
+
+		String sql = "from Patent p where p.user.major.name = '" + sub + "'";
+		try {
+			return  patentDao.findkey(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("统计该用户的  专利  数量失败");
+		}
+	}
+
 }

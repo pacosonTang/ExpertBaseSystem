@@ -42,4 +42,18 @@ public interface AwardService {
 	 * @return List 该用户的所有奖励实体集合
 	 */
 	public List<Award> findAwardByUser(int userId);
+	
+	/**
+	 * 根据用户名(id)统计 奖励  数量
+	 * @param userId 用户编号
+	 * @return List 对应用户的 奖励  数量
+	 */
+	public int findAwardNum(String userId);
+	
+	/**
+	 * 根据  学科科目  统计 奖励  
+	 * @param sub 学科科目
+	 * @return List 对应用户的 奖励  数量
+	 */
+	public List<Award> countAwardNum(String sub);
 }

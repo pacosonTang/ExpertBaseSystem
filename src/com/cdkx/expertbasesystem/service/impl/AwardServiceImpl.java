@@ -71,5 +71,31 @@ public class AwardServiceImpl implements AwardService {
 	public void setAwardDao(AwardDao awardDao) {
 		this.awardDao = awardDao;
 	}
+	
+	@Override
+	public int findAwardNum(String userId) {
+		
+		String sql = "select count(*) from Award where a.user.realname = '" + userId + "'";
+		try {
+			List list = awardDao.findkey(sql); 
+			
+			return Integer.parseInt(list.get(0).toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("统计该用户的论文数量失败");
+		}
+	}
+
+	@Override
+	public List<Award> countAwardNum(String sub) {
+		
+		String sql = "from Award p where p.user.major.name = '" + sub + "'";
+		try {
+			return  awardDao.findkey(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("统计该用户的 奖励  数量失败");
+		}
+	}
 
 }

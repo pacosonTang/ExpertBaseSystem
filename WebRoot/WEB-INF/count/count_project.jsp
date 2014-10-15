@@ -4,6 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
+<%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -49,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
    	</div>
 	
-	<div class="panel panel-default" style="width: 1100px;height: 1100px;margin: 0px 160px 0px 100px;"><div class="panel-body">
+	<div class="panel panel-default" style="width: 1220px;height: 1100px;margin: 0px 160px 0px 70px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
 		   
 		   <li ><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
@@ -73,12 +74,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 			<div id="content"  style="margin: 0px 0px 0px 20px;width: 78%" ><!-- 右边 -->
 				
-				<jsp:include page="/input-part/sci-project.jsp" flush="true"></jsp:include><!-- 顶部 -->
+				<s:if test="#request.list_total!=null">
+				 <table class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center;vertical-align: middle;">
+			     	<thead><tr style="vertical-align: middle;">
+			     		<th width="4%" style="text-align: center;vertical-align: middle;">编号</th>
+			     		<th width="25%" style="text-align: center;vertical-align: middle;">项目名称</th>
+			     		<th width="10%" style="text-align: center;vertical-align: middle;">委托单位</th>
+			     		<th width="7%" style="text-align: center;vertical-align: middle;">项目<br/>级别</th>
+			     		<th width="10%" style="text-align: center;vertical-align: middle;">项目<br/>时间</th>
+			     		<th width="7%" style="text-align: center;vertical-align: middle;">完成<br/>状态</th>
+			     		<th width="7%" style="text-align: center;vertical-align: middle;">本人<br/>作用</th>
+			     		<th width="7%" style="text-align: center;vertical-align: middle;">自筹<br/>经费</th>
+			     		<th width="7%" style="text-align: center;vertical-align: middle;">财政<br/>拨款</th>
+			     		<th width="7%" style="text-align: center;vertical-align: middle;">负责人</th>
+			     	</tr></thead><tbody>
+				 <s:iterator value="#request.list_total" status="st" id="proDto">
+		    		<tr>
+			     		<td style="text-align: center;vertical-align: middle;"><span class="label label-info"><s:property value="#st.count"/></span></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#proDto.name"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#proDto.delegationUnit"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#proDto.projectLevel"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#proDto.projectTime"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#proDto.completeStatus"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#proDto.selfFunc"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#proDto.allocation"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#proDto.selffinance"/></td>
+			     		<td style="text-align: center;vertical-align: middle;"><s:property value="#proDto.user.realname"/></td>
+			     	</tr>
+			     	
+					</s:iterator>
+				</tbody></table>
+				</s:if>
 				
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		
-	</div></div>	
+	</div></div>
+	
+	<s:debug></s:debug>	
   </body>
   
   

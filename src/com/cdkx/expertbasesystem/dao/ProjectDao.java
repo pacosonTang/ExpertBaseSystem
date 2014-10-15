@@ -42,4 +42,6 @@ public interface ProjectDao {
 	 * @return Project 要查找的科研项目
 	 */
 	public Project findProject(int id);
+	
+	public List findkey(String sql);
 }

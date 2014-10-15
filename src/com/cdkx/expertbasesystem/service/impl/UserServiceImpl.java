@@ -1,10 +1,13 @@
 package com.cdkx.expertbasesystem.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.cdkx.expertbasesystem.dao.UserDao;
 import com.cdkx.expertbasesystem.domain.ConditionDTO;
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.UserService;
 
@@ -168,5 +171,41 @@ public class UserServiceImpl implements UserService {
 
 		String sql = "from User u where u.realname = '" + username + "'";
 		return userDao.findKeyword(sql);
+	}
+
+	@Override
+	public List<String> findUserBySub(String sub) {
+		
+		String sql = "select u.realname from User u where u.major.name = '" + sub + "'";
+		return userDao.findKeyword(sql);
+	}
+
+	@Override
+	public List<UserTotalDTO> countnum(String sub) {
+
+		UserTotalDTO userTotal;
+		List<UserTotalDTO> userCountList = new ArrayList<UserTotalDTO>();
+		List list = null;
+		String name;
+		String sql = "select u.id , u.realname from User u where u.major.name = '" + sub +"'";
+		 
+		Object temp_object[][] = new Object[1][2];
+		list = userDao.findKeyword(sql);
+		if(list != null)
+			for (int i = 0; i < list.size(); i++) {
+				userTotal = new UserTotalDTO();
+				temp_object[0] = (Object[]) list.get(i);
+				sql = "select count(*) from Award a where a.user.id = '" + String.valueOf(temp_object[0][0]) + "'";
+				userTotal.setAward(String.valueOf(userDao.findKeyword(sql).get(0)));
+				sql = "select count(*) from Project p where p.user.id = '" + String.valueOf(temp_object[0][0]) + "'";
+				userTotal.setProject(String.valueOf(userDao.findKeyword(sql).get(0)));
+				sql = "select count(*) from Thesis t where t.user.id = '" + String.valueOf(temp_object[0][0]) + "'";
+				userTotal.setThesis(String.valueOf(userDao.findKeyword(sql).get(0)));
+				sql = "select count(*) from Patent p where p.user.id = '" + String.valueOf(temp_object[0][0]) + "'";
+				userTotal.setPatent(String.valueOf(userDao.findKeyword(sql).get(0)));
+				userTotal.setUsername(String.valueOf(temp_object[0][1]));
+				userCountList.add(userTotal);
+			}
+		return userCountList;
 	}
 }

@@ -39,4 +39,10 @@ public class ProjectDaoImpl extends HibernateDaoSupport implements ProjectDao {
 		return (Project) getHibernateTemplate().load(Project.class, id);
 	}
 
+	@Override
+	public List findkey(String sql) {
+		// TODO Auto-generated method stub
+		return this.getHibernateTemplate().find(sql);
+	}
+
 }

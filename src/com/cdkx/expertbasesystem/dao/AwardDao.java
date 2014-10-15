@@ -42,4 +42,6 @@ public interface AwardDao {
 	 * @param award 修改好的奖励信息
 	 */
 	public void modifyAward(Award award);
+	
+	public List findkey(String sql);
 }

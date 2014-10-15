@@ -34,4 +34,10 @@ public class PatentDaoImpl extends HibernateDaoSupport implements PatentDao {
 		return getHibernateTemplate().find("from Patent p where p.user.id=" + userId);
 	}
 
+	@Override
+	public List findkey(String sql) {
+		// TODO Auto-generated method stub
+		return this.getHibernateTemplate().find(sql);
+	}
+
 }

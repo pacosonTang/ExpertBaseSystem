@@ -1,6 +1,5 @@
 package com.cdkx.test;
 
-import java.util.Date;
 import java.util.List;
 import org.junit.Test;
 
@@ -11,7 +10,6 @@ import com.cdkx.expertbasesystem.domain.Project;
 import com.cdkx.expertbasesystem.domain.Subject;
 import com.cdkx.expertbasesystem.domain.Thesis;
 import com.cdkx.expertbasesystem.domain.User;
-import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 import com.cdkx.expertbasesystem.service.AwardService;
 import com.cdkx.expertbasesystem.service.PatentService;
 import com.cdkx.expertbasesystem.service.ProjectService;
@@ -20,7 +18,7 @@ import com.cdkx.expertbasesystem.service.ThesisService;
 import com.cdkx.expertbasesystem.service.UserService;
 import com.cdkx.util.BaseTest;
 
-public class MemberTest  extends BaseTest{
+public class ThesisCountTest  extends BaseTest{
 	
 	private List list;
 	
@@ -40,22 +38,35 @@ public class MemberTest  extends BaseTest{
 	}
 	
 	/**
-	 * 测试通过科目名查看用户的全部信息
+	 * 测试通过用户名查看专利;
+	 */
+	@Test
+	public void patentCountTest(){//测试通过科目名查看用户名;
+		
+		Patent patent;
+		String keyword = "郭刚";
+		PatentService patentService = (PatentService) this.ctx.getBean("patentService");
+		List<String> list = null;
+		
+		for (String patent2 : list)  
+			System.out.print(patent2 + "  ");
+	}
+	
+	/**
+	 * 依据科目 查看所有 论文
 	 */
 	
 	@Test
-	public void totalCountTest(){//测试通过科目名查看用户名;
+	public void countThesisTest(){//测试通过科目名查看用户名;
 		
-		User user;
+		Thesis thesis;
 		String keyword = "计算机应用技术";
-		UserService userService = (UserService) this.ctx.getBean("userService");
-		Date before = new Date();
-		List<UserTotalDTO> list = userService.countnum(keyword);
-		Date after = new Date();
-		System.out.println("运行时间为:  " + (after.getTime() - before.getTime() ));
-		for (UserTotalDTO u : list) {
-			System.out.println("[名称为：] " + u.getUsername() + " 【奖励为】 " + u.getAward() + " 【专利数量为 】 " + u.getPatent() + " 【项目数量为 】 " + u.getProject() + " 【论文数量为 】 " + u.getThesis());
-		}
+		ThesisService thesisService = (ThesisService) this.ctx.getBean("thesisService");
+		List<Thesis> list = thesisService.countThesisNum(keyword);
+		
+		for (Thesis thesis2 : list)  
+			System.out.println(thesis2.getName() + "  ");
 	}
+	
 	
 }

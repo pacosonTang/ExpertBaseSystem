@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" isELIgnored="false"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
    	</div>
 	
-	<div class="panel panel-default" style="width: 1150px;height: 1100px;margin: 0px 160px 0px 100px;"><div class="panel-body">
+	<div class="panel panel-default" style="width: 1220px;height: 1100px;margin: 0px 160px 0px 70px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
 		   <li class="active"><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
 		   <li ><a href="count/skip_project!skip_project">科研项目</a></li>
@@ -74,23 +74,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 			<div id="content"  style="margin: 0px 0px 0px 10px;"><!-- 右边 -->
 				
-				<table><tbody>
-					<tr>
-						<td style="padding-left: 20px;"><jsp:include page="/input-part/expert-basic.jsp" flush="true"></jsp:include><!-- 顶部 --></td>
-						<td style="padding-left: 20px;"><jsp:include page="/input-part/expert-basic.jsp" flush="true"></jsp:include><!-- 顶部 --></td>
-						<td style="padding-left: 20px;"><jsp:include page="/input-part/expert-basic.jsp" flush="true"></jsp:include><!-- 顶部 --></td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px;"><jsp:include page="/input-part/expert-basic.jsp" flush="true"></jsp:include><!-- 顶部 --></td>
-						<td style="padding-left: 20px;"><jsp:include page="/input-part/expert-basic.jsp" flush="true"></jsp:include><!-- 顶部 --></td>
-						<td style="padding-left: 20px;"><jsp:include page="/input-part/expert-basic.jsp" flush="true"></jsp:include><!-- 顶部 --></td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px;"><jsp:include page="/input-part/expert-basic.jsp" flush="true"></jsp:include><!-- 顶部 --></td>
-						<td style="padding-left: 20px;"><jsp:include page="/input-part/expert-basic.jsp" flush="true"></jsp:include><!-- 顶部 --></td>
-						<td style="padding-left: 20px;"><jsp:include page="/input-part/expert-basic.jsp" flush="true"></jsp:include><!-- 顶部 --></td>
-					</tr>
-				</tbody></table>
+				<table style="vertical-align: top"><tbody>
+				
+					 <s:iterator value="#request.list_total" status="st" id="userDto">
+				    	<s:if test="#st.index%4==0||#st.first">
+				    		<tr>
+				    	</s:if>
+				    	
+				    		<td style="padding-left: 10px;">
+				    			<jsp:include page="/WEB-INF/demo-part/expert-basic.jsp" flush="true">
+				    				<jsp:param value="${userDto.username}" name="username"/>
+				    				<jsp:param value="${userDto.patent}" name="patent"/>
+				    				<jsp:param value="${userDto.thesis}" name="thesis"/>
+				    				<jsp:param value="${userDto.award}" name="award"/>
+				    				<jsp:param value="${userDto.project}" name="project"/>
+				    			</jsp:include>
+			    			</td>
+				   	 </s:iterator>
+					
+					</tbody></table>
 				
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
