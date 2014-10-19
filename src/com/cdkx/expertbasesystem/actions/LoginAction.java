@@ -1,12 +1,16 @@
 package com.cdkx.expertbasesystem.actions;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.UserService;
+import com.cdkx.expertbasesystem.utils.BaseAction;
 import com.cdkx.expertbasesystem.utils.MD5Util;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -16,7 +20,7 @@ import com.opensymphony.xwork2.ActionSupport;
  *
  */
 
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,6 +47,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			session.put("userId", user.getId());
 			session.put("username", user.getUsername());
 			session.remove("loginError");
+			this.session.put("user_chart_dto", this.userService.user_chart_dto());//会员统计图信息
 			if(user.getLevel() == 0)
 				return "manager_success";
 			else if(user.getLevel() == 1){

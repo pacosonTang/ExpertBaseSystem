@@ -23,35 +23,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		
-		$(function(){
-			
-			$(".form-control").bind("click", function() {
-			  alert("User clicked on foo.");
-			});
-			load_subject();
-			
-		});
-		
-		
-		function load_subject(){//添加评论
-			//请求的地址 　　
-			var url = "count/subject!findSubject";
-			alert("发送请求");
-			$.post(url,{
-					postid:"1"
-				},
-				function(data){
-					member = eval('('+data+')');
-					alert("回复成功!我日你哥哥");
-				},"json"); 
-		}
-		
+		 
 	</script>
 	
   </head>
   
   <body>
+	<a href="javascript:return false " onclick="document.getElementById('view').scrollIntoView();">你好</a>
 		
+		<div style="margin-top: 500px;">
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+		</div>
+		
+		
+		<div style="margin-top: 500px;">
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+			这个函数可以实现,而且url后面不带任何参数，很干净。
+		</div>	
+	<a id="view">大家好</a>
+	
 		   
   </body>
    

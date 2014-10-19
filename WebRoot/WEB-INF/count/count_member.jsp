@@ -66,14 +66,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<div id="container" style="width: 100%;margin-top: 10px;">
 			 
-			<div id="menu" class="well well-lg" style="margin-top: 0px;float: top;width: 220px;"><!-- 左边 -->
+			<div id="menu" class="well well-lg" style="margin-top: 0px;float: top;width: 20%;"><!-- 左边 -->
 				<iframe src="<%=path%>/jquery-chart.jsp" width="100%" height="300px;" 
 				  		marginheight="0" marginwidth="0" frameborder="0" scrolling="no"> 
 				</iframe> 
 			</div><!-- ./well well-lg -->
 				
-			<div id="content"  style="margin: 0px 0px 0px 10px;"><!-- 右边 -->
+			<div id="content"  style="margin: 0px 0px 0px 10px; width: 75%"><!-- 右边 -->
 				
+				<s:if test="#request.list_total!=null">
 				<table style="vertical-align: top"><tbody>
 				
 					 <s:iterator value="#request.list_total" status="st" id="userDto">
@@ -93,7 +94,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   	 </s:iterator>
 					
 					</tbody></table>
-				
+				</s:if>
+				<s:else>
+					<table>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+					<iframe src="<%=basePath%>/chart/member_chart.jsp" width="100%" height="600px;" 
+				  		marginheight="0" marginwidth="0" frameborder="0" scrolling="no"> 
+				</iframe> 
+				</s:else>
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		

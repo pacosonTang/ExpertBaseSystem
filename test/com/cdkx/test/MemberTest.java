@@ -11,6 +11,7 @@ import com.cdkx.expertbasesystem.domain.Project;
 import com.cdkx.expertbasesystem.domain.Subject;
 import com.cdkx.expertbasesystem.domain.Thesis;
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.dto.UserChartDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 import com.cdkx.expertbasesystem.service.AwardService;
 import com.cdkx.expertbasesystem.service.PatentService;
@@ -58,4 +59,35 @@ public class MemberTest  extends BaseTest{
 		}
 	}
 	
+	/**
+	 * 测试通过科目名查看用户的全部信息
+	 */
+	
+	@Test
+	public void user_chart_dto_Test(){//测试通过科目名查看 会员  数量;
+		
+		User user;
+		String keyword = "计算机应用技术";
+		
+		UserService userService = (UserService) this.ctx.getBean("userService");
+		
+		for (UserChartDTO ucd : userService.user_chart_dto()) 
+			System.out.println(ucd.getSubject() + ", 博士数量 : " + ucd.getPhd() + ", 会员数量  : " + ucd.getUser());
+	}
+	
+	@Test
+	public void findUserBySub_Test(){//测试通过 科目名 查找下属会员
+		
+		User user;
+		String keyword = "计算机应用技术";
+		Object[] o;
+		
+		UserService userService = (UserService) this.ctx.getBean("userService");
+		List list = userService.findUserBySub_count(keyword);
+		
+		for (int i = 0; i < list.size(); i++) {
+			o = (Object[])list.get(i);
+			System.out.println("会员姓名 :  " + String.valueOf(o[1]) + "  编号" + String.valueOf(o[0]));
+		} 
+	}
 }

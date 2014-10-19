@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cdkx.expertbasesystem.domain.ConditionDTO;
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.dto.UserChartDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 
 /**
@@ -111,6 +112,17 @@ public interface UserService {
 	 */
 	public List<UserTotalDTO> countnum(String sub);
 	
-	
-	
+	/**
+	 * 通过  一级学科  科目来统计 专家数量
+	 * @param sub 需要查找的科目
+	 * @return UserCountDTO 传输类的集合
+	 */
+	public List<UserChartDTO> user_chart_dto();
+
+	/**
+	 * 通过  一级学科  科目来 查询专家姓名和id
+	 * @param sub 需要查找的科目
+	 * @return 专家姓名和编号的集合
+	 */
+	public List findUserBySub_count(String sub);
 }

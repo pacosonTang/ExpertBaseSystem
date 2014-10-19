@@ -136,7 +136,6 @@ public class MemberAction extends BaseAction {
 		return "success";
 	}
 		
-	//以下为统计所需的方法啦
 	/**
 	 * 统计会员的  论文  详细信息  
 	 * @return success
@@ -156,7 +155,6 @@ public class MemberAction extends BaseAction {
 		return "success";
 	}
 		
-	//以下为统计所需的方法啦
 	/**
 	 * 统计会员的  专利  详细信息  
 	 * @return success
@@ -176,11 +174,7 @@ public class MemberAction extends BaseAction {
 		return "success";
 	}
 	
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
+	
 	public void setSelectIds(String selectIds) {
 		this.selectIds = selectIds;
 	}

@@ -1,4 +1,3 @@
-
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
@@ -68,7 +67,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 
 			<div id="menu" class="well well-lg" style="margin-top: 0px;float: top;width: 220px;"><!-- 左边 -->
 				 <ul class="nav nav-pills nav-stacked">
-	              <li class="active"><a href="javascript: return false;">会员详细资料</a></li>
+				  <li class="active"><a href="javascript: return false;">会员列表</a></li>	
+	              <li ><a href="javascript: return false;">会员详细资料</a></li>
 	              <li><a href="javascript: return false;">科研项目</a></li>
 	              <li><a href="javascript: return false;">成果奖励</a></li>
 	              <li><a href="javascript: return false;">科技论文</a></li>
@@ -77,7 +77,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div><!-- ./well well-lg -->
 				
 			<div id="content"  style="margin: 0px 0px 0px 10px;width: 78%"><!-- 右边 -->
-				<jsp:include page="/member-specification/m-basic.jsp" flush="true"></jsp:include><!-- 顶部 -->
+			
+				<jsp:include page="/member-specification/m-basic.jsp" flush="true"></jsp:include> 
+				<!--<jsp:include page="/gdjt.jsp" flush="true"></jsp:include>-->
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		

@@ -1,7 +1,13 @@
 package com.cdkx.expertbasesystem.dto;
 
-public class UserTotalDTO {
+import java.io.Serializable;
 
+public class UserTotalDTO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6449340695293120042L;
 	private String username;
 	private String project;
 	private String award;

@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.cdkx.expertbasesystem.domain.Patent;
 import com.cdkx.expertbasesystem.domain.User;
 import com.cdkx.expertbasesystem.domain.UserDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
@@ -149,6 +150,25 @@ public class UserAction extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询用户综合信息失败");
+		}
+		return "success";
+	}
+	
+	/**
+	 * 全部会员姓名
+	 * @return success
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String total_someone() throws UnsupportedEncodingException{
+		
+		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
+		System.out.println("关键字 :  " + str);
+		try {
+			List temp = userService.findUserBySub_count(str);
+			this.getRequest().put("list_total", temp);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("查询  会员姓名  信息失败");
 		}
 		return "success";
 	}

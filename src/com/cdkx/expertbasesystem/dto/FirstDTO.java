@@ -1,9 +1,14 @@
 package com.cdkx.expertbasesystem.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class FirstDTO {//一级学科dto
+public class FirstDTO implements Serializable{//一级学科dto
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6356062357220605421L;
 	private String first;
 	private List<SecondDTO> secondlist;
 	
