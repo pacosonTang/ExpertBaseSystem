@@ -7,6 +7,7 @@ import java.util.List;
 import com.cdkx.expertbasesystem.dao.UserDao;
 import com.cdkx.expertbasesystem.domain.ConditionDTO;
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.dto.BiPropertyDTO;
 import com.cdkx.expertbasesystem.dto.UserChartDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 import com.cdkx.expertbasesystem.exception.AppException;
@@ -248,9 +249,28 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List findUserBySub_count(String sub) {
+	public List<BiPropertyDTO> findUserBySub_count(String sub) {
 		
+		List<BiPropertyDTO> list = new ArrayList<BiPropertyDTO>();
+		BiPropertyDTO dto;
 		String sql = "select u.id , u.realname from User u where u.major.name = '" + sub + "'";
-		return userDao.findKeyword(sql);
+		List temp = userDao.findKeyword(sql);
+		if(temp==null) return null;
+		for (int i = 0; i < temp.size(); i++) {
+			Object[] o  = (Object [])temp.get(i);
+			dto = new BiPropertyDTO(String.valueOf(o[0]), String.valueOf(o[1]));
+			list.add(dto);
+		}
+		return list;
+	}
+
+	@Override
+	public User findUserById(String id) {
+		// TODO Auto-generated method stub
+		String sql = "from User u where u.id = '" + id + "'";
+		List temp = userDao.findKeyword(sql);
+		if(temp != null)
+			return (User)temp.get(0);
+		return null;
 	}
 }

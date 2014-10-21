@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cdkx.expertbasesystem.domain.ConditionDTO;
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.dto.BiPropertyDTO;
 import com.cdkx.expertbasesystem.dto.UserChartDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 
@@ -124,5 +125,15 @@ public interface UserService {
 	 * @param sub 需要查找的科目
 	 * @return 专家姓名和编号的集合
 	 */
-	public List findUserBySub_count(String sub);
+	public List<BiPropertyDTO> findUserBySub_count(String sub);
+	
+	/**
+	 * 通过  用户id来查询用户详细信心
+	 * @param 用户编号
+	 * @return 用户
+	 */
+	public User findUserById(String id);
+	
+	
+	
 }

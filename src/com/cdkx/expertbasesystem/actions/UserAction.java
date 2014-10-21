@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
@@ -15,6 +19,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.cdkx.expertbasesystem.domain.Patent;
 import com.cdkx.expertbasesystem.domain.User;
 import com.cdkx.expertbasesystem.domain.UserDTO;
+import com.cdkx.expertbasesystem.dto.BiPropertyDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.UserService;
@@ -59,6 +64,10 @@ public class UserAction extends BaseAction {
 	private String keyword;
 	
 	private List<UserTotalDTO> list_total; 
+	
+	private String result;
+	
+	private JSONObject jo;
 	
 	/**
 	 * 修改用户信息
@@ -162,9 +171,10 @@ public class UserAction extends BaseAction {
 	public String total_someone() throws UnsupportedEncodingException{
 		
 		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
+		keyword = str;
 		System.out.println("关键字 :  " + str);
 		try {
-			List temp = userService.findUserBySub_count(str);
+			List<BiPropertyDTO> temp = userService.findUserBySub_count(str);
 			this.getRequest().put("list_total", temp);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -172,6 +182,32 @@ public class UserAction extends BaseAction {
 		}
 		return "success";
 	}
+	
+	/**
+	 * 依据会员id查询会员实体对象 【ajax方法】
+	 * @return success
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String find_someone_id() throws UnsupportedEncodingException{
+		
+		System.out.println("关键字 :  " + keyword);
+		try {
+			user = userService.findUser(Integer.parseInt(keyword));
+			
+			JsonConfig config = new JsonConfig();
+			config.setExcludes(new String[]{"patents","projects","thesises","awards"});
+			jo = JSONObject.fromObject(user,config);   //将user 封装为 JSONArray 数据 
+			//jo = JSONObject.fromObject(user);   //将user 封装为 JSONArray 数据
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("查询  会员姓名  信息失败");
+		}
+		System.out.println(user.getAddress());
+		result = jo.toString();
+		System.out.println(result);
+		return SUCCESS;
+	}
+	 
 
 	public User getUser() {
 		return user;
@@ -224,6 +260,12 @@ public class UserAction extends BaseAction {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
-	
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
 }

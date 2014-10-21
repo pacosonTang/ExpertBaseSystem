@@ -1,10 +1,12 @@
 package com.cdkx.test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 import org.junit.Test;
 
 import com.cdkx.expertbasesystem.actions.SubjectAction;
+import com.cdkx.expertbasesystem.actions.UserAction;
 import com.cdkx.expertbasesystem.domain.Award;
 import com.cdkx.expertbasesystem.domain.Patent;
 import com.cdkx.expertbasesystem.domain.Project;
@@ -89,5 +91,17 @@ public class MemberTest  extends BaseTest{
 			o = (Object[])list.get(i);
 			System.out.println("会员姓名 :  " + String.valueOf(o[1]) + "  编号" + String.valueOf(o[0]));
 		} 
+	}
+	
+	@Test//通过userid 查询user的全部信息.
+	public void findUser_id() throws UnsupportedEncodingException{//测试通过 科目名 查找下属会员
+		
+		/*UserService userService = (UserService) this.ctx.getBean("userService");
+		User u = userService.findUserById("6"); 
+		System.out.println(u.getAddress()); */
+		
+		UserAction userAction = (UserAction) this.ctx.getBean("userAction");
+		userAction.setKeyword("6");
+		String s = userAction.find_someone_id(); 
 	}
 }

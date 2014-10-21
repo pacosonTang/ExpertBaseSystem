@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
   <head>
-    <base href="<%=basePath%>">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>My JSP 'basic.jsp' starting page</title>
     <link href="<%=path %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="<%=path %>/bootstrap/js/jquery.js"></script>
