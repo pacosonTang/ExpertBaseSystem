@@ -44,4 +44,7 @@
 	<bean name="subjectAction" class="com.cdkx.expertbasesystem.actions.SubjectAction">
 		<property name="subjectService" ref="subjectService"/>
 	</bean>
+	<bean name="dataOperator" class="com.cdkx.expertbasesystem.actions.DataOperator">
+		<property name="subjectService" ref="subjectService"/>
+	</bean>
 </beans>

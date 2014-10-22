@@ -19,7 +19,7 @@
     	<action name="subject" class="subjectAction">
     		<result name="success" type="json">
     			<param name="root">result</param>
-    		</result>	
+    		</result>
     	</action>
     	
     	<action name="someone_a" class="userAction">
@@ -83,10 +83,12 @@
  
        	<action name="logout" class="loginAction" method="logout">
        		<result name="success" type="redirect">loginPage.action</result>
-       		
+       	</action>
+       	
+       	<action name="modifySecondSubject" class="dataOperator" method="modifySecondSubject">
+       		<result>/WEB-INF/jsp/login.jsp</result>
        	</action>
     </package>
-    
    
     <package name="common" namespace="/common" extends="default">
     	<action name="modifyUser" class="userAction" method="modifyUser">

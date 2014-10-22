@@ -847,6 +847,8 @@ var showMember = function(grid, row, modifyMemberWindow){
 	memberFP.down('[name=user.avatar]').setValue(record.get('avatar'));
 	if(record.get('avatar') != null && record.get('avatar') != ''){
 		memberFP.down('image').setSrc('uploads/' + record.get('avatar'));
+	}else{
+		memberFP.down('image').setSrc('img/nopicture.jpg');
 	}
 	if(record.get('birthday') != null && record.get('birthday') != '')
 		memberFP.down('[name=user.birthday]').setValue(new Date(Date.parse(record.get('birthday').replace(/\./g,"/"))));
