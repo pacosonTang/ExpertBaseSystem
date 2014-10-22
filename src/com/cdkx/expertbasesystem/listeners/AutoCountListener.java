@@ -25,12 +25,12 @@ public class AutoCountListener extends HttpServlet implements
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		timer.scheduleAtFixedRate(new AutoCountTask(), this.getStartTime(), this.PERIOD);
-		System.out.println("自动统计表生成任务开始执行...");
+		System.out.println("自动统计表生成任务已注册...");
 	}
 	
 	public Date getStartTime(){
 		Calendar calendar = Calendar.getInstance();
-		//设置第一次启动执行任务时间为凌晨3点
+		//设置第一次启动执行任务时间为凌晨4点
 		calendar.set(Calendar.HOUR_OF_DAY, 4);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(calendar.SECOND, 0);

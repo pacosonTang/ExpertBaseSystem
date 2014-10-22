@@ -22,7 +22,8 @@ public class AutoBackUpListener extends HttpServlet implements
 	public void contextInitialized(ServletContextEvent sce) {
 		//执行周期为30天
 		//延迟10天启动，加快启动速度
-		timer.schedule(new AutoBackUpTask(), 10 * 24 * 60 * 60 * 1000, 30 * 24 * 60 * 60 * 1000);
+		timer.schedule(new AutoBackUpTask(), 864000000L, 2592000000L);
+		System.out.println("自动备份任务已注册...");
 	}
 
 }
