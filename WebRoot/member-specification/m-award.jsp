@@ -22,51 +22,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <script type="text/javascript">
     	
-    	$(function(){
-    		
-    	});
+    	function setAward_detail(award){
+			
+			for ( var i = 0; i < award.length; i++) {
+				$("table[id='award']").append(
+					"<tr>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'><span class='label label-info'>" + (i+1) + "</span></td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ award[i].name + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ award[i].fruitName + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ award[i].rank + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ award[i].awardTime + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ "负责人" +"</td>" + 
+			     	"</tr>"
+				);
+			}
+		}
     	
     </script>
     
   </head>
   
   <body>
-      <div class="panel panel-primary" style="width: 270px;">
+      <div class="panel panel-primary">
 	   <div class="panel-heading" >
-	      <h3 class="panel-title" align="center">会员-舒红平</h3>
+	      <h3 class="panel-title" align="center">舒红平-奖励列表</h3>
 	   </div><!-- ./panel-heading -->
 	   
 	   <div class="panel-body" style="padding: 5px;">
-	   		
-			<table class="table table-bordered" style="font-size: 13px;margin: 0px;">
-                
-                <tr>
-                  <td width="30%" align="right"><label>科技论文</label></td>
-                  <td width="25%">521项</td>
-                  <td width="25%" align="right"><label>发明专利 </label></td>
-                  <td>600项</td>
-                </tr>
-                <tr>
-                  <td align="right"><label>成果奖励</label> </td>
-                  <td colspan="3">一等奖211项，二等奖311项，三等奖411项</td>
-                </tr>
-                 <tr>
-                  <td align="right"><label>科研项目 </label></td>
-                  <td colspan="3">已验收211项，未验收311项，在研141项</td>
-                </tr>
-                <tr>
-                  <td align="right"><label>所属学会</label></td>
-                  <td colspan="3">青年科学联合会</td>
-                </tr>
-                <tr>
-                  <td align="right"><label>现从事专业</label></td>
-                  <td colspan="3">数据挖掘</td>
-                </tr>
-                
-            </table>
-      	 	 
+   		<table id="award" class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center;vertical-align: middle;">
+	     	<tr style="vertical-align: middle;">
+	     		<th width="7%" style="text-align: center;vertical-align: middle;">编号</th>
+	     		<th width="25%" style="text-align: center;vertical-align: middle;">奖励名称</th>
+	     		<th width="35%" style="text-align: center;vertical-align: middle;">获奖项目名称</th>
+	     		<th width="10%" style="text-align: center;vertical-align: middle;">排名</th>
+	     		<th width="15%" style="text-align: center;vertical-align: middle;">获奖时间</th>
+	     		<th width="15%" style="text-align: center;vertical-align: middle;">获奖者</th>
+	     	</tr>
+		 
+    		<tr>
+	     		<td style="text-align: center;vertical-align: middle;"><span class="label label-info">1</span></td>
+	     		<td style="text-align: center;vertical-align: middle;">1</td>
+	     		<td style="text-align: center;vertical-align: middle;">2</td>
+	     		<td style="text-align: center;vertical-align: middle;">3</td>
+	     		<td style="text-align: center;vertical-align: middle;">4</td>
+	     		<td style="text-align: center;vertical-align: middle;">5</td>
+	     	</tr>
+	     	
+		</table>
+		
 	   </div><!-- ./panel-body-->
 	 </div><!-- ./panel panel-primary-->
-	 
   </body>
 </html>

@@ -25,7 +25,6 @@ public class JsonUtil {
 				else
 					return false;
 			}
-			
 		});
 		
 		JSONArray jsonData = JSONArray.fromObject(clazz, cfg);

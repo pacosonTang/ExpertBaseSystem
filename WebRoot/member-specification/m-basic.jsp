@@ -18,8 +18,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		padding:3px;	
     	}
     	th{
-    		text-align: center;
-    	}	 
+    		align: center;
+    	}
+    		 
     </style>
     
     <script type="text/javascript">
@@ -33,29 +34,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-       <table class="table table-bordered" style="font-size: 13px;margin: 0px;text-align: center">
+  
+  	<div class="panel panel-primary">
+	   <div class="panel-heading" >
+	      <h3 class="panel-title" align="center">会员舒红平-详细信息</h3>
+	   </div><!-- ./panel-heading -->
+	   
+	   <div class="panel-body" style="padding: 5px;" >
+	   
+       <table class="table table-bordered" style="font-size: 13px;margin: 0px;" id="user_specific">
      	<tbody>
      	
-     	<tr><!-- 基本 信息 start -->
-     		<th colspan="6"><a class="btn btn-primary" href="javascript: return false;" style="width: 100%;font-size: 16px;padding: 5px;">基本信息</a></th>
-     	</tr>
-     	<tr>
+     	<tr><!-- 基本 信息start-->
      		<th>姓名</th>
      		<th>身份证号</th>
      		<th>性别</th>
      		<th colspan="3">生日</th>
      	</tr>
      	<tr>
-     		<td>周锐锋</td>
-     		<td>510102196910174364</td>
-     		<td>女</td>
-     		<td colspan="3">1969-10-17</td>
+     		<td></td>
+     		<td></td>
+     		<td></td>
+     		<td colspan="3"></td>
      	</tr><!-- 基本 信息 end -->
      	
      	<tr><!-- 教育 信息 start -->
-     		<th colspan="6"><a class="btn btn-primary" href="javascript: return false;" style="width: 100%;font-size: 16px;padding: 5px;">教育信息</a></th>
-     	</tr>
-     	<tr>
      		<th>毕业院校</th>
      		<th>所学专业</th>
      		<th>毕业时间</th>
@@ -63,17 +66,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		<th colspan="2">学位</th>
      	</tr>
      	<tr>
-     		<td>重庆医科大学</td>
-     		<td>临床医学</td>
-     		<td>1992-07-06</td>
-     		<td>本科</td>
-     		<td colspan="2">学士</td>
+     		<td></td>
+     		<td></td>
+     		<td></td>
+     		<td></td>
+     		<td colspan="2"></td>
      	</tr><!-- 教育 信息 end -->
      	
-     	<tr><!-- 职业 信息 start -->
-     		<th colspan="6"><a class="btn btn-primary" href="javascript: return false;" style="width: 100%;font-size: 16px;padding: 5px;">职业信息</a></th>
-     	</tr>
-     	<tr>
+     	<tr><!-- 职业 信息start -->
      		<th>所属学会</th>
      		<th>工作单位</th>
      		<th>技术职称</th>
@@ -81,17 +81,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		<th colspan="2">现从事专业</th>
      	</tr>
      	<tr>
-     		<td>成都市防痨协会</td>
-     		<td>成都市公共卫生临床医疗中心</td>
-     		<td>副主任医师</td>
-     		<td>医疗组长</td>
-     		<td colspan="2">艾滋病临床</td>
+     		<td></td>
+     		<td></td>
+     		<td></td>
+     		<td></td>
+     		<td colspan="2"></td>
      	</tr><!-- 职业 信息 end -->
      	
-     	<tr><!-- 联系 信息 start -->
-     		<th colspan="6"><a class="btn btn-primary" href="javascript: return false;" style="width: 100%;font-size: 16px;padding: 5px;">联系信息</a></th>
-     	</tr>
-     	<tr>
+     	<tr><!-- 联系 信息  start -->
      		<th>通讯地址</th>
      		<th>手机</th>
      		<th>办公电话</th>
@@ -100,22 +97,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		<th>QQ</th>
      	</tr>
      	<tr>
-     		<td>成都市锦江区静明路377号</td>
-     		<td>13981899327</td>
-     		<td>028-64369017</td>
-     		<td>610066</td>
-     		<td> </td>
-     		<td> </td>
+     		<td></td>
+     		<td></td>
+     		<td></td>
+     		<td></td>
+     		<td></td>
+     		<td></td>
      	</tr><!-- 联系 信息  over -->
      	
      	<tr><!-- 标签 信息 start -->
-     		<th colspan="6"><a class="btn btn-primary" href="javascript: return false;" style="width: 100%;font-size: 16px;padding: 5px;">标签信息[擅长领域]</a></th>
+     		<th colspan="6">标签信息[擅长领域]</th>
      	</tr>
      	
      	<tr>
-     		<td colspan="6">传染病控制：艾滋病、病毒性肝炎治疗和控制</td>
+     		<td colspan="6"></td>
      	</tr><!-- 标签 信息 over-->
      	
     </tbody> </table>
+     </div><!-- ./panel-body-->
+	 </div><!-- ./panel panel-primary-->
   </body>
 </html>

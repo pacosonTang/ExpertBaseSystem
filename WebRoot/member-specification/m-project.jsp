@@ -4,6 +4,8 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
+<%@taglib prefix="s" uri="/struts-tags"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
   <head>
@@ -21,50 +23,67 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
     
     <script type="text/javascript">
-    	
-    	$(function(){
-    		
-    	});
-    	
+		
+		function setProject_detail(project){
+
+			for ( var i = 0; i < project.length; i++) {
+				$("table[id='project']").append(
+					"<tr>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'><span class='label label-info'>"+ (i+1) + "</span></td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ project[i].name + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ project[i].delegationUnit + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ project[i].projectLevel + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ project[i].projectTime + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ project[i].completeStatus + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ project[i].selfFunc + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ project[i].selffinance + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ project[i].allocation + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ "你好</td>" +
+			     	"</tr>"
+				);
+			}
+		}
+		
     </script>
     
   </head>
   
   <body>
-      <div class="panel panel-primary" style="width: 270px;">
+      <div class="panel panel-primary" >
 	   <div class="panel-heading" >
-	      <h3 class="panel-title" align="center">会员-舒红平</h3>
+	      <h3 class="panel-title" align="center">舒红平项目列表</h3>
 	   </div><!-- ./panel-heading -->
 	   
 	   <div class="panel-body" style="padding: 5px;">
 	   		
-			<table class="table table-bordered" style="font-size: 13px;margin: 0px;">
-                
-                <tr>
-                  <td width="30%" align="right"><label>科技论文</label></td>
-                  <td width="25%">521项</td>
-                  <td width="25%" align="right"><label>发明专利 </label></td>
-                  <td>600项</td>
-                </tr>
-                <tr>
-                  <td align="right"><label>成果奖励</label> </td>
-                  <td colspan="3">一等奖211项，二等奖311项，三等奖411项</td>
-                </tr>
-                 <tr>
-                  <td align="right"><label>科研项目 </label></td>
-                  <td colspan="3">已验收211项，未验收311项，在研141项</td>
-                </tr>
-                <tr>
-                  <td align="right"><label>所属学会</label></td>
-                  <td colspan="3">青年科学联合会</td>
-                </tr>
-                <tr>
-                  <td align="right"><label>现从事专业</label></td>
-                  <td colspan="3">数据挖掘</td>
-                </tr>
-                
-            </table>
-      	 	 
+	   		<table id="project" class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center;vertical-align: middle;">
+		     	<tr style="vertical-align: middle;">
+		     		<th width="4%" style="text-align: center;vertical-align: middle;">编号</th>
+		     		<th width="25%" style="text-align: center;vertical-align: middle;">项目名称</th>
+		     		<th width="10%" style="text-align: center;vertical-align: middle;">委托单位</th>
+		     		<th width="7%" style="text-align: center;vertical-align: middle;">项目<br/>级别</th>
+		     		<th width="10%" style="text-align: center;vertical-align: middle;">项目<br/>时间</th>
+		     		<th width="7%" style="text-align: center;vertical-align: middle;">完成<br/>状态</th>
+		     		<th width="7%" style="text-align: center;vertical-align: middle;">本人<br/>作用</th>
+		     		<th width="7%" style="text-align: center;vertical-align: middle;">自筹<br/>经费</th>
+		     		<th width="7%" style="text-align: center;vertical-align: middle;">财政<br/>拨款</th>
+		     		<th width="7%" style="text-align: center;vertical-align: middle;">负责人</th>
+		     	</tr>
+	    		<tr>
+		     		<td style="text-align: center;vertical-align: middle;"><span class="label label-info">1</span></td>
+		     		<td style="text-align: center;vertical-align: middle;">1</td>
+		     		<td style="text-align: center;vertical-align: middle;">1</td>
+		     		<td style="text-align: center;vertical-align: middle;">1</td>
+		     		<td style="text-align: center;vertical-align: middle;">1</td>
+		     		<td style="text-align: center;vertical-align: middle;">1</td>
+		     		<td style="text-align: center;vertical-align: middle;">1</td>
+		     		<td style="text-align: center;vertical-align: middle;">1</td>
+		     		<td style="text-align: center;vertical-align: middle;">1</td>
+		     		<td style="text-align: center;vertical-align: middle;">1</td>
+		     	</tr>
+		     	 
+				</tbody></table>
+			 
 	   </div><!-- ./panel-body-->
 	 </div><!-- ./panel panel-primary-->
 	 

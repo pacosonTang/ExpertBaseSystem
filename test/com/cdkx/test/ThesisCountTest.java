@@ -68,5 +68,20 @@ public class ThesisCountTest  extends BaseTest{
 			System.out.println(thesis2.getName() + "  ");
 	}
 	
+	/**
+	 * 依据用户id  查看所有 论文
+	 */
+	
+	@Test
+	public void findThesis_id_Test(){//测试通过科目名查看用户名;
+		
+		Thesis thesis;
+		String keyword = "计算机应用技术";
+		ThesisService thesisService = (ThesisService) this.ctx.getBean("thesisService");
+		List<Thesis> list = thesisService.findThesisByUser(12);
+		
+		for (Thesis thesis2 : list)  
+			System.out.println(thesis2.getName() + "  ");
+	}
 	
 }

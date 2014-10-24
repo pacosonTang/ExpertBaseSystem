@@ -52,6 +52,21 @@ public class PatentCountTest  extends BaseTest{
 			System.out.print(patent2.getName() + "  ");
 	}
 	
+	/**
+	 * 测试通过科用户 id  查看专利;
+	 */
+	@Test
+	public void findPatent_id_Test(){
+		
+		Patent patent;
+		
+		PatentService patentService = (PatentService) this.ctx.getBean("patentService");
+		List<Patent> list = patentService.findPatentByUser(12);
+		
+		for (Patent patent2 : list)  
+			System.out.print(patent2.getName() + "  ");
+	}
+	
 	
 	
 }

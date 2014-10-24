@@ -16,6 +16,7 @@ import com.cdkx.expertbasesystem.service.PatentService;
 import com.cdkx.expertbasesystem.service.ProjectService;
 import com.cdkx.expertbasesystem.service.ThesisService;
 import com.cdkx.expertbasesystem.utils.BaseAction;
+import com.cdkx.expertbasesystem.utils.JsonUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -45,6 +46,10 @@ public class MemberAction extends BaseAction {
 	private Map<String, Object> session;
 	
 	private String keyword;
+	
+	private String result;
+	
+	private String specific_type;
 
 	/**
 	 * 根据传回的特定的选择的论文编号，删除对应的论文
@@ -100,7 +105,7 @@ public class MemberAction extends BaseAction {
 	
 	//以下为统计所需的方法啦
 	/**
-	 * 统计会员的  项目 详细信息  
+	 * 统计 某学科下的  项目 详细信息  
 	 * @return success
 	 * @throws UnsupportedEncodingException 
 	 */
@@ -118,7 +123,7 @@ public class MemberAction extends BaseAction {
 		return "success";
 	}
 	/**
-	 * 统计会员的  奖励  详细信息  
+	 * 统计 某学科下的 奖励  详细信息  
 	 * @return success
 	 * @throws UnsupportedEncodingException 
 	 */
@@ -137,7 +142,7 @@ public class MemberAction extends BaseAction {
 	}
 		
 	/**
-	 * 统计会员的  论文  详细信息  
+	 * 统计 某学科下的 论文  详细信息  
 	 * @return success
 	 * @throws UnsupportedEncodingException 
 	 */
@@ -156,7 +161,7 @@ public class MemberAction extends BaseAction {
 	}
 		
 	/**
-	 * 统计会员的  专利  详细信息  
+	 * 统计 某学科下的  专利  详细信息  
 	 * @return success
 	 * @throws UnsupportedEncodingException 
 	 */
@@ -171,6 +176,32 @@ public class MemberAction extends BaseAction {
 			e.printStackTrace();
 			throw new AppException("查询  专利  信息失败");
 		}
+		return "success";
+	}
+	
+//	specific
+	/**
+	 * 统计 会员的 详细 项目2，奖励3， 论文4， 专利5 等信息  
+	 * 输入用户的编号id
+	 * @return success
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String specific_four(){
+		 
+		System.out.println("关键字 :  " + keyword);
+		try {
+			switch(Integer.parseInt(specific_type)){
+				case 2: result = JsonUtil.jsonForList(projectService.findProjectByUser(Integer.parseInt(keyword)));break;//将List解析为json字符串对象
+				case 3: result = JsonUtil.jsonForList(awardService.findAwardByUser(Integer.parseInt(keyword)));break;
+				case 4: result = JsonUtil.jsonForList(thesisService.findThesisByUser(Integer.parseInt(keyword)));break;
+				case 5: result = JsonUtil.jsonForList(patentService.findPatentByUser(Integer.parseInt(keyword)));break;
+				default:result = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("查询 项目  信息失败");
+		}
+		System.out.println(result);
 		return "success";
 	}
 	
@@ -206,6 +237,21 @@ public class MemberAction extends BaseAction {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getSpecific_type() {
+		return specific_type;
+	}
+
+	public void setSpecific_type(String specific_type) {
+		this.specific_type = specific_type;
+	}
 	
 }

@@ -22,49 +22,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <script type="text/javascript">
     	
-    	$(function(){
-    		
-    	});
-    	
+    	function setPatent_detail(patent){
+			
+			for ( var i = 0; i < patent.length; i++) {
+				$("table[id='patent']").append(
+					"<tr>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'><span class='label label-info'>"+ (i+1) + "</span></td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ patent[i].name + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ patent[i].patentNo + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ patent[i].authorityTime + "</td>" +
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ "专利人" + "</td>" + 
+			     	"</tr>"
+				);
+			}
+		}
+    	 
     </script>
     
   </head>
   
   <body>
-      <div class="panel panel-primary" style="width: 270px;">
+      <div class="panel panel-primary" >
 	   <div class="panel-heading" >
-	      <h3 class="panel-title" align="center">会员-舒红平</h3>
+	      <h3 class="panel-title" align="center">舒红平-专利列表</h3>
 	   </div><!-- ./panel-heading -->
 	   
 	   <div class="panel-body" style="padding: 5px;">
-	   		
-			<table class="table table-bordered" style="font-size: 13px;margin: 0px;">
-                
-                <tr>
-                  <td width="30%" align="right"><label>科技论文</label></td>
-                  <td width="25%">521项</td>
-                  <td width="25%" align="right"><label>发明专利 </label></td>
-                  <td>600项</td>
-                </tr>
-                <tr>
-                  <td align="right"><label>成果奖励</label> </td>
-                  <td colspan="3">一等奖211项，二等奖311项，三等奖411项</td>
-                </tr>
-                 <tr>
-                  <td align="right"><label>科研项目 </label></td>
-                  <td colspan="3">已验收211项，未验收311项，在研141项</td>
-                </tr>
-                <tr>
-                  <td align="right"><label>所属学会</label></td>
-                  <td colspan="3">青年科学联合会</td>
-                </tr>
-                <tr>
-                  <td align="right"><label>现从事专业</label></td>
-                  <td colspan="3">数据挖掘</td>
-                </tr>
-                
-            </table>
-      	 	 
+	   	
+	   	<table id="patent" class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center;vertical-align: middle;">
+	     	<tr style="vertical-align: middle;">
+	     		<th width="7%" style="text-align: center;vertical-align: middle;">编号</th>
+	     		<th width="40%" style="text-align: center;vertical-align: middle;">专利名称</th>
+	     		<th width="24%" style="text-align: center;vertical-align: middle;">专利号</th>
+	     		<th width="14%" style="text-align: center;vertical-align: middle;">授权时间</th>
+	     		<th width="14%" style="text-align: center;vertical-align: middle;">获得者</th>
+	     	</tr>
+	     	
+    		<tr>
+	     		<td style="text-align: center;vertical-align: middle;"><span class="label label-info">1</span></td>
+	     		<td style="text-align: center;vertical-align: middle;">1</td>
+	     		<td style="text-align: center;vertical-align: middle;">1</td>
+	     		<td style="text-align: center;vertical-align: middle;">1</td>
+	     		<td style="text-align: center;vertical-align: middle;">1</td>
+	     	</tr>
+	     	 
+		</table>	
+			 
 	   </div><!-- ./panel-body-->
 	 </div><!-- ./panel panel-primary-->
 	 

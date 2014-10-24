@@ -16,7 +16,10 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.cdkx.expertbasesystem.domain.Award;
 import com.cdkx.expertbasesystem.domain.Patent;
+import com.cdkx.expertbasesystem.domain.Project;
+import com.cdkx.expertbasesystem.domain.Thesis;
 import com.cdkx.expertbasesystem.domain.User;
 import com.cdkx.expertbasesystem.domain.UserDTO;
 import com.cdkx.expertbasesystem.dto.BiPropertyDTO;
@@ -191,24 +194,27 @@ public class UserAction extends BaseAction {
 	public String find_someone_id() throws UnsupportedEncodingException{
 		
 		System.out.println("关键字 :  " + keyword);
+		this.getRequest().put("cur_find_id", keyword);
 		try {
 			user = userService.findUser(Integer.parseInt(keyword));
-			
+			/*
 			JsonConfig config = new JsonConfig();
-			config.setExcludes(new String[]{"patents","projects","thesises","awards"});
-			jo = JSONObject.fromObject(user,config);   //将user 封装为 JSONArray 数据 
-			//jo = JSONObject.fromObject(user);   //将user 封装为 JSONArray 数据
+   		    config.setIgnoreDefaultExcludes(true);  //设置默认忽略
+			config.setExcludes(new String[]{"patents","projects","thesises","awards","usersForDegree","usersForEducation",
+					"users","children"});
+			jo = JSONObject.fromObject(user,config);   //将user 封装为 JSONArray 数据*/
+			result = JsonUtil.jsonForSingle(user);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  会员姓名  信息失败");
 		}
-		System.out.println(user.getAddress());
+/*		System.out.println(user.getAddress());
 		result = jo.toString();
-		System.out.println(result);
+*/		System.out.println(result);
 		return SUCCESS;
 	}
-	 
-
+	
 	public User getUser() {
 		return user;
 	}

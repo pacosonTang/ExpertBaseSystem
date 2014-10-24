@@ -22,9 +22,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		
-		function toggleMenu(index){
+		var access = new Array(-1,-1,-1,-1);//初试值为-1		
+		function toggleMenu(index){//让各个标签置顶
+			
+			if(index > 1 ) find_specific_four(index);
+			access[index-2] = index;//存储已经加载了的信息，2项目，3奖励， 4论文， 5专利
 			document.getElementById("item" + index).scrollIntoView();
 			return false;
+		}
+
+		//ajax 访问函数
+		function find_specific_four(index){//在后台加载数据，项目2，奖励3， 论文4， 专利5， index=2, 3, 4, 5
+			
+			oldaccess = index;
+			var url = "count/specific!specific_four";//请求的地址 
+			$.post(url,{
+					keyword:cur_find_id, //[逗号 连接 ]
+					specific_type:index
+				},
+				function(data){
+					member = eval('('+data+')');
+ 					//alert("success");
+					setSpesific_detail(member.list,index);
+				},"json"); 
+		}
+		function setSpesific_detail(specific,type){//显示用户基本信息
+			
+			switch(type){
+				case 2:setProject_detail(specific);break;
+				case 3:setAward_detail(specific);break;
+				case 4:setThesis_detail(specific);break;
+				case 5:setPatent_detail(specific);break;
+				default:break;
+			} 
 		}
 		
 	</script>
@@ -67,7 +97,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	        <tr class="error"><td><a href="javascript: toggleMenu(2);">科研项目</a></td></tr>
 	                <tr class="error"><td><a href="javascript: toggleMenu(3);">成果奖励</a></td></tr>
 	                <tr class="error"><td><a href="javascript: toggleMenu(4);">科技论文</a></td></tr>
-	                <tr class="error"><td><a href="javascript: toggleMenu(4);">发明专利</a></td></tr>
+	                <tr class="error"><td><a href="javascript: toggleMenu(5);">发明专利</a></td></tr>
+	                
 				</table>
 			</div><!-- ./well well-lg -->
 				
@@ -76,22 +107,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div style="margin-left: 10px;width: 940px;margin-top: 5px;">
 					<div data-spy="scroll" data-target="#navbar-example" data-offset="0" style="height:600px;overflow:auto; position: relative;">
 					   
-					   <h4 id="item0"></h4>
-					   <jsp:include page="/member-specification/m-list.jsp" flush="true"></jsp:include>
+					   <h4 id="item0"></h4><!-- 会员列表 -->
+					   <jsp:include page="/member-specification/m-list.jsp"></jsp:include>
 					   
 					   <h4 id="item1"></h4>
 					   <jsp:include page="/member-specification/m-basic.jsp"></jsp:include>
 					   
-					   <h4 id="item2" style="margin-top: 50px;">科研项目</h4>
+					   <h4 id="item2" style="margin-top: 10px;"></h4><!-- 项目 -->
 					   <jsp:include page="/member-specification/m-project.jsp"></jsp:include>
 					   
-					   <h4 id="item3" style="margin-top: 50px;">成果奖励</h4>
+					   <h4 id="item3" style="margin-top: 10px;"></h4><!-- 奖励 -->
 					   <jsp:include page="/member-specification/m-award.jsp"></jsp:include>
 					   
-					   <h4 id="item4" style="margin-top: 50px;">科技论文</h4>
+					   <h4 id="item4" style="margin-top: 10px;"></h4><!-- 论文 -->
 					   <jsp:include page="/member-specification/m-thesis.jsp"></jsp:include>
 					   
-					   <h4 id="item5" style="margin-top: 50px;">发明专利</h4>
+					   <h4 id="item5" style="margin-top: 10px;"></h4><!-- 专利 -->
 					   <jsp:include page="/member-specification/m-patent.jsp"></jsp:include>
 					    
 					</div>

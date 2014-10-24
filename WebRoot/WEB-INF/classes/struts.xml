@@ -28,6 +28,12 @@
     		</result>	
     	</action>
     	
+    	<action name="specific" class="memberAction">
+    		<result name="success" type="json">
+    			<param name="root">result</param>
+    		</result>	
+    	</action>
+    	
     	
     	<action name="member" class="userAction">
     		<result>/WEB-INF/count/count_member.jsp</result>

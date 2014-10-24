@@ -37,5 +37,19 @@ public class AwardCountTest  extends BaseTest{
 			System.out.print(a.getName() + "  ");
 	}
 	
+	/**
+	 * 测试通过用户id 查看其 奖励信息
+	 */
+	@Test
+	public void findAward_id_Test(){
+		
+		Award award;
+		String keyword = "计算机应用技术";
+		AwardService awardService = (AwardService) this.ctx.getBean("awardService");
+		List<Award> list = awardService.findAwardByUser(13);
+		
+		for (Award a : list)  
+			System.out.print(a.getName() + "  ");
+	}
 	 
 }

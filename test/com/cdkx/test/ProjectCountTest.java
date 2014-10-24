@@ -58,16 +58,27 @@ public class ProjectCountTest  extends BaseTest{
 	 * 
 	 */
 	@Test
-	public void countProjectNum(){
+	public void countProjectNum(){ 
 		
 		Project project;
 		String keyword = "计算机应用技术";
 		ProjectService projectService = (ProjectService) this.ctx.getBean("projectService");
 		List<Project> temp = projectService.countProNum(keyword);
-		
-		for (Project p : temp) {
+		for (Project p : temp)  
 			System.out.println(p.getName());
-		}
+	}
+	
+	/**
+	 * 依据 科目 查询所有科研项目
+	 */
+	@Test
+	public void findProject_id(){
 		
+		Project project;
+		String keyword = "计算机应用技术";
+		ProjectService projectService = (ProjectService) this.ctx.getBean("projectService");
+		List<Project> temp = projectService.findProjectByUser(12);
+		for (Project p : temp)  
+			System.out.println(p.getName());
 	}
 }

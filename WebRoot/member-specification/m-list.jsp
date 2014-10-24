@@ -13,29 +13,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=path %>/bootstrap/js/jquery.js"></script>
 	<script type="text/javascript">
 		
+		var cur_find_id;
+		/* function finduser(userid){
+			window.location="count/someone_a!find_someone_id?keyword=" + userid;
+		} */
 		
+		//ajax 访问函数
 		function finduser(userid){
-			window.location="count/someone_a!find_someone?keyword=" + userid;
-		}
-		/*ajax 访问函数
-		function finduser(userid){
-	
-			alert(userid);
+			cur_find_id = userid;
+			//alert(userid);
 			var url = "count/someone_a!find_someone_id";//请求的地址 
 			$.post(url,{
-					keyword:userid//[逗号 连接 ]
+					keyword:userid //[逗号 连接 ]
 				},
 				function(data){
 					member = eval('('+data+')');
-					alert("success");
+					//alert("success");
 					setUser_detail(member);
 				},"json"); 
 		}
-		
-		function setUser_detail(temp_user){
+		function setUser_detail(temp_user){//显示用户基本信息
 			
-			alert(temp_user);
-		}*/
+			$("table[id='user_specific'] td:eq(0)").text(temp_user.list[0].realname);
+			$("table[id='user_specific'] td:eq(1)").text(temp_user.list[0].idNo);
+			$("table[id='user_specific'] td:eq(2)").text(temp_user.list[0].sex);
+			$("table[id='user_specific'] td:eq(3)").text(temp_user.list[0].birthday);
+			$("table[id='user_specific'] td:eq(4)").text(temp_user.list[0].school);
+			$("table[id='user_specific'] td:eq(5)").text(temp_user.list[0].major.name);
+			$("table[id='user_specific'] td:eq(6)").text(temp_user.list[0].graduateTime);
+			$("table[id='user_specific'] td:eq(7)").text(temp_user.list[0].degree.name);
+			$("table[id='user_specific'] td:eq(8)").text(temp_user.list[0].education.name);
+			$("table[id='user_specific'] td:eq(9)").text(temp_user.list[0].institution.name);
+			$("table[id='user_specific'] td:eq(10)").text(temp_user.list[0].workUnit);
+			$("table[id='user_specific'] td:eq(11)").text(temp_user.list[0].title);
+			$("table[id='user_specific'] td:eq(12)").text(temp_user.list[0].duty);
+			$("table[id='user_specific'] td:eq(13)").text(temp_user.list[0].currentMajor);
+			$("table[id='user_specific'] td:eq(14)").text(temp_user.list[0].address);
+			$("table[id='user_specific'] td:eq(15)").text(temp_user.list[0].telephone);
+			$("table[id='user_specific'] td:eq(16)").text(temp_user.list[0].officePhone);
+			$("table[id='user_specific'] td:eq(17)").text(temp_user.list[0].postcode);
+			$("table[id='user_specific'] td:eq(18)").text(temp_user.list[0].email);
+			$("table[id='user_specific'] td:eq(19)").text(temp_user.list[0].qq);
+			$("table[id='user_specific'] td:eq(20)").text(temp_user.list[0].adept);
+		}
 	</script>
 	</head>
 <body>
@@ -47,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   
 	   <div class="panel-body" style="padding: 5px;">
 	   		
-			<table class="table" style="font-size: 14px;margin: 0px;">
+		<table class="table" style="font-size: 14px;margin: 0px;">
                 
             <s:iterator value="#request.list_total" status="st" id="userlist">
 			<!-- 编号：<s:property value="#userlist.first_p"/> -->
@@ -59,8 +79,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<s:property value="#userlist.second_p"/>
 				</button>
 			</td>
-		</s:iterator>
-            </table>
+			</s:iterator>
+        </table>
             
 	   </div><!-- ./panel-body-->
 	 </div><!-- ./panel panel-primary-->
