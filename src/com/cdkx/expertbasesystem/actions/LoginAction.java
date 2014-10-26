@@ -47,7 +47,6 @@ public class LoginAction extends BaseAction {
 			session.put("userId", user.getId());
 			session.put("username", user.getUsername());
 			session.remove("loginError");
-			this.session.put("user_chart_dto", this.userService.user_chart_dto());//会员统计图信息
 			if(user.getLevel() == 0)
 				return "manager_success";
 			else if(user.getLevel() == 1){

@@ -108,22 +108,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div data-spy="scroll" data-target="#navbar-example" data-offset="0" style="height:600px;overflow:auto; position: relative;">
 					   
 					   <h4 id="item0"></h4><!-- 会员列表 -->
-					   <jsp:include page="/member-specification/m-list.jsp"></jsp:include>
+					   <jsp:include page="/WEB-INF/member-specification/m-list.jsp"></jsp:include>
 					   
 					   <h4 id="item1"></h4>
-					   <jsp:include page="/member-specification/m-basic.jsp"></jsp:include>
+					   <jsp:include page="/WEB-INF/member-specification/m-basic.jsp"></jsp:include>
 					   
 					   <h4 id="item2" style="margin-top: 10px;"></h4><!-- 项目 -->
-					   <jsp:include page="/member-specification/m-project.jsp"></jsp:include>
+					   <jsp:include page="/WEB-INF/member-specification/m-project.jsp"></jsp:include>
 					   
 					   <h4 id="item3" style="margin-top: 10px;"></h4><!-- 奖励 -->
-					   <jsp:include page="/member-specification/m-award.jsp"></jsp:include>
+					   <jsp:include page="/WEB-INF/member-specification/m-award.jsp"></jsp:include>
 					   
 					   <h4 id="item4" style="margin-top: 10px;"></h4><!-- 论文 -->
-					   <jsp:include page="/member-specification/m-thesis.jsp"></jsp:include>
+					   <jsp:include page="/WEB-INF/member-specification/m-thesis.jsp"></jsp:include>
 					   
 					   <h4 id="item5" style="margin-top: 10px;"></h4><!-- 专利 -->
-					   <jsp:include page="/member-specification/m-patent.jsp"></jsp:include>
+					   <jsp:include page="/WEB-INF/member-specification/m-patent.jsp"></jsp:include>
 					    
 					</div>
 				  

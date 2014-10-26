@@ -212,43 +212,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserChartDTO> user_chart_dto() {
-		
-		
-		String sql = "select s.name from Subject s where s.parent=null";
-		List<String> firstsub = this.userDao.findKeyword(sql);
-		UserChartDTO ucd;
-		List<UserChartDTO> ucd_list = new ArrayList<UserChartDTO>();
-		
-		for(String s:firstsub){
-			
-			int usernum,phd;
-			ucd = new UserChartDTO();
-			sql = "select count(*) from User u where u.major.parent.parent.name = '" + s + "'";
-			usernum = user_chart_dto_1(sql);//统计某学科下的会员数量
-			
-			sql = "select count(*) from User u where u.major.parent.parent.name = '" + s + "' and u.degree.name = '博士'";//查询所有博士学位的用户数量
-			phd = user_chart_dto_1(sql);// 统计某学科下的博士会员数量
-			ucd = new UserChartDTO(s, phd, usernum);
-			ucd_list.add(ucd);
-		}
-		 return ucd_list;
-	}
-	
-	public int user_chart_dto_1(String sql){//从user_chart_dto()中抽取代码
-		
-		List temp = this.userDao.findKeyword(sql);//统计某一级学科下的用户总量
-		try {
-			if(temp!=null)
-				return Integer.valueOf(String.valueOf(temp.get(0)));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new AppException("查询失败  user_chart_dto");
-		}
-		return 0;
-	}
-
-	@Override
 	public List<BiPropertyDTO> findUserBySub_count(String sub) {
 		
 		List<BiPropertyDTO> list = new ArrayList<BiPropertyDTO>();

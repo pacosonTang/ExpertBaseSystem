@@ -7,6 +7,10 @@
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 	
+	<bean name="datacountAction" class="com.cdkx.expertbasesystem.actions.DatacountAction">
+		<property name="datacountService" ref="datacountService"/>
+	</bean>
+	
 	<bean name="loginAction" class="com.cdkx.expertbasesystem.actions.LoginAction">
 		<property name="userService" ref="userService"/>
 	</bean>
@@ -26,6 +30,7 @@
 		<property name="projectService" ref="projectService"/>
 		<property name="thesisService" ref="thesisService"/>
 	</bean>
+	
 	<bean name="serverAction" class="com.cdkx.expertbasesystem.actions.ServerAction">
 		<property name="userService" ref="userService" />
 	</bean>

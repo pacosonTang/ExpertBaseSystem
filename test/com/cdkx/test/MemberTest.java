@@ -65,18 +65,7 @@ public class MemberTest  extends BaseTest{
 	 * 测试通过科目名查看用户的全部信息
 	 */
 	
-	@Test
-	public void user_chart_dto_Test(){//测试通过科目名查看 会员  数量;
-		
-		User user;
-		String keyword = "计算机应用技术";
-		
-		UserService userService = (UserService) this.ctx.getBean("userService");
-		
-		for (UserChartDTO ucd : userService.user_chart_dto()) 
-			System.out.println(ucd.getSubject() + ", 博士数量 : " + ucd.getPhd() + ", 会员数量  : " + ucd.getUser());
-	}
-	
+	 
 	@Test
 	public void findUserBySub_Test(){//测试通过 科目名 查找下属会员
 		

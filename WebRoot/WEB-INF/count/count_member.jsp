@@ -29,15 +29,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		
-		function toggleMenu(index){
+		$(function(){
+			 
+			load_chart_list();
+		});
+		
+		//ajax 访问函数
+		function load_chart_list(){//在后台加载数据，统计会员百分比
 			
-			$("ul > li").removeClass("active");
-			$("ul > li:eq(" + index + ")").addClass("active");
-			
-			//var menuLink = ["expert-basic","invent-patent","result-award","sci-project","sci-thesis"];
-		 
-			return false;
-			
+			var url = "count/chart_member!member_percentage";//请求的地址 
+			$.post(url,{
+					keyword:"memberNum" //keyword:传输的是所要统计 字段
+				},
+				function(data){
+					member = eval('('+data+')');
+ 					//alert("success");
+					setChart(member); 
+				},"json"); 
 		}
 		
 	</script>
@@ -96,16 +104,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tbody></table>
 				</s:if>
 				<s:else>
-					<table>
-						<tr>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
+					<div class="alert alert-error">
+					  	各个一级学科会员百分占比情况一览
+					</div> 
+					
+					<!-- 
 					<iframe src="<%=basePath%>/chart/member_chart.jsp" width="100%" height="600px;" 
 				  		marginheight="0" marginwidth="0" frameborder="0" scrolling="no"> 
-				</iframe> 
+				</iframe>  -->
+				
 				</s:else>
+				<jsp:include page="/WEB-INF/chart/member_chart.jsp"></jsp:include>
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		

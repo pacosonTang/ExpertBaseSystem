@@ -98,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div><!-- ./well well-lg -->
 				
 			<div id="content"  style="margin: 0px 0px 0px 10px;width: 78%"><!-- 右边 -->
-				<jsp:include page="/member-specification/m-basic.jsp" flush="true"></jsp:include><!-- 顶部 -->
+				<jsp:include page="/WEB-INF/member-specification/m-basic.jsp" flush="true"></jsp:include><!-- 顶部 -->
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		

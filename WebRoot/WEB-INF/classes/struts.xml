@@ -5,13 +5,19 @@
 
 <struts>
 
-	<constant name="struts.devMode" value="true" /><!-- 开发模式true， struts 改变什么， 就显示 -->
+	<constant name="struts.devMode" value="false" /><!-- 开发模式true， struts 改变什么， 就显示 -->
     <constant name="struts.enable.DynamicMethodInvocation" value="true" /><!-- 使用动态方法调用 XXAction!method,不过要设置为true -->
     <constant name="struts.multipart.maxSize" value="2049152" />
     <constant name="struts.i18n.encoding" value="UTF-8" />
 	
  	<package name="count" extends="json-default" namespace="/count"><!-- 用于跳转-通配符 -->
-    
+    	
+    	<action name="chart_*" class="datacountAction">
+    		<result name="success" type="json">
+    			<param name="root">result</param>
+    		</result>
+    	</action>
+    	
     	<action name="skip_*" class="loginAction">
     		<result>/WEB-INF/count/count_{1}.jsp</result>
     	</action>
