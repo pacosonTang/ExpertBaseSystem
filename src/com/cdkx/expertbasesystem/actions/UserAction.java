@@ -159,6 +159,7 @@ public class UserAction extends BaseAction {
 		try {
 			list_total = userService.countnum(str);
 			this.getRequest().put("list_total", list_total);
+			this.getSession().put("cur_sub", str);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询用户综合信息失败");
@@ -179,6 +180,7 @@ public class UserAction extends BaseAction {
 		try {
 			List<BiPropertyDTO> temp = userService.findUserBySub_count(str);
 			this.getRequest().put("list_total", temp);
+			this.getSession().put("cur_sub", str);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  会员姓名  信息失败");

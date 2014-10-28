@@ -116,6 +116,7 @@ public class MemberAction extends BaseAction {
 		try {
 			List<Project> temp = projectService.countProNum(str);
 			this.getRequest().put("list_total", temp);
+			this.getSession().put("cur_sub", str);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  全部项目 信息失败");
@@ -134,6 +135,7 @@ public class MemberAction extends BaseAction {
 		try {
 			List<Award> temp = awardService.countAwardNum(str);
 			this.getRequest().put("list_total", temp);
+			this.getSession().put("cur_sub", str);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  奖励  信息失败");
@@ -153,6 +155,7 @@ public class MemberAction extends BaseAction {
 		try {
 			List<Thesis> temp = thesisService.countThesisNum(str);
 			this.getRequest().put("list_total", temp);
+			this.getSession().put("cur_sub", str);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  论文  信息失败");
@@ -172,6 +175,7 @@ public class MemberAction extends BaseAction {
 		try {
 			List<Patent> temp = patentService.countPatentNum(str);
 			this.getRequest().put("list_total", temp);
+			this.getSession().put("cur_sub", str);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  专利  信息失败");

@@ -5,7 +5,7 @@
 
 <struts>
 
-	<constant name="struts.devMode" value="false" /><!-- 开发模式true， struts 改变什么， 就显示 -->
+	<constant name="struts.devMode" value="true" /><!-- 开发模式true， struts 改变什么， 就显示 -->
     <constant name="struts.enable.DynamicMethodInvocation" value="true" /><!-- 使用动态方法调用 XXAction!method,不过要设置为true -->
     <constant name="struts.multipart.maxSize" value="2049152" />
     <constant name="struts.i18n.encoding" value="UTF-8" />
@@ -85,7 +85,7 @@
        	</action>
        	
        	<action name="login" class="loginAction" method="login">
-       		<result name="leader_success">/WEB-INF/count/count_member.jsp</result>
+       		<result name="leader_success">/WEB-INF/count/count_chart.jsp</result>
        		<result name="server_success">/WEB-INF/jsp/server.jsp</result>
        		<result name="member_success">/WEB-INF/jsp/member.jsp</result>
        		<result name="manager_success">/WEB-INF/jsp/manager.jsp</result>

@@ -62,6 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<ul class="nav nav-tabs">
 		   
 		   <li ><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
+		   <li ><a href="count/skip_chart!skip_chart">专家库统计图</a></li>
 		   <li class="active" ><a href="count/skip_project!skip_project">科研项目</a></li>
 		   <li ><a href="count/skip_award!skip_award">成果奖励</a></li>
 		   <li ><a href="count/skip_thesis!skip_thesis">科技论文</a></li>

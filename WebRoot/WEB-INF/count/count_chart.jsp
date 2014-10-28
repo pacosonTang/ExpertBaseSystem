@@ -68,18 +68,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div class="panel panel-default" style="width: 1220px;height: 1100px;margin: 0px 160px 0px 70px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
-		   <li class="active"><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
-		   <li ><a href="count/skip_chart!skip_chart">专家库统计图</a></li>
+		   <li ><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
+		   <li class="active"><a href="count/skip_chart!skip_chart">专家库统计图</a></li>
 		   <li ><a href="count/skip_project!skip_project">科研项目</a></li>
 		   <li ><a href="count/skip_award!skip_award">成果奖励</a></li>
 		   <li ><a href="count/skip_thesis!skip_thesis">科技论文</a></li>
 		   <li ><a href="count/skip_patent!skip_patent">发明专利</a></li>
 		   <li ><a href="count/skip_someone!skip_someone">找人</a></li>
 		   
-		   <li style="float: right;">
-			   	<jsp:include page="/WEB-INF/count/common-subject.jsp" flush="true"></jsp:include><!-- 顶部 -->
-		   </li>
-		  
 		</ul>
 		
 		<div id="container" style="width: 100%;margin-top: 10px;">
@@ -92,31 +88,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div><!-- ./well well-lg -->
 				
 			<div id="content"  style="margin: 0px 0px 0px 10px; width: 75%"><!-- 右边 -->
-				<s:if test="#request.list_total!=null">
-				<table style="vertical-align: top" id="toggle_2"><tbody>
-					 <s:iterator value="#request.list_total" status="st" id="userDto">
-				    	<s:if test="#st.index%4==0||#st.first">
-				    		<tr>
-				    	</s:if>
-				    		<td style="padding-left: 10px;">
-				    			<jsp:include page="/WEB-INF/demo-part/expert-basic.jsp" flush="true">
-				    				<jsp:param value="${userDto.username}" name="username"/>
-				    				<jsp:param value="${userDto.patent}" name="patent"/>
-				    				<jsp:param value="${userDto.thesis}" name="thesis"/>
-				    				<jsp:param value="${userDto.award}" name="award"/>
-				    				<jsp:param value="${userDto.project}" name="project"/>
-				    			</jsp:include>
-			    			</td>
-				   	 </s:iterator>
-					
-					</tbody></table>
-				 </s:if>
-				 <s:else>
-					<div class="alert alert-error" id="toggle_1">
-					  	各个一级学科会员百分占比情况一览
-					  	<jsp:include page="/WEB-INF/chart/member_chart.jsp"></jsp:include>
-					</div>
-				</s:else> 
+				
+				<div class="alert alert-error" id="toggle_1">
+				  	各个一级学科会员百分占比情况一览
+				  	<jsp:include page="/WEB-INF/chart/member_chart.jsp"></jsp:include>
+				</div>
+				
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		

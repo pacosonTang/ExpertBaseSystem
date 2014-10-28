@@ -99,6 +99,12 @@ public class LoginAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	public String skip_chart(){
+		
+		this.session.put("access", "chart");
+		return SUCCESS;
+	}
+	
 	public String skip_someone(){
 		
 		

@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,9 +16,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		var flag = -1;
 		$(function(){
-			
+			var cur_sub = "<%=session.getAttribute("cur_sub")%>";
+			if(cur_sub!="undefined")
+				$("#seledsub").val(cur_sub);
 			$(".form-control").bind("click", function() {
-			 
 			  load_subject();
 			  
 			});
@@ -85,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<div class="col-sm-10" style="width: 200px;height: 40px">
-    	<input id="seledsub" type="text" class="form-control" data-toggle="modal" data-target="#myModal" placeholder="点击选择学科" style="width: 160px; "/> 
+    	<input id="seledsub" type="text" class="form-control" data-toggle="modal" data-target="#myModal" value="" placeholder="点击选择学科" style="width: 160px; "/> 
     </div>
 	
 	<!-- 模态框（Modal） -->
