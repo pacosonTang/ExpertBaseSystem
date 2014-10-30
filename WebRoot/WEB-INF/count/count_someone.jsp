@@ -28,7 +28,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(index > 1 ) find_specific_four(index);
 			access[index-2] = index;//存储已经加载了的信息，2项目，3奖励， 4论文， 5专利
 			document.getElementById("item" + index).scrollIntoView();
+			changeLink(index);
 			return false;
+		}
+		
+		function changeLink(index){
+		
+			$("div[id='menu'] span").css("font-weight","");
+			$("div[id='menu'] span:eq(" + index +")").css("font-weight","bold");
 		}
 
 		//ajax 访问函数
@@ -37,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			oldaccess = index;
 			var url = "count/specific!specific_four";//请求的地址 
 			$.post(url,{
-					keyword:cur_find_id, //[逗号 连接 ]
+					someoneKey:cur_find_id, //[逗号 连接 ]
 					specific_type:index
 				},
 				function(data){
@@ -93,12 +100,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 
 			<div id="menu" style="margin: 0px 0px 0px 5px;float: top;width: 180px; "><!-- 左边 -->
 				<table class="table table-bordered" style="text-align: center">
-					<tr class="error"><td><a href="javascript: toggleMenu(0);">会员列表</a></td></tr>
-		            <tr class="error"><td><a href="javascript: toggleMenu(1);">会员详细资料</a></td></tr>
-	    	        <tr class="error"><td><a href="javascript: toggleMenu(2);">科研项目</a></td></tr>
-	                <tr class="error"><td><a href="javascript: toggleMenu(3);">成果奖励</a></td></tr>
-	                <tr class="error"><td><a href="javascript: toggleMenu(4);">科技论文</a></td></tr>
-	                <tr class="error"><td><a href="javascript: toggleMenu(5);">发明专利</a></td></tr>
+					<tr class="error"><td><a href="javascript: toggleMenu(0);"><span>会员列表</span></a></td></tr>
+		            <tr class="error"><td><a href="javascript: toggleMenu(1);"><span>会员详细资料列表</span></a></td></tr>
+	    	        <tr class="error"><td><a href="javascript: toggleMenu(2);"><span>会员科研项目列表</span></a></td></tr>
+	                <tr class="error"><td><a href="javascript: toggleMenu(3);"><span>会员成果奖励列表</span></a></td></tr>
+	                <tr class="error"><td><a href="javascript: toggleMenu(4);"><span>会员科技论文列表</span></a></td></tr>
+	                <tr class="error"><td><a href="javascript: toggleMenu(5);"><span>会员发明专利列表</span></a></td></tr>
 	                
 				</table>
 			</div><!-- ./well well-lg -->

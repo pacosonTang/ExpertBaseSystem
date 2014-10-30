@@ -45,9 +45,6 @@ public class UserAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Map<String, Object> request;
-	private Map<String, Object> session;
-	
 	//前端需要传入User和UserDetail的信息，使用方法是：如果是User的属性，
 	//则直接user.xxxx，如果是UserDetail的属性，则需要使用user.userDetail.xxxx
 	private User user;
@@ -86,7 +83,7 @@ public class UserAction extends BaseAction {
 	}
 	
 	public String modifyCount(){
-		int userId = Integer.parseInt(session.get("userId").toString());
+		int userId = Integer.parseInt(this.getSession().get("userId").toString());
 		user = userService.findUser(userId);
 		userDTO.setPassword(MD5Util.encode(userDTO.getPassword()));
 		if(userDTO.getPassword().equals(user.getPassword())){
@@ -107,8 +104,8 @@ public class UserAction extends BaseAction {
 	}
 	
 	public String showUser(){
-		if(session.get("userId") != null){
-			int id = Integer.parseInt(session.get("userId").toString());
+		if(this.getSession().get("userId") != null){
+			int id = Integer.parseInt(this.getSession().get("userId").toString());
 			user = userService.findUser(id);
 			jsonString = JsonUtil.jsonForSingle(user);
 			return SUCCESS;
@@ -152,10 +149,14 @@ public class UserAction extends BaseAction {
 	 * @return success
 	 * @throws UnsupportedEncodingException 
 	 */
+	
 	public String total_member() throws UnsupportedEncodingException{
 		
 		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
 		System.out.println("关键字 :  " + str);
+		if(str.equals("undefined"))
+			str = String.valueOf(this.getSession().get("cur_sub"));
+		keyword = str;
 		try {
 			list_total = userService.countnum(str);
 			this.getRequest().put("list_total", list_total);
@@ -175,8 +176,10 @@ public class UserAction extends BaseAction {
 	public String total_someone() throws UnsupportedEncodingException{
 		
 		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
-		keyword = str;
 		System.out.println("关键字 :  " + str);
+		if(str.equals("undefined"))
+			str = String.valueOf(this.getSession().get("cur_sub"));
+		keyword = str;
 		try {
 			List<BiPropertyDTO> temp = userService.findUserBySub_count(str);
 			this.getRequest().put("list_total", temp);
@@ -187,6 +190,7 @@ public class UserAction extends BaseAction {
 		}
 		return "success";
 	}
+	
 	
 	/**
 	 * 依据会员id查询会员实体对象 【ajax方法】
@@ -276,4 +280,10 @@ public class UserAction extends BaseAction {
 	public void setResult(String result) {
 		this.result = result;
 	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+	
+	
 }

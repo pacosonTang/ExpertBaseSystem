@@ -66,54 +66,6 @@ public class LoginAction extends BaseAction {
 	}
 	
 	/**
-	 * 以下是跳转页面的访问
-	 * @return success
-	 */
-	
-	public String skip_patent(){
-		
-		this.session.put("access", "patent");
-		return SUCCESS;
-	}
-	
-	public String skip_award(){
-		
-		this.session.put("access", "award");
-		return SUCCESS;
-	}
-	
-	public String skip_project(){
-		
-		this.session.put("access", "project");
-		return SUCCESS;
-	}
-	public String skip_thesis(){
-		
-		this.session.put("access", "thesis");
-		return SUCCESS;
-	}
-	
-	public String skip_member(){
-		
-		this.session.put("access", "member");
-		return SUCCESS;
-	}
-	
-	public String skip_chart(){
-		
-		this.session.put("access", "chart");
-		return SUCCESS;
-	}
-	
-	public String skip_someone(){
-		
-		
-		this.session.put("access", "someone");
-		return SUCCESS;
-	}
-	
-	
-	/**
 	 * 用户注销
 	 */
 	public void logout(){

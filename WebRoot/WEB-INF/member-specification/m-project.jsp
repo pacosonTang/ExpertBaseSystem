@@ -69,19 +69,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		     		<th width="7%" style="text-align: center;vertical-align: middle;">财政<br/>拨款</th>
 		     		<th width="7%" style="text-align: center;vertical-align: middle;">负责人</th>
 		     	</tr>
-	    		<tr>
-		     		<td style="text-align: center;vertical-align: middle;"><span class="label label-info">1</span></td>
-		     		<td style="text-align: center;vertical-align: middle;">1</td>
-		     		<td style="text-align: center;vertical-align: middle;">1</td>
-		     		<td style="text-align: center;vertical-align: middle;">1</td>
-		     		<td style="text-align: center;vertical-align: middle;">1</td>
-		     		<td style="text-align: center;vertical-align: middle;">1</td>
-		     		<td style="text-align: center;vertical-align: middle;">1</td>
-		     		<td style="text-align: center;vertical-align: middle;">1</td>
-		     		<td style="text-align: center;vertical-align: middle;">1</td>
-		     		<td style="text-align: center;vertical-align: middle;">1</td>
-		     	</tr>
-		     	 
 				</tbody></table>
 			 
 	   </div><!-- ./panel-body-->

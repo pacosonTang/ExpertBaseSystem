@@ -28,28 +28,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=path %>/bootstrap/js/jquery.js"></script>
     <script src="<%=path %>/bootstrap/js/bootstrap.min.js"></script>
 	
-	<script type="text/javascript">
-			
-		$(function(){
-			 
-			load_chart_list();
-		});
-		
-		//ajax 访问函数
-		function load_chart_list(){//在后台加载数据，统计会员百分比
-			
-			var url = "count/chart_member!member_percentage";//请求的地址 
-			$.post(url,{
-					keyword:"projectNum" //keyword:传输的是所要统计 字段
-				},
-				function(data){
-					member = eval('('+data+')');
- 					//alert("success");
-					setChart(member); 
-				},"json"); 
-		}
-		
-	</script>
   </head>
   
   <body style="background-color: #fff">
@@ -114,12 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</s:iterator>
 				</tbody></table>
 				</s:if>
-				<s:else>
-					<div class="alert alert-error">
-					  	各个一级学科会员百分占比情况一览
-					</div> 
-					<jsp:include page="/WEB-INF/chart/member_chart.jsp" flush="true"></jsp:include>
-				</s:else>
+				 
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		

@@ -29,34 +29,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		
-		var member = "-1";
 		$(function(){
-			
-			load_chart_list();  
+			load_chart_list("memberNum",0);  
 		});
 		
 		//ajax 访问函数
-		function load_chart_list(){//在后台加载数据，统计会员百分比
+		function load_chart_list(num_type,item_index){//在后台加载数据，统计会员百分比
 			
-			if(member != "-1"){
-				setChart(member);
-				return success; 
-			}			
 			var url = "count/chart_member!member_percentage";//请求的地址 
 			$.post(url,{
-					keyword:"memberNum" //keyword:传输的是所要统计 字段
+					keyword:num_type //keyword:传输的是所要统计 字段
 				},
 				function(data){
 					member = eval('('+data+')');
+					changeLink(item_index);
 					setChart(member); 
 				},"json"); 
 		}
 		
-		function toggleMenu(index){
-			
-			$("[id^='toggle']").hide();
-			$("#toggle_" + index).show();
+		function changeLink(index){
+		
+			$("div[id='menu'] span").css("font-weight","");
+			$("div[id='menu'] span:eq(" + index +")").css("font-weight","bold");
 		}
+		
 	</script>
   </head>
   
@@ -82,8 +78,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 
 			<div id="menu" style="margin-top: 0px;float: top;width: 20%;"><!-- 左边 -->
 				<table class="table table-bordered" style="text-align: center">
-					<tr class="error"><td><a href="javascript: toggleMenu(1)" id="left_navi_1">会员统计柱状图</a></td></tr>
-		            <tr class="error"><td><a href="javascript: toggleMenu(2)">会员列表</a></td></tr>
+					<tr><td><a href="javascript: load_chart_list('memberNum',0)" id="left_navi_1"><span>会员统计柱状图</span></a></td></tr>
+		            <tr><td><a href="javascript: load_chart_list('projectNum',1)"><span>科研项目柱状图</span></a></td></tr>
+		            <tr><td><a href="javascript: load_chart_list('awardNum',2)"><span>成果奖励柱状图</span></a></td></tr>
+		            <tr><td><a href="javascript: load_chart_list('thesisNum',3)"><span>科技论文柱状图</span></a></td></tr>
+		            <tr><td><a href="javascript: load_chart_list('patentNum',4)"><span>发明专利柱状图</span></a></td></tr>
 				</table>
 			</div><!-- ./well well-lg -->
 				

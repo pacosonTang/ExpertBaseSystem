@@ -18,7 +18,7 @@
     		</result>
     	</action>
     	
-    	<action name="skip_*" class="loginAction">
+    	<action name="skip_*" class="memberAction">
     		<result>/WEB-INF/count/count_{1}.jsp</result>
     	</action>
     	

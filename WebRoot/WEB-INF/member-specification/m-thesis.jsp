@@ -55,13 +55,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	     		<th width="10%" style="text-align: center;vertical-align: middle;">收录年份</th>
 	     		<th width="10%" style="text-align: center;vertical-align: middle;">作者</th>
 	     	</tr>
-		 
-    		<tr>
-	     		<td style="text-align: center;vertical-align: middle;"><span class="label label-info">1</span></td>
-	     		<td style="text-align: center;vertical-align: middle;">1</td>
-	     		<td style="text-align: center;vertical-align: middle;">2</td>
-	     		<td style="text-align: center;vertical-align: middle;">3</td>
-	     	</tr>
 	     	
 		</table>
       	 	 

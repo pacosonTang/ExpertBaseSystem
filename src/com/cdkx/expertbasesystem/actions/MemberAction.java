@@ -10,6 +10,8 @@ import com.cdkx.expertbasesystem.domain.Award;
 import com.cdkx.expertbasesystem.domain.Patent;
 import com.cdkx.expertbasesystem.domain.Project;
 import com.cdkx.expertbasesystem.domain.Thesis;
+import com.cdkx.expertbasesystem.dto.BiPropertyDTO;
+import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.AwardService;
 import com.cdkx.expertbasesystem.service.PatentService;
@@ -43,13 +45,15 @@ public class MemberAction extends BaseAction {
 	
 	private String jsonString;
 	
-	private Map<String, Object> session;
-	
 	private String keyword;
 	
 	private String result;
 	
 	private String specific_type;
+	
+	private UserAction userAction;
+	
+	private String someoneKey;
 
 	/**
 	 * 根据传回的特定的选择的论文编号，删除对应的论文
@@ -113,6 +117,8 @@ public class MemberAction extends BaseAction {
 		
 		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
 		System.out.println("关键字 :  " + str);
+		if(str.equals("undefined"))
+			str = String.valueOf(this.getSession().get("cur_sub"));
 		try {
 			List<Project> temp = projectService.countProNum(str);
 			this.getRequest().put("list_total", temp);
@@ -132,6 +138,8 @@ public class MemberAction extends BaseAction {
 		
 		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
 		System.out.println("关键字 :  " + str);
+		if(str.equals("undefined"))
+			str = String.valueOf(this.getSession().get("cur_sub"));
 		try {
 			List<Award> temp = awardService.countAwardNum(str);
 			this.getRequest().put("list_total", temp);
@@ -152,6 +160,8 @@ public class MemberAction extends BaseAction {
 		
 		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
 		System.out.println("关键字 :  " + str);
+		if(str.equals("undefined"))
+			str = String.valueOf(this.getSession().get("cur_sub"));
 		try {
 			List<Thesis> temp = thesisService.countThesisNum(str);
 			this.getRequest().put("list_total", temp);
@@ -172,6 +182,8 @@ public class MemberAction extends BaseAction {
 		
 		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
 		System.out.println("关键字 :  " + str);
+		if(str.equals("undefined"))
+			str = String.valueOf(this.getSession().get("cur_sub"));
 		try {
 			List<Patent> temp = patentService.countPatentNum(str);
 			this.getRequest().put("list_total", temp);
@@ -192,13 +204,13 @@ public class MemberAction extends BaseAction {
 	 */
 	public String specific_four(){
 		 
-		System.out.println("关键字 :  " + keyword);
+		System.out.println("关键字 :  " + someoneKey);
 		try {
 			switch(Integer.parseInt(specific_type)){
-				case 2: result = JsonUtil.jsonForList(projectService.findProjectByUser(Integer.parseInt(keyword)));break;//将List解析为json字符串对象
-				case 3: result = JsonUtil.jsonForList(awardService.findAwardByUser(Integer.parseInt(keyword)));break;
-				case 4: result = JsonUtil.jsonForList(thesisService.findThesisByUser(Integer.parseInt(keyword)));break;
-				case 5: result = JsonUtil.jsonForList(patentService.findPatentByUser(Integer.parseInt(keyword)));break;
+				case 2: result = JsonUtil.jsonForList(projectService.findProjectByUser(Integer.parseInt(someoneKey)));break;//将List解析为json字符串对象
+				case 3: result = JsonUtil.jsonForList(awardService.findAwardByUser(Integer.parseInt(someoneKey)));break;
+				case 4: result = JsonUtil.jsonForList(thesisService.findThesisByUser(Integer.parseInt(someoneKey)));break;
+				case 5: result = JsonUtil.jsonForList(patentService.findPatentByUser(Integer.parseInt(someoneKey)));break;
 				default:result = null;
 			}
 		} catch (Exception e) {
@@ -209,6 +221,90 @@ public class MemberAction extends BaseAction {
 		return "success";
 	}
 	
+	/**
+	 * 以下是跳转页面的访问
+	 * @return success
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String skip_patent() throws UnsupportedEncodingException{
+		
+		String str;
+		this.getSession().put("access", "patent");
+		if(this.getSession().get("cur_sub") != null){
+			str = String.valueOf(this.getSession().get("cur_sub"));
+			List<Patent> temp = patentService.countPatentNum(str);
+			this.getRequest().put("list_total", temp);
+		}  
+		return SUCCESS;
+	}
+	
+	public String skip_award() throws UnsupportedEncodingException{
+		
+		String str;
+		this.getSession().put("access", "award");
+		if(this.getSession().get("cur_sub") != null){
+			str = String.valueOf(this.getSession().get("cur_sub"));
+			List<Award> temp = awardService.countAwardNum(str);
+			this.getRequest().put("list_total", temp); 
+			return total_award();
+		} 
+		return SUCCESS;
+	}
+	
+	public String skip_project() throws UnsupportedEncodingException{
+		
+		String str;
+		this.getSession().put("access", "project");
+		if(this.getSession().get("cur_sub") != null){
+			str = String.valueOf(this.getSession().get("cur_sub"));
+			List<Project> temp = projectService.countProNum(str);
+			this.getRequest().put("list_total", temp); 
+		}
+		return SUCCESS;
+	}
+	public String skip_thesis() throws UnsupportedEncodingException{
+		
+		String str;
+		this.getSession().put("access", "thesis");
+		if(this.getSession().get("cur_sub") != null){
+			str = String.valueOf(this.getSession().get("cur_sub"));
+			List<Thesis> temp = thesisService.countThesisNum(str);
+			this.getRequest().put("list_total", temp); 
+		} 
+		return SUCCESS;
+	}
+	
+	public String skip_member() throws UnsupportedEncodingException{
+		
+		String str;
+		this.getSession().put("access", "member");
+		if(this.getSession().get("cur_sub") != null){
+			str = String.valueOf(this.getSession().get("cur_sub"));
+			List<UserTotalDTO> list_total = this.getUserAction().getUserService().countnum(str);
+			this.getRequest().put("list_total", list_total);		
+		}
+		return SUCCESS;
+	}
+	
+	public String skip_chart(){
+		
+		this.getSession().put("access", "chart");
+		return SUCCESS;
+	}
+	
+	public String skip_someone() throws UnsupportedEncodingException{
+		
+		String str;
+		this.getSession().put("access", "someone");
+		if(this.getSession().get("cur_sub") != null){
+			str = String.valueOf(this.getSession().get("cur_sub"));
+			this.getUserAction().setKeyword(str);
+			List<BiPropertyDTO> temp = this.getUserAction().getUserService().findUserBySub_count(str);
+			this.getRequest().put("list_total", temp);
+		}
+		return SUCCESS;
+	}
+	//[over]页面跳转访问
 	
 	public void setSelectIds(String selectIds) {
 		this.selectIds = selectIds;
@@ -256,6 +352,22 @@ public class MemberAction extends BaseAction {
 
 	public void setSpecific_type(String specific_type) {
 		this.specific_type = specific_type;
+	}
+
+	public UserAction getUserAction() {
+		return userAction;
+	}
+
+	public void setUserAction(UserAction userAction) {
+		this.userAction = userAction;
+	}
+
+	public String getSomeoneKey() {
+		return someoneKey;
+	}
+
+	public void setSomeoneKey(String someoneKey) {
+		this.someoneKey = someoneKey;
 	}
 	
 }

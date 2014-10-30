@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*"  pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*"  pageEncoding="GBK" contentType="text/html; charset=GBK"%>
+ 
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,30 +10,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<base href="<%=basePath%>">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ç»¼åˆåˆ©ç”¨</title>
+	<title>×ÛºÏÀûÓÃ</title>
 	<script src="<%=path %>/bootstrap/js/jquery.js"></script>
 	
 	<script type="text/javascript">
 		
 		var flag = -1;
+		 
 		$(function(){
-			var cur_sub = "<%=session.getAttribute("cur_sub")%>";
-			if(cur_sub!="undefined")
-				$("#seledsub").val(cur_sub);
+				
 			$(".form-control").bind("click", function() {
 			  load_subject();
-			  
-			});
-			
+			});	
+			var cur_sub = "<%=session.getAttribute("cur_sub")%>";
+			if(cur_sub!="null")
+				$("#seledsub").val(cur_sub);//ÉèÖÃinputµÄvalueÊôĞÔ
+				//findKey();//Ïàµ±ÓÚ ´¥·¢ ²éÑ¯°´Å¥ÊÂ¼ş				
+		    else{
+				$("input[id='seledsub']").trigger("click");
+			}
 		});
 		
 		function load_subject(){//
 			
 			if(flag != -1) return false;
-			//è¯·æ±‚çš„åœ°å€ ã€€ã€€
+			//ÇëÇóµÄµØÖ· ¡¡¡¡
 			var url = "count/subject!findSubject";
 			$.post(url,{
-					postid:"1"//[é€—å· è¿æ¥ ]
+					postid:"1"//[¶ººÅ Á¬½Ó ]
 				},
 				function(data){
 					member = eval('('+data+')');
@@ -57,10 +62,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				//alert(firstSubjects[i].secondlist.length);
 				for (var j = 0; j < first.secondlist.length; j++) {
 					var second = first.secondlist[j];
-					//alert(temp);æ‰“å°å‡ºåŠ›å­¦ï¼Œç­‰ 
+					//alert(temp);´òÓ¡³öÁ¦Ñ§£¬µÈ 
 					//$("#table" + i).append("<tr></tr>");
 					//$("#table" + i + " > tr").append("<td>[" + second.secondsingle + "]</td>");
-					$("#l"+ i).append("<br/><button type='button' class='btn btn-inverse' style='padding:5px;'>ã€"+ second.secondsingle + "ã€‘</button>");
+					$("#l"+ i).append("<br/><button type='button' class='btn btn-inverse' style='padding:5px;'>¡¾"+ second.secondsingle + "¡¿</button>");
 					for ( var k = 0; k < second.third.length; k++){ 
 						var third = second.third;
 						$("#l"+ i).append("<button type='button' class='btn btn-primary' style='font-size: 13px;padding: 3px;margin-left:5px;'" + " onclick=javascript:selsub('"+ third[k]+ "')>"+ third[k] + "</button>");
@@ -73,23 +78,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var keyword;
 		function selsub(obj){
 			keyword = obj;
-			$("#selsub").text("æ‰€é€‰ç§‘ç›® :  " + obj);
+			$("#selsub").text("ËùÑ¡¿ÆÄ¿ :  " + obj);
 			$("#seledsub").val([obj]);
+			findKey(obj);
 		}
 		
-		function findKey(){
-			//alert(keyword);
+		function findKey(keyword){
+			
+			if(keyword == "undefined" || keyword == "null")
+				keyword =  "<%=session.getAttribute("cur_sub")%>";;
 			var access = "<%=session.getAttribute("access")%>";
 			window.location= "count/" + access + "!total_"+ access + "?keyword=" + keyword;
 		}
+		
+		function findInputKey(){
+			 
+			var keyword = $("#seledsub").val();
+			var access = "<%=session.getAttribute("access")%>";
+			window.location= "count/" + access + "!total_"+ access + "?keyword=" + keyword;
+		}
+		
+		
 	</script>
 </head>
 <body>
 	<div class="col-sm-10" style="width: 200px;height: 40px">
-    	<input id="seledsub" type="text" class="form-control" data-toggle="modal" data-target="#myModal" value="" placeholder="ç‚¹å‡»é€‰æ‹©å­¦ç§‘" style="width: 160px; "/> 
+    	<input id="seledsub" type="text" class="form-control" data-toggle="modal" data-target="#myModal" value="" placeholder="µã»÷Ñ¡ÔñÑ§¿Æ" style="width: 160px; "/> 
     </div>
 	
-	<!-- æ¨¡æ€æ¡†ï¼ˆModalï¼‰ -->
+	<!-- Ä£Ì¬¿ò£¨Modal£© -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" 
 	 style="width: 1000px;margin:10px 0px 0px 150px;">
 	   <div class="modal-dialog" style="width: 100%;">
@@ -99,8 +116,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         
 	         	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	            <h4 class="modal-title" id="myModalLabel">
-	            	<button type='button' class='btn btn-danger' style='font-size: 16px;padding: 3px;margin-left:5px;' id="selsub">é€‰æ‹©å­¦ç§‘</button>
-	            	<button type='button' class='btn btn-primary' data-dismiss='modal' style='font-size: 16px;padding: 3px;margin-left:5px;'>ç¡®å®š</button>
+	            	<button type='button' class='btn btn-danger' style='font-size: 16px;padding: 3px;margin-left:5px;' id="selsub">Ñ¡ÔñÑ§¿Æ</button>
+	            	<button type='button' class='btn btn-primary' data-dismiss='modal' style='font-size: 16px;padding: 3px;margin-left:5px;'>È·¶¨</button>
 	            </h4>
 	         	
 	         </div><!--  modal-header over -->
@@ -118,6 +135,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 	</div><!-- /.modal fade -->
-	<button type="button" class="btn btn-default" style="margin-bottom: 2px;width: 80px;" onclick="javascript:findKey()">æŸ¥è¯¢</button>
+	<button type="button" class="btn btn-default" style="margin-bottom: 2px;width: 80px;" onclick="javascript:findInputKey()">²éÑ¯</button>
 </body>
 </html>

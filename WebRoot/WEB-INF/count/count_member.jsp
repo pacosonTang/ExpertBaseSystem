@@ -29,34 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		
-		var member = "-1";
 		$(function(){
 			
-			load_chart_list();  
+			
 		});
 		
-		//ajax 访问函数
-		function load_chart_list(){//在后台加载数据，统计会员百分比
-			
-			if(member != "-1"){
-				setChart(member);
-				return success; 
-			}			
-			var url = "count/chart_member!member_percentage";//请求的地址 
-			$.post(url,{
-					keyword:"memberNum" //keyword:传输的是所要统计 字段
-				},
-				function(data){
-					member = eval('('+data+')');
-					setChart(member); 
-				},"json"); 
-		}
-		
-		function toggleMenu(index){
-			
-			$("[id^='toggle']").hide();
-			$("#toggle_" + index).show();
-		}
 	</script>
   </head>
   
@@ -85,10 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="container" style="width: 100%;margin-top: 10px;">
 			 
 			<div id="menu" style="margin-top: 0px;float: top;width: 20%;"><!-- 左边 -->
-				<table class="table table-bordered" style="text-align: center">
-					<tr class="error"><td><a href="javascript: toggleMenu(1)" id="left_navi_1">会员统计柱状图</a></td></tr>
-		            <tr class="error"><td><a href="javascript: toggleMenu(2)">会员列表</a></td></tr>
-				</table>
+				 
 			</div><!-- ./well well-lg -->
 				
 			<div id="content"  style="margin: 0px 0px 0px 10px; width: 75%"><!-- 右边 -->
@@ -111,12 +85,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 					</tbody></table>
 				 </s:if>
-				 <s:else>
-					<div class="alert alert-error" id="toggle_1">
-					  	各个一级学科会员百分占比情况一览
-					  	<jsp:include page="/WEB-INF/chart/member_chart.jsp"></jsp:include>
-					</div>
-				</s:else> 
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		
