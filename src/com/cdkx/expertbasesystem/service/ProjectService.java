@@ -56,7 +56,7 @@ public interface ProjectService {
 	 * @param 学科科目编号
 	 * @return List 对应用户的科研项目数量
 	 */
-	public List<Project> countProNum(String sub);
+	public List<Project> countProNum(String sub,int pageindex);
 	
 	
 	

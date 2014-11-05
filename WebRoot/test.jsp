@@ -12,13 +12,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<!--  -->
 	<link href="<%=path %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<%=path %>/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="<%=path %>/bootstrap/css/docs.css" rel="stylesheet">
-	<!--<link href="<%=path %>/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <script src="<%=path %>/bootstrap/js/prettify.js"></script>
-	<link href="<%=path %>/bootstrap/css/prettify.css" rel="stylesheet"> -->
+	<link href="<%=path %>/bootstrap/css/prettify.css" rel="stylesheet">
     <script src="<%=path %>/bootstrap/js/jquery.js"></script>
     <script src="<%=path %>/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=path %>/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="<%=path %>/bootstrap/js/bootstrap-tab.js"></script>
     
     
     <script type="text/javascript">
@@ -34,17 +34,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
   </head>
   <body>
-  	 你好
-  	 <ul class="nav nav-pills" style="margin-left: 20px;">
-               
-              <li class="dropdown active open">
-                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="javascript:return false;" style="padding:10px 45px;">会员信息 <b class="caret"></b></a>
-                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="padding: 3px 10px;">会员统计柱状图</a></li>
-                  <li role="presentation" class="divider"></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">会员列表</a></li>
-                </ul>
-              </li>
-            </ul>
+  	<div class="tabbable tabs-left">
+       <ul class="nav nav-tabs">
+         <li class="active"><a href="#lA" data-toggle="tab">Section 1</a></li>
+         <li class=""><a href="#lB" data-toggle="tab">Section 2</a></li>
+         <li class=""><a href="#lC" data-toggle="tab">Section 3</a></li>
+       </ul>
+       <div class="tab-content">
+         <div class="tab-pane active" id="lA">
+           <p>I'm in Section A.</p>
+         </div>
+         <div class="tab-pane" id="lB">
+           <p>Howdy, I'm in Section B.</p>
+         </div>
+         <div class="tab-pane" id="lC">
+           <p>What up girl, this is Section C.</p>
+         </div>
+       </div>
+     </div>
   </body>
 </html>

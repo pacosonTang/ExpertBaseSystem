@@ -31,7 +31,7 @@ public class AwardCountTest  extends BaseTest{
 		Award award;
 		String keyword = "计算机应用技术";
 		AwardService awardService = (AwardService) this.ctx.getBean("awardService");
-		List<Award> list = awardService.countAwardNum(keyword);
+		List<Award> list = awardService.countAwardNum(keyword,1);
 		
 		for (Award a : list)  
 			System.out.print(a.getName() + "  ");

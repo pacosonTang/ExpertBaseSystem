@@ -60,21 +60,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 <body>
 	
-	<div class="panel panel-primary" style="width: 950px;margin-bottom: 10px;">
+	<div class="panel panel-primary" style="width: 900px;margin-bottom: 10px;">
 	   <div class="panel-heading" >
-	      <h3 class="panel-title" align="center">【&nbsp;<s:property value="keyword"/>&nbsp;】下属会员列表</h3>
+	      <h3 class="panel-title" align="center">【&nbsp;<s:property value="someoneKey"/>&nbsp;】下属会员列表</h3>
 	   </div><!-- ./panel-heading -->
 	   
 	   <div class="panel-body" style="padding: 5px;">
 	   		
-		<table class="table" style="font-size: 14px;margin: 0px;">
+		<table class="table" style="font-size: 14px;margin: 0px;text-align: left;">
                 
             <s:iterator value="#request.list_total" status="st" id="userlist">
 			<!-- 编号：<s:property value="#userlist.first_p"/> -->
 			<s:if test="#st.index%10==0">
 				<tr>
 			</s:if>
-			<td>
+			<td style="width: 80px;">
 				<button class="btn btn-danger" type="button" style="width: 65px;" onclick="javascript:finduser(<s:property value="#userlist.first_p"/>)">
 					<s:property value="#userlist.second_p"/>
 				</button>

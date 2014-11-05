@@ -17,7 +17,7 @@
 		<script src="<%=path %>/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			
-			function setChart(tempdata){
+			function setChart_member(tempdata){
 				
 				var f_list = new Array();
 				var s_list = new Array();
@@ -26,7 +26,6 @@
 					f_list[i] = temp[i].first_p;
 					s_list[i] = temp[i].second_p;
 				}
-				var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 				var barChartData={
 					labels : [f_list[0],f_list[1],f_list[2],f_list[3],f_list[4],f_list[5],
 							  f_list[6],f_list[7],f_list[8],f_list[9],f_list[10],f_list[11]],
@@ -53,8 +52,15 @@
 	</head>
 	
 	<body>
+		<div class="panel panel-primary" style="width: 850px;margin-bottom: 5px;">
+	   <div class="panel-heading" >
+	      <h3 class="panel-title" align="center">一级学科【会员】百分占比情况</h3>
+	   </div><!-- ./panel-heading -->
+	   <div class="panel-body" style="padding: 5px;">
 		<div style="width: 100%; font-family:courier ">
 			<canvas id="canvas"></canvas>
+		</div>
+		</div>
 		</div>
 	</body>
 </html>

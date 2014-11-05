@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cdkx.expertbasesystem.domain.ConditionDTO;
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.domain.Userfour;
 import com.cdkx.expertbasesystem.dto.BiPropertyDTO;
 import com.cdkx.expertbasesystem.dto.UserChartDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
@@ -107,11 +108,11 @@ public interface UserService {
 	public List<String> findUserBySub(String sub);
 	
 	/**
-	 * 通过学科科目来查找用户 的统计信息如： 专利 ，奖励， 项目 ， 论文数量。
+	 * 通过学科科目来查找用户的统计信息， 包括 4项，专利，项目，论文，奖励数量
 	 * @param sub 需要查找的科目
-	 * @return UserTotalDTO 传输类的集合
+	 * @return Userfour 传输类的集合
 	 */
-	public List<UserTotalDTO> countnum(String sub);
+	public List<Userfour> countnum(String sub,int pageindex);
 	
 	/**
 	 * 通过  一级学科  科目来 查询专家姓名和id
@@ -126,8 +127,5 @@ public interface UserService {
 	 * @return 用户
 	 */
 	public User findUserById(String id);
-	
-	
-	
 	
 }

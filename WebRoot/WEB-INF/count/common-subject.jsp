@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(keyword == "undefined" || keyword == "null")
 				keyword =  "<%=session.getAttribute("cur_sub")%>";;
 			var access = "<%=session.getAttribute("access")%>";
-			window.location= "count/" + access + "!total_"+ access + "?keyword=" + keyword;
+			window.location= "count/" + access + "!total_"+ access + "?keyword=" + keyword + "&curpage=1";
 		}
 		
 		function findInputKey(){

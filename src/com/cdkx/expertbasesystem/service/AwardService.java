@@ -55,5 +55,14 @@ public interface AwardService {
 	 * @param sub 学科科目
 	 * @return List 对应用户的 奖励  数量
 	 */
-	public List<Award> countAwardNum(String sub);
+	public List<Award> countAwardNum(String sub,int pageindex);
+	
+	/**
+	 * 根据  学科科目  统计 条目数量，包括 five: member, award , project ,patent ,thesis.[为了方便，我写在了awardService 里面]
+	 * @param sub 学科科目, numtype,mNum, aNum,proNum, patNum, tNum.
+	 * @return    数量
+	 */
+	public int countFiveNum(String sub, String datatype);
+	
+	
 }

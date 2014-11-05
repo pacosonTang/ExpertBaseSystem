@@ -15,7 +15,6 @@
 		<property name="userDao" ref="userDao"/>
 	</bean>
 	
-	
 	<bean name="awardService" class="com.cdkx.expertbasesystem.service.impl.AwardServiceImpl">
 		<property name="awardDao" ref="awardDao"/>
 	</bean>

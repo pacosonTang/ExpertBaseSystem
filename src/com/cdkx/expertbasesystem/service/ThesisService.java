@@ -63,6 +63,6 @@ public interface ThesisService {
 	 * @param sub 学科科目
 	 * @return List 对应用户的论文数量
 	 */
-	public List<Thesis> countThesisNum(String sub);
+	public List<Thesis> countThesisNum(String sub,int pageindex);
 	
 }

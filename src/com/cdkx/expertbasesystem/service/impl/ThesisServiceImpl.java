@@ -94,14 +94,9 @@ public class ThesisServiceImpl implements ThesisService {
 	}
 
 	@Override
-	public List<Thesis> countThesisNum(String sub) {
+	public List<Thesis> countThesisNum(String sub,int pageindex) {
 		
 		String sql = "from Thesis p where p.user.major.name = '" + sub + "'";
-		try {
-			return  thesisDao.findKeyword(sql);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new AppException("统计该用户的  论文 数量失败");
-		}
+		return this.thesisDao.loaditempage(sql, pageindex); 
 	}
 }

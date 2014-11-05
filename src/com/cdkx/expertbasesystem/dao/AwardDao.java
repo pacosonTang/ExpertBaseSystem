@@ -44,4 +44,13 @@ public interface AwardDao {
 	public void modifyAward(Award award);
 	
 	public List findkey(String sql);
+	
+	/**
+	 * 分页查询出项目
+	 * @param t_sql , 传入的sql语句，
+	 * @param pageindex， 当前页面
+	 * @return
+	 */
+	public List<Award> loaditempage(String t_sql, int pageindex);
+	
 }

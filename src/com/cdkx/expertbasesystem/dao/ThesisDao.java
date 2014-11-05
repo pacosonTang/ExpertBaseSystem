@@ -2,6 +2,7 @@ package com.cdkx.expertbasesystem.dao;
 
 import java.util.List;
 
+import com.cdkx.expertbasesystem.domain.Award;
 import com.cdkx.expertbasesystem.domain.Thesis;
 
 /**
@@ -50,4 +51,12 @@ public interface ThesisDao {
 	 * @return List<Thesis> 对应编号的论文列表
 	 */
 	public List findKeyword(String sql);
+	
+	/**
+	 * 分页查询出项目
+	 * @param t_sql , 传入的sql语句，
+	 * @param pageindex， 当前页面
+	 * @return
+	 */
+	public List<Thesis> loaditempage(String t_sql, int pageindex);
 }

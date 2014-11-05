@@ -22,9 +22,11 @@ import com.cdkx.expertbasesystem.domain.Project;
 import com.cdkx.expertbasesystem.domain.Thesis;
 import com.cdkx.expertbasesystem.domain.User;
 import com.cdkx.expertbasesystem.domain.UserDTO;
+import com.cdkx.expertbasesystem.domain.Userfour;
 import com.cdkx.expertbasesystem.dto.BiPropertyDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 import com.cdkx.expertbasesystem.exception.AppException;
+import com.cdkx.expertbasesystem.service.AwardService;
 import com.cdkx.expertbasesystem.service.UserService;
 import com.cdkx.expertbasesystem.utils.BaseAction;
 import com.cdkx.expertbasesystem.utils.JsonUtil;
@@ -68,6 +70,12 @@ public class UserAction extends BaseAction {
 	private String result;
 	
 	private JSONObject jo;
+	
+	private String someoneKey;
+	
+	private String curpage;
+	
+	private AwardService awardService;
 	
 	/**
 	 * 修改用户信息
@@ -152,15 +160,34 @@ public class UserAction extends BaseAction {
 	
 	public String total_member() throws UnsupportedEncodingException{
 		
+		List<Userfour> list_mem; 
 		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
 		System.out.println("关键字 :  " + str);
 		if(str.equals("undefined"))
 			str = String.valueOf(this.getSession().get("cur_sub"));
 		keyword = str;
 		try {
-			list_total = userService.countnum(str);
-			this.getRequest().put("list_total", list_total);
+			list_mem = userService.countnum(str,Integer.parseInt(curpage)); //这里查询的第一页的数据
+			this.getRequest().put("curpage", curpage);// 当前页面是多少
+			this.getRequest().put("list_total", list_mem);
 			this.getSession().put("cur_sub", str);
+			this.getSession().put("item_total", this.awardService.countFiveNum(str, "mSum")); 
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("查询用户综合信息失败");
+		}
+		return "success";
+	}
+	
+	//分页查询会员
+	public String page_member() throws UnsupportedEncodingException{
+		
+		List<Userfour> list_mem; 
+		String str = String.valueOf(this.getSession().get("cur_sub")); 
+		try {
+			list_mem = userService.countnum(str,Integer.parseInt(curpage)); //这里查询的第一页的数据
+			this.getRequest().put("curpage", curpage);// 当前页面是多少
+			this.getRequest().put("list_total", list_mem);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询用户综合信息失败");
@@ -179,7 +206,7 @@ public class UserAction extends BaseAction {
 		System.out.println("关键字 :  " + str);
 		if(str.equals("undefined"))
 			str = String.valueOf(this.getSession().get("cur_sub"));
-		keyword = str;
+		this.setSomeoneKey(str);
 		try {
 			List<BiPropertyDTO> temp = userService.findUserBySub_count(str);
 			this.getRequest().put("list_total", temp);
@@ -284,6 +311,28 @@ public class UserAction extends BaseAction {
 	public UserService getUserService() {
 		return userService;
 	}
-	
-	
+
+	public String getSomeoneKey() {
+		return someoneKey;
+	}
+
+	public void setSomeoneKey(String someoneKey) {
+		this.someoneKey = someoneKey;
+	}
+
+	public String getCurpage() {
+		return curpage;
+	}
+
+	public void setCurpage(String curpage) {
+		this.curpage = curpage;
+	}
+
+	public AwardService getAwardService() {
+		return awardService;
+	}
+
+	public void setAwardService(AwardService awardService) {
+		this.awardService = awardService;
+	}
 }

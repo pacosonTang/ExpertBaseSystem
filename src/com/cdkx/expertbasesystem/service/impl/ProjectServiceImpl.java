@@ -87,15 +87,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Project> countProNum(String sub) {
+	public List<Project> countProNum(String sub, int pageindex) {
 		// TODO Auto-generated method stub
 		
 		String sql = "from Project p where p.user.major.name = '" + sub + "'";
-		try {
-			return  projectDao.findkey(sql);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new AppException("统计该用户的项目数量失败");
-		}
+		return this.projectDao.loaditempage(sql, pageindex);
+		 
 	}
 }

@@ -32,5 +32,6 @@
 		<mapping resource="com/cdkx/expertbasesystem/domain/Project.hbm.xml" />
 		<mapping resource="com/cdkx/expertbasesystem/domain/Patent.hbm.xml" />
 		<mapping resource="com/cdkx/expertbasesystem/domain/Datacount.hbm.xml" />
+		<mapping resource="com/cdkx/expertbasesystem/domain/Userfour.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

@@ -56,7 +56,7 @@ public interface PatentService {
 	 * @param sub 学科名称　
 	 * @return List 对应用户的 专利 数量
 	 */
-	public List<Patent> countPatentNum(String sub);
+	public List<Patent> countPatentNum(String sub,int pageindex);
 	
 	
 }

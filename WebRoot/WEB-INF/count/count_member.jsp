@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
    	</div>
 	
-	<div class="panel panel-default" style="width: 1220px;height: 1100px;margin: 0px 160px 0px 70px;"><div class="panel-body">
+	<div class="panel panel-default" style="width: 1220px;height: 550px;margin: 0px 160px 0px 70px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
 		   <li class="active"><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
 		   <li ><a href="count/skip_chart!skip_chart">专家库统计图</a></li>
@@ -61,11 +61,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<div id="container" style="width: 100%;margin-top: 10px;">
 			 
-			<div id="menu" style="margin-top: 0px;float: top;width: 20%;"><!-- 左边 -->
-				 
+			<div id="menu"  style="margin-top: 0px;float: top;width: 18%;"><!-- 左边 -->
+				<jsp:include page="/WEB-INF/demo-part/paging.jsp" flush="true"></jsp:include><!-- 分页 -->
 			</div><!-- ./well well-lg -->
 				
-			<div id="content"  style="margin: 0px 0px 0px 10px; width: 75%"><!-- 右边 -->
+			<div id="content"  style="margin: 0px 0px 0px 10px; width: 80%;height: 500px;overflow: scroll;"><!-- 右边 -->
 				<s:if test="#request.list_total!=null">
 				<table style="vertical-align: top" id="toggle_2"><tbody>
 					 <s:iterator value="#request.list_total" status="st" id="userDto">
@@ -74,11 +74,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    	</s:if>
 				    		<td style="padding-left: 10px;">
 				    			<jsp:include page="/WEB-INF/demo-part/expert-basic.jsp" flush="true">
-				    				<jsp:param value="${userDto.username}" name="username"/>
-				    				<jsp:param value="${userDto.patent}" name="patent"/>
-				    				<jsp:param value="${userDto.thesis}" name="thesis"/>
-				    				<jsp:param value="${userDto.award}" name="award"/>
-				    				<jsp:param value="${userDto.project}" name="project"/>
+				    				<jsp:param value="${userDto.realname}" name="username"/>
+				    				<jsp:param value="${userDto.patNum}" name="patent"/>
+				    				<jsp:param value="${userDto.tNum}" name="thesis"/>
+				    				<jsp:param value="${userDto.aNum}" name="award"/>
+				    				<jsp:param value="${userDto.proNum}" name="project"/>
 				    			</jsp:include>
 			    			</td>
 				   	 </s:iterator>

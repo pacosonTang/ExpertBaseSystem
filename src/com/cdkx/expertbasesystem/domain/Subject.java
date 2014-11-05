@@ -10,7 +10,7 @@ import java.util.Set;
 public class Subject {
 
 	//学科编号
-	private int id;
+	private Integer id;
 	
 	//学科名称
 	private String name;
@@ -18,17 +18,34 @@ public class Subject {
 	//该学科的父学科
 	private Subject parent;
 	
+	//会员数量
+	private Integer mSum;
+	
+	//项目数量
+	private Integer proSum;
+	
+	//奖励数量
+	private Integer aSum;
+	
+	//论文数量
+	private Integer tSum;
+	
+	//专利数量
+	private Integer patSum;
+	
 	//该学科的子学科
 	private Set<Subject> children;
 	
 	//所学专业相同的会员
 	private Set<User> users;
+	
+	public Subject(){}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -48,12 +65,44 @@ public class Subject {
 		this.parent = parent;
 	}
 
-	public Set<User> getUsers() {
-		return users;
+	public Integer getmSum() {
+		return mSum;
 	}
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	public void setmSum(Integer mSum) {
+		this.mSum = mSum;
+	}
+
+	public Integer getProSum() {
+		return proSum;
+	}
+
+	public void setProSum(Integer proSum) {
+		this.proSum = proSum;
+	}
+
+	public Integer getaSum() {
+		return aSum;
+	}
+
+	public void setaSum(Integer aSum) {
+		this.aSum = aSum;
+	}
+
+	public Integer gettSum() {
+		return tSum;
+	}
+
+	public void settSum(Integer tSum) {
+		this.tSum = tSum;
+	}
+
+	public Integer getPatSum() {
+		return patSum;
+	}
+
+	public void setPatSum(Integer patSum) {
+		this.patSum = patSum;
 	}
 
 	public Set<Subject> getChildren() {
@@ -62,5 +111,13 @@ public class Subject {
 
 	public void setChildren(Set<Subject> children) {
 		this.children = children;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

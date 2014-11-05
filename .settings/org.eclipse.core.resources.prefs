@@ -1,4 +1,4 @@
-#Sun Sep 28 16:47:58 CST 2014
+#Tue Nov 04 10:44:56 CST 2014
 eclipse.preferences.version=1
 encoding//WebRoot/app=UTF-8
 encoding//WebRoot/app/controller/managerCl.js=UTF-8
@@ -31,3 +31,6 @@ encoding//WebRoot/app/view/server/serverPanel.js=UTF-8
 encoding//WebRoot/ext4/bootstrap.js=UTF-8
 encoding//WebRoot/ext4/ext-all-debug.js=UTF-8
 encoding//WebRoot/ext4/locale/ext-lang-zh_CN.js=UTF-8
+encoding//src/com/cdkx/expertbasesystem/dao/impl/UserDaoImpl.java=UTF-8
+encoding//src/com/cdkx/expertbasesystem/service/impl/DatacountServiceImpl.java=UTF-8
+encoding//src/com/cdkx/expertbasesystem/service/impl/UserServiceImpl.java=UTF-8

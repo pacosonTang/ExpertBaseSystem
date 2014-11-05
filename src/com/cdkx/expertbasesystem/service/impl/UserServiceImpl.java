@@ -7,6 +7,7 @@ import java.util.List;
 import com.cdkx.expertbasesystem.dao.UserDao;
 import com.cdkx.expertbasesystem.domain.ConditionDTO;
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.domain.Userfour;
 import com.cdkx.expertbasesystem.dto.BiPropertyDTO;
 import com.cdkx.expertbasesystem.dto.UserChartDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
@@ -14,7 +15,7 @@ import com.cdkx.expertbasesystem.exception.AppException;
 import com.cdkx.expertbasesystem.service.UserService;
 
 /**
- * ¶ÔÓÃ»§·şÎñ½Ó¿ÚµÄÊµÏÖ£¬Ìá¹©¶ÔÓÃ»§ÊµÌåµÄÔöÉ¾¸Ä²é
+ * å¯¹ç”¨æˆ·æœåŠ¡æ¥å£çš„å®ç°ï¼Œæä¾›å¯¹ç”¨æˆ·å®ä½“çš„å¢åˆ æ”¹æŸ¥
  * @author Guojun
  * 2014-8-23
  */
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
 			return userDao.login(user);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new AppException("²éÑ¯ÓÃ»§ÃûÎª¡¾" + user.getUsername() +"¡¿Ê§°Ü£¡");
+			throw new AppException("æŸ¥è¯¢ç”¨æˆ·åä¸ºã€" + user.getUsername() +"ã€‘å¤±è´¥ï¼");
 		}
 	}
 
@@ -99,7 +100,7 @@ public class UserServiceImpl implements UserService {
 			return userDao.findMembers();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new AppException("²éÕÒËùÓĞ»áÔ±ĞÅÏ¢Ê§°Ü£¡");
+			throw new AppException("æŸ¥æ‰¾æ‰€æœ‰ä¼šå‘˜ä¿¡æ¯å¤±è´¥ï¼");
 		}
 	}
 
@@ -109,7 +110,7 @@ public class UserServiceImpl implements UserService {
 			return userDao.findLeaders();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new AppException("²éÕÒËùÓĞÁìµ¼ĞÅÏ¢Ê§°Ü£¡");
+			throw new AppException("æŸ¥æ‰¾æ‰€æœ‰é¢†å¯¼ä¿¡æ¯å¤±è´¥ï¼");
 		}
 	}
 
@@ -119,7 +120,7 @@ public class UserServiceImpl implements UserService {
 			return userDao.findServers();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new AppException("²éÕÒËùÓĞÊĞ³¡»¯·şÎñÈËÔ±ĞÅÏ¢Ê§°Ü£¡");
+			throw new AppException("æŸ¥æ‰¾æ‰€æœ‰å¸‚åœºåŒ–æœåŠ¡äººå‘˜ä¿¡æ¯å¤±è´¥ï¼");
 		}
 	}
 
@@ -130,7 +131,7 @@ public class UserServiceImpl implements UserService {
 			return userDao.statisticMembers(countCondition);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new AppException("Í³¼ÆÓÃ»§Ê§°Ü£¡");
+			throw new AppException("ç»Ÿè®¡ç”¨æˆ·å¤±è´¥ï¼");
 		}
 	}
 
@@ -140,7 +141,7 @@ public class UserServiceImpl implements UserService {
 			return userDao.findUsersByUsername(username);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new AppException("²éÑ¯ÓÃ»§Ãû=¡¾" + username + "¡¿µÄÓÃ»§Ê§°Ü£¡");
+			throw new AppException("æŸ¥è¯¢ç”¨æˆ·å=ã€" + username + "ã€‘çš„ç”¨æˆ·å¤±è´¥ï¼");
 		}
 	}
 
@@ -183,34 +184,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserTotalDTO> countnum(String sub) {
+	public List<Userfour> countnum(String sub,int pageindex) {
 
-		UserTotalDTO userTotal;
-		List<UserTotalDTO> userCountList = new ArrayList<UserTotalDTO>();
-		List list = null;
-		String name;
-		String sql = "select u.id , u.realname from User u where u.major.name = '" + sub +"'";
-		 
-		Object temp_object[][] = new Object[1][2];
-		list = userDao.findKeyword(sql);
-		if(list != null)
-			for (int i = 0; i < list.size(); i++) {
-				userTotal = new UserTotalDTO();
-				temp_object[0] = (Object[]) list.get(i);
-				sql = "select count(*) from Award a where a.user.id = '" + String.valueOf(temp_object[0][0]) + "'";
-				userTotal.setAward(String.valueOf(userDao.findKeyword(sql).get(0)));
-				sql = "select count(*) from Project p where p.user.id = '" + String.valueOf(temp_object[0][0]) + "'";
-				userTotal.setProject(String.valueOf(userDao.findKeyword(sql).get(0)));
-				sql = "select count(*) from Thesis t where t.user.id = '" + String.valueOf(temp_object[0][0]) + "'";
-				userTotal.setThesis(String.valueOf(userDao.findKeyword(sql).get(0)));
-				sql = "select count(*) from Patent p where p.user.id = '" + String.valueOf(temp_object[0][0]) + "'";
-				userTotal.setPatent(String.valueOf(userDao.findKeyword(sql).get(0)));
-				userTotal.setUsername(String.valueOf(temp_object[0][1]));
-				userCountList.add(userTotal);
-			}
-		return userCountList;
+		String sql = "from Userfour uf where uf.subname = '" + sub +"'";
+	    return this.userDao.loaditempage(sql, pageindex); 
 	}
-
+	 
 	@Override
 	public List<BiPropertyDTO> findUserBySub_count(String sub) {
 		

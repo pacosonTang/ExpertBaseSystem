@@ -16,7 +16,7 @@
 	</bean>
 	<bean name="userAction" class="com.cdkx.expertbasesystem.actions.UserAction">
 		<property name="userService" ref="userService"/>
-		
+		<property name="awardService" ref="awardService"/>
 	</bean>
 	<bean name="managerAction" class="com.cdkx.expertbasesystem.actions.ManagerAction">
 		<property name="userService" ref="userService"/>

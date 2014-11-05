@@ -3,6 +3,7 @@ package com.cdkx.expertbasesystem.dao;
 import java.util.List;
 
 import com.cdkx.expertbasesystem.domain.User;
+import com.cdkx.expertbasesystem.domain.Userfour;
 
 /**
  * 负责对user表进行操作
@@ -90,7 +91,21 @@ public interface UserDao {
 	public List<User> searchMember(String hql);
 	
 	//【以下方法用于统计】
+	
+	/**
+	 * 主要用户和数据库进行交互，service 直接传递sql就可以访问数据库了。
+	 * @param sql
+	 * @return
+	 */
+	
 	public List findKeyword(String sql);
+	
+	/**
+	 * @param sql， 要查询的slq
+	 * @param pageindex，当前页面
+	 * @return 集合 List<Userfour> 
+	 */
+	public List<Userfour> loaditempage(String sql,int pageindex);
 	
 	 
 }

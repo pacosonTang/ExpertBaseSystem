@@ -10,6 +10,7 @@ import com.cdkx.expertbasesystem.domain.Award;
 import com.cdkx.expertbasesystem.domain.Patent;
 import com.cdkx.expertbasesystem.domain.Project;
 import com.cdkx.expertbasesystem.domain.Thesis;
+import com.cdkx.expertbasesystem.domain.Userfour;
 import com.cdkx.expertbasesystem.dto.BiPropertyDTO;
 import com.cdkx.expertbasesystem.dto.UserTotalDTO;
 import com.cdkx.expertbasesystem.exception.AppException;
@@ -54,7 +55,8 @@ public class MemberAction extends BaseAction {
 	private UserAction userAction;
 	
 	private String someoneKey;
-
+	
+	private String curpage;
 	/**
 	 * 根据传回的特定的选择的论文编号，删除对应的论文
 	 * @return
@@ -113,6 +115,7 @@ public class MemberAction extends BaseAction {
 	 * @return success
 	 * @throws UnsupportedEncodingException 
 	 */
+	
 	public String total_project() throws UnsupportedEncodingException{
 		
 		String str = new String(this.getKeyword().getBytes("ISO-8859-1"),"UTF-8");
@@ -120,9 +123,11 @@ public class MemberAction extends BaseAction {
 		if(str.equals("undefined"))
 			str = String.valueOf(this.getSession().get("cur_sub"));
 		try {
-			List<Project> temp = projectService.countProNum(str);
+			List<Project> temp = projectService.countProNum(str,Integer.parseInt(curpage));
 			this.getRequest().put("list_total", temp);
 			this.getSession().put("cur_sub", str);
+			this.getRequest().put("curpage", curpage);// 当前页面是多少
+			this.getSession().put("item_total", awardService.countFiveNum(str, "proNum"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  全部项目 信息失败");
@@ -141,9 +146,11 @@ public class MemberAction extends BaseAction {
 		if(str.equals("undefined"))
 			str = String.valueOf(this.getSession().get("cur_sub"));
 		try {
-			List<Award> temp = awardService.countAwardNum(str);
+			List<Award> temp = awardService.countAwardNum(str,Integer.parseInt(curpage));
 			this.getRequest().put("list_total", temp);
 			this.getSession().put("cur_sub", str);
+			this.getRequest().put("curpage", curpage);// 当前页面是多少
+			this.getSession().put("item_total", awardService.countFiveNum(str, "aNum"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  奖励  信息失败");
@@ -163,9 +170,11 @@ public class MemberAction extends BaseAction {
 		if(str.equals("undefined"))
 			str = String.valueOf(this.getSession().get("cur_sub"));
 		try {
-			List<Thesis> temp = thesisService.countThesisNum(str);
+			List<Thesis> temp = thesisService.countThesisNum(str,Integer.parseInt(curpage));
 			this.getRequest().put("list_total", temp);
 			this.getSession().put("cur_sub", str);
+			this.getRequest().put("curpage", curpage);// 当前页面是多少
+			this.getSession().put("item_total", awardService.countFiveNum(str, "tNum"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  论文  信息失败");
@@ -185,12 +194,46 @@ public class MemberAction extends BaseAction {
 		if(str.equals("undefined"))
 			str = String.valueOf(this.getSession().get("cur_sub"));
 		try {
-			List<Patent> temp = patentService.countPatentNum(str);
+			List<Patent> temp = patentService.countPatentNum(str,Integer.parseInt(curpage));
 			this.getRequest().put("list_total", temp);
 			this.getSession().put("cur_sub", str);
+			this.getRequest().put("curpage", curpage);// 当前页面是多少
+			this.getSession().put("item_total", awardService.countFiveNum(str, "patNum"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("查询  专利  信息失败");
+		}
+		return "success";
+	}
+	
+	//分页查询4 items ,project，patent， award , thesis;
+	public String page_four() throws UnsupportedEncodingException{
+		
+		List list = null;
+		String str = String.valueOf(this.getSession().get("cur_sub"));
+		String access = String.valueOf(this.getSession().get("access"));
+		try {
+			if(access.equals("project")){
+				list = projectService.countProNum(str, Integer.parseInt(curpage));
+				this.getSession().put("item_total", awardService.countFiveNum(str, "proSum")); 
+			}
+			else if(access.equals("award")){
+				list = awardService.countAwardNum(str, Integer.parseInt(curpage));
+				this.getSession().put("item_total", awardService.countFiveNum(str, "aSum")) ; 
+			}
+			else if(access.equals("patent")){
+				list = patentService.countPatentNum(str, Integer.parseInt(curpage));
+				this.getSession().put("item_total", awardService.countFiveNum(str, "patSum")); 
+			}
+			else{//thesis
+				list = thesisService.countThesisNum(str, Integer.parseInt(curpage));
+				this.getSession().put("item_total", awardService.countFiveNum(str, "tSum")); 
+			}
+			this.getRequest().put("curpage", curpage);// 当前页面是多少
+			this.getRequest().put("list_total", list);//
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("查询用户综合信息失败");
 		}
 		return "success";
 	}
@@ -232,8 +275,10 @@ public class MemberAction extends BaseAction {
 		this.getSession().put("access", "patent");
 		if(this.getSession().get("cur_sub") != null){
 			str = String.valueOf(this.getSession().get("cur_sub"));
-			List<Patent> temp = patentService.countPatentNum(str);
+			List<Patent> temp = patentService.countPatentNum(str,1);
+			this.getRequest().put("curpage", 1);// 当前页面是多少
 			this.getRequest().put("list_total", temp);
+			this.getSession().put("item_total", this.awardService.countFiveNum(str, "patSum"));//总条目数
 		}  
 		return SUCCESS;
 	}
@@ -244,9 +289,10 @@ public class MemberAction extends BaseAction {
 		this.getSession().put("access", "award");
 		if(this.getSession().get("cur_sub") != null){
 			str = String.valueOf(this.getSession().get("cur_sub"));
-			List<Award> temp = awardService.countAwardNum(str);
+			List<Award> temp = awardService.countAwardNum(str,1);
+			this.getRequest().put("curpage", 1);// 当前页面是多少
 			this.getRequest().put("list_total", temp); 
-			return total_award();
+			this.getSession().put("item_total", this.awardService.countFiveNum(str, "aSum"));//总条目数
 		} 
 		return SUCCESS;
 	}
@@ -257,8 +303,10 @@ public class MemberAction extends BaseAction {
 		this.getSession().put("access", "project");
 		if(this.getSession().get("cur_sub") != null){
 			str = String.valueOf(this.getSession().get("cur_sub"));
-			List<Project> temp = projectService.countProNum(str);
+			List<Project> temp = projectService.countProNum(str,1);
+			this.getRequest().put("curpage", 1);// 当前页面是多少
 			this.getRequest().put("list_total", temp); 
+			this.getSession().put("item_total", this.awardService.countFiveNum(str, "proSum"));//总条目数
 		}
 		return SUCCESS;
 	}
@@ -268,8 +316,10 @@ public class MemberAction extends BaseAction {
 		this.getSession().put("access", "thesis");
 		if(this.getSession().get("cur_sub") != null){
 			str = String.valueOf(this.getSession().get("cur_sub"));
-			List<Thesis> temp = thesisService.countThesisNum(str);
+			List<Thesis> temp = thesisService.countThesisNum(str,1);
+			this.getRequest().put("curpage", 1);// 当前页面是多少
 			this.getRequest().put("list_total", temp); 
+			this.getSession().put("item_total", this.awardService.countFiveNum(str, "tSum"));//总条目数
 		} 
 		return SUCCESS;
 	}
@@ -280,8 +330,10 @@ public class MemberAction extends BaseAction {
 		this.getSession().put("access", "member");
 		if(this.getSession().get("cur_sub") != null){
 			str = String.valueOf(this.getSession().get("cur_sub"));
-			List<UserTotalDTO> list_total = this.getUserAction().getUserService().countnum(str);
-			this.getRequest().put("list_total", list_total);		
+			List<Userfour> list_total = this.getUserAction().getUserService().countnum(str,1);
+			this.getRequest().put("curpage", 1);// 当前页面是多少
+			this.getRequest().put("list_total", list_total);	
+			this.getSession().put("item_total", this.awardService.countFiveNum(str, "mSum"));//总条目数
 		}
 		return SUCCESS;
 	}
@@ -298,6 +350,7 @@ public class MemberAction extends BaseAction {
 		this.getSession().put("access", "someone");
 		if(this.getSession().get("cur_sub") != null){
 			str = String.valueOf(this.getSession().get("cur_sub"));
+			this.setSomeoneKey(str);
 			this.getUserAction().setKeyword(str);
 			List<BiPropertyDTO> temp = this.getUserAction().getUserService().findUserBySub_count(str);
 			this.getRequest().put("list_total", temp);
@@ -369,5 +422,14 @@ public class MemberAction extends BaseAction {
 	public void setSomeoneKey(String someoneKey) {
 		this.someoneKey = someoneKey;
 	}
+
+	public String getCurpage() {
+		return curpage;
+	}
+
+	public void setCurpage(String curpage) {
+		this.curpage = curpage;
+	}
+	
 	
 }

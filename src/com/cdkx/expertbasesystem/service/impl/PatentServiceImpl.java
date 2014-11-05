@@ -89,15 +89,10 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
-	public List<Patent> countPatentNum(String sub) {
+	public List<Patent> countPatentNum(String sub, int pageindex) {
 
 		String sql = "from Patent p where p.user.major.name = '" + sub + "'";
-		try {
-			return  patentDao.findkey(sql);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new AppException("统计该用户的  专利  数量失败");
-		}
+		return this.patentDao.loaditempage(sql, pageindex);
 	}
 
 }

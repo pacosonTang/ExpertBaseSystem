@@ -25,7 +25,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var access = new Array(-1,-1,-1,-1);//初试值为-1		
 		function toggleMenu(index){//让各个标签置顶
 			
-			if(index > 1 ) find_specific_four(index);
+			if(index > 1 )
+				if(access[index-2] == -1)
+					find_specific_four(index);
+			 
 			access[index-2] = index;//存储已经加载了的信息，2项目，3奖励， 4论文， 5专利
 			document.getElementById("item" + index).scrollIntoView();
 			changeLink(index);
@@ -41,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//ajax 访问函数
 		function find_specific_four(index){//在后台加载数据，项目2，奖励3， 论文4， 专利5， index=2, 3, 4, 5
 			
-			oldaccess = index;
+			access[index-2] = true;
 			var url = "count/specific!specific_four";//请求的地址 
 			$.post(url,{
 					someoneKey:cur_find_id, //[逗号 连接 ]
@@ -81,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
    	</div>
 	
-	<div class="panel panel-default" style="width: 1220px;height: 1100px;margin: 0px 160px 0px 70px;"><div class="panel-body">
+	<div class="panel panel-default" style="width: 1220px;height: 550px;margin: 0px 160px 0px 70px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
 		   
 		  <li ><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
@@ -101,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="menu" style="margin: 0px 0px 0px 5px;float: top;width: 180px; "><!-- 左边 -->
 				<table class="table table-bordered" style="text-align: center">
 					<tr class="error"><td><a href="javascript: toggleMenu(0);"><span>会员列表</span></a></td></tr>
-		            <tr class="error"><td><a href="javascript: toggleMenu(1);"><span>会员详细资料列表</span></a></td></tr>
+		            <tr class="error"><td><a href="javascript: toggleMenu(1);"><span>会员基本信息</span></a></td></tr>
 	    	        <tr class="error"><td><a href="javascript: toggleMenu(2);"><span>会员科研项目列表</span></a></td></tr>
 	                <tr class="error"><td><a href="javascript: toggleMenu(3);"><span>会员成果奖励列表</span></a></td></tr>
 	                <tr class="error"><td><a href="javascript: toggleMenu(4);"><span>会员科技论文列表</span></a></td></tr>
@@ -110,10 +113,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</table>
 			</div><!-- ./well well-lg -->
 				
-			<div id="content"  style="margin: 0px 0px 0px 230px;width: 78%;float: left"><!-- 右边 -->
+			<div id="content"  style="margin: 0px 0px 0px 220px;width: 75%;float: left"><!-- 右边 -->
 				
-				<div style="margin-left: 10px;width: 940px;margin-top: 5px;">
-					<div data-spy="scroll" data-target="#navbar-example" data-offset="0" style="height:600px;overflow:auto; position: relative;">
+				<div style="margin-left: 10px;width: 105%;margin-top: 5px;height: 450px;overflow: scroll;">
+					<div data-spy="scroll" data-target="#navbar-example" data-offset="0" >
 					   
 					   <h4 id="item0"></h4><!-- 会员列表 -->
 					   <jsp:include page="/WEB-INF/member-specification/m-list.jsp"></jsp:include>

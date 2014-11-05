@@ -63,7 +63,7 @@ public class ProjectCountTest  extends BaseTest{
 		Project project;
 		String keyword = "计算机应用技术";
 		ProjectService projectService = (ProjectService) this.ctx.getBean("projectService");
-		List<Project> temp = projectService.countProNum(keyword);
+		List<Project> temp = projectService.countProNum(keyword,1);
 		for (Project p : temp)  
 			System.out.println(p.getName());
 	}

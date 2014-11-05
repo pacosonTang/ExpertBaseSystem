@@ -87,15 +87,29 @@ public class AwardServiceImpl implements AwardService {
 	}
 
 	@Override
-	public List<Award> countAwardNum(String sub) {
+	public List<Award> countAwardNum(String sub,int pageindex) {
 		
 		String sql = "from Award p where p.user.major.name = '" + sub + "'";
+		return this.awardDao.loaditempage(sql, pageindex);
+	}
+
+	@Override
+	public int countFiveNum(String sub, String datatype) {
+		
+		String sql = "select "+ datatype + " from Subject s where s.name = '" +  sub + "'";
 		try {
-			return  awardDao.findkey(sql);
+			return Integer.parseInt(String.valueOf(convertData(this.awardDao.findkey(sql))));
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new AppException("统计该用户的 奖励  数量失败");
 		}
+		return 0;
+	}
+	
+	public Object convertData(List list){//将list类型转换为object类型。当通过传入sql取到的list需要转换为Single Object的时候使用
+		
+		if(list!=null)
+			return list.get(0);
+		return null;
 	}
 
 }

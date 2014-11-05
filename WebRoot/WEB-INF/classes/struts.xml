@@ -14,7 +14,7 @@
     	
     	<action name="chart_*" class="datacountAction">
     		<result name="success" type="json">
-    			<param name="root">result</param>
+    			<param name="root">result</param><!-- 这里的result一定要和ajax所请求的Action里面的result属性一致 -->
     		</result>
     	</action>
     	
@@ -39,7 +39,6 @@
     			<param name="root">result</param>
     		</result>	
     	</action>
-    	
     	
     	<action name="member" class="userAction">
     		<result>/WEB-INF/count/count_member.jsp</result>
@@ -89,7 +88,6 @@
        		<result name="server_success">/WEB-INF/jsp/server.jsp</result>
        		<result name="member_success">/WEB-INF/jsp/member.jsp</result>
        		<result name="manager_success">/WEB-INF/jsp/manager.jsp</result>
-       		
        		<result name="error" type="redirect">loginPage.action</result>
        	</action>
  

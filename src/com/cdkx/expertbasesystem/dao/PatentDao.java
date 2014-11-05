@@ -2,6 +2,7 @@ package com.cdkx.expertbasesystem.dao;
 
 import java.util.List;
 
+import com.cdkx.expertbasesystem.domain.Award;
 import com.cdkx.expertbasesystem.domain.Patent;
 
 /**
@@ -38,4 +39,12 @@ public interface PatentDao {
 	public List<Patent> findPatentByUser(int userId);
 	
 	public List findkey(String sql);
+	
+	/**
+	 * 分页查询出项目
+	 * @param t_sql , 传入的sql语句，
+	 * @param pageindex， 当前页面
+	 * @return
+	 */
+	public List<Patent> loaditempage(String t_sql, int pageindex);
 }

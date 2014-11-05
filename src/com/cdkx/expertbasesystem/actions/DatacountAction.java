@@ -3,6 +3,8 @@ package com.cdkx.expertbasesystem.actions;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -67,6 +69,7 @@ public class DatacountAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	
 	public String execute(){//默认访问方法
 		return SUCCESS;
 	}
@@ -94,6 +97,5 @@ public class DatacountAction extends BaseAction {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	
 	
 }

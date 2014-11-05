@@ -16,5 +16,17 @@ public interface DatacountService {
 	 */
 	public List<BiPropertyDTO> member_ratio(String keyword);
 	 
+	/**
+	 * 通过 查询各个科目 subname 的会员记录条目数量
+	 * @param 一级科目名称， 项目集类型，itemType 如会员，项目， 奖励， 论文，专利。
+	 * @return 项目集数量
+	 */
+	public int findItemSum(String subname,String itemType);
+	
+	/**
+	 * 通过 查询各个科目 subname 的会员记录条目数量 【分页查询】
+	 * @param 一级科目名称， 项目集类型，itemType 如会员，项目， 奖励， 论文，专利。
+	 * @return 项目集数量
+	 */
 	
 }

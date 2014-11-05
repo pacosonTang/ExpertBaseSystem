@@ -23,12 +23,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		div#content {background-color:;height:400px;width:650px;float:left;}
 	</style>
 	
-    <link href="<%=path %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="<%=path %>/bootstrap/js/jquery.js"></script>
-    <script src="<%=path %>/bootstrap/js/bootstrap.min.js"></script>
+   	<link href="<%=path %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script type="text/javascript" src="<%=path%>/bootstrap/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=path%>/bootstrap/js/Chart.js"></script>
+	<script src="<%=path %>/bootstrap/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript">
 		
+		var access = new Array(-1,-1,-1,-1,-1);//初试值为-1	
 		$(function(){
 			load_chart_list("memberNum",0);  
 		});
@@ -36,24 +38,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//ajax 访问函数
 		function load_chart_list(num_type,item_index){//在后台加载数据，统计会员百分比
 			
+			if(access[item_index] != -1){
+				changeLink(item_index);
+				return;
+			}
+			var member = null;
 			var url = "count/chart_member!member_percentage";//请求的地址 
 			$.post(url,{
 					keyword:num_type //keyword:传输的是所要统计 字段
 				},
 				function(data){
 					member = eval('('+data+')');
-					changeLink(item_index);
-					setChart(member); 
+					access[item_index] = item_index;//设置相应的数组值，member0 , porject1, award2 , thesis3 , patent4 
+					setChart(item_index, member);
 				},"json"); 
 		}
 		
-		function changeLink(index){
+		function setChart(item_index, member){// 设置 图形
+			
+			switch(item_index){
+				case 0:setChart_member(member);break;
+				case 1:setChart_project(member);break;
+				case 2:setChart_award(member);break;
+				case 3:setChart_thesis(member);break;
+				case 4:setChart_patent(member);break;
+			}
+			changeLink(item_index);
+		}
 		
+		function changeLink(index){//设置右边粗体， 所有div隐藏，然后show某个div
+		
+			document.getElementById("item" + index).scrollIntoView();
 			$("div[id='menu'] span").css("font-weight","");
 			$("div[id='menu'] span:eq(" + index +")").css("font-weight","bold");
 		}
 		
 	</script>
+	
+	<style type="text/css">
+		div#menu{
+			position: fixed;
+			left: 92px;
+			top: 150px;
+		}
+	</style>
   </head>
   
   <body style="background-color: #fff">
@@ -62,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
    	</div>
 	
-	<div class="panel panel-default" style="width: 1220px;height: 1100px;margin: 0px 160px 0px 70px;"><div class="panel-body">
+	<div class="panel panel-default" style="width: 1220px;height: 600px;margin: 0px 160px 0px 70px;"><div class="panel-body">
 		<ul class="nav nav-tabs">
 		   <li ><a href="count/skip_member!skip_member" style="padding-left: 60px;padding-right: 60px;">成都市科协专家库</a></li>
 		   <li class="active"><a href="count/skip_chart!skip_chart">专家库统计图</a></li>
@@ -71,12 +99,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <li ><a href="count/skip_thesis!skip_thesis">科技论文</a></li>
 		   <li ><a href="count/skip_patent!skip_patent">发明专利</a></li>
 		   <li ><a href="count/skip_someone!skip_someone">找人</a></li>
-		   
 		</ul>
 		
 		<div id="container" style="width: 100%;margin-top: 10px;">
 			 
-			<div id="menu" style="margin-top: 0px;float: top;width: 20%;"><!-- 左边 -->
+			<div id="menu" style="margin-top: 0px;float: top;width: 17%;"><!-- 左边 -->
 				<table class="table table-bordered" style="text-align: center">
 					<tr><td><a href="javascript: load_chart_list('memberNum',0)" id="left_navi_1"><span>会员统计柱状图</span></a></td></tr>
 		            <tr><td><a href="javascript: load_chart_list('projectNum',1)"><span>科研项目柱状图</span></a></td></tr>
@@ -86,13 +113,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</table>
 			</div><!-- ./well well-lg -->
 				
-			<div id="content"  style="margin: 0px 0px 0px 10px; width: 75%"><!-- 右边 -->
-				
-				<div class="alert alert-error" id="toggle_1">
-				  	各个一级学科会员百分占比情况一览
-				  	<jsp:include page="/WEB-INF/chart/member_chart.jsp"></jsp:include>
-				</div>
-				
+			<div id="content"  style="margin: 0px 0px 0px 280px; width: 75%"><!-- 右边 -->
+				<div data-spy="scroll" data-target="#navbar-example" data-offset="0" style="height:500px;overflow:auto; position: relative;">
+				 	
+				  	<h4 id="item0"></h4><!-- 一级学科会员百分比占比情况 -->
+				  	
+				  	<jsp:include page="/WEB-INF/chart/member_chart.jsp" flush="true"></jsp:include>
+				  	
+				  	<h4 id="item1"></h4><!-- 项目百分比占比情况 -->
+				  	<jsp:include page="/WEB-INF/chart/project_chart.jsp" flush="true"></jsp:include>
+				  	
+				  	<h4 id="item2"> </h4><!-- 成果百分比占比情况 -->
+				  	<jsp:include page="/WEB-INF/chart/award_chart.jsp" flush="true"></jsp:include>
+				  	
+				  	<h4 id="item3"> </h4><!-- 论文百分比占比情况 -->
+				  	<jsp:include page="/WEB-INF/chart/thesis_chart.jsp" flush="true"></jsp:include>
+				  	
+				  	<h4 id="item4"></h4><!-- 专利百分比占比情况 -->
+				  	<jsp:include page="/WEB-INF/chart/patent_chart.jsp" flush="true"></jsp:include>
+				  	
+				</div><!-- scroll -->
+				 
 			</div><!-- ./content  -->
 		</div><!-- ./container -->
 		

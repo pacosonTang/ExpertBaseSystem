@@ -62,7 +62,7 @@ public class ThesisCountTest  extends BaseTest{
 		Thesis thesis;
 		String keyword = "计算机应用技术";
 		ThesisService thesisService = (ThesisService) this.ctx.getBean("thesisService");
-		List<Thesis> list = thesisService.countThesisNum(keyword);
+		List<Thesis> list = thesisService.countThesisNum(keyword,1);
 		
 		for (Thesis thesis2 : list)  
 			System.out.println(thesis2.getName() + "  ");

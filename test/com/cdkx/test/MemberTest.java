@@ -46,20 +46,7 @@ public class MemberTest  extends BaseTest{
 	 * 测试通过科目名查看用户的全部信息
 	 */
 	
-	@Test
-	public void totalCountTest(){//测试通过科目名查看用户名;
-		
-		User user;
-		String keyword = "计算机应用技术";
-		UserService userService = (UserService) this.ctx.getBean("userService");
-		Date before = new Date();
-		List<UserTotalDTO> list = userService.countnum(keyword);
-		Date after = new Date();
-		System.out.println("运行时间为:  " + (after.getTime() - before.getTime() ));
-		for (UserTotalDTO u : list) {
-			System.out.println("[名称为：] " + u.getUsername() + " 【奖励为】 " + u.getAward() + " 【专利数量为 】 " + u.getPatent() + " 【项目数量为 】 " + u.getProject() + " 【论文数量为 】 " + u.getThesis());
-		}
-	}
+	 
 	
 	/**
 	 * 测试通过科目名查看用户的全部信息

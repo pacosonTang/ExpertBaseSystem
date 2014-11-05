@@ -28,5 +28,20 @@
             </key>
             <one-to-many class="com.cdkx.expertbasesystem.domain.Subject" />
         </set>
+        <property name="mSum" type="java.lang.Integer">
+            <column name="m_sum"/>
+        </property>
+        <property name="proSum" type="java.lang.Integer">
+            <column name="pro_sum" />
+        </property>
+        <property name="aSum" type="java.lang.Integer">
+            <column name="a_sum" />
+        </property>
+        <property name="tSum" type="java.lang.Integer">
+            <column name="t_sum" />
+        </property>
+        <property name="patSum" type="java.lang.Integer">
+            <column name="pat_sum" />
+        </property>
     </class>
 </hibernate-mapping>
