@@ -24,13 +24,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	function setThesis_detail(thesis){
 			
+			$("table[id='thesis']").empty();
+			$("table[id='thesis']").append("<tr style='vertical-align: middle;'>"+
+	     		"<th width='7%' style='text-align: center;vertical-align: middle;'>编号</th>"+
+	     		"<th width='60%' style='text-align: center;vertical-align: middle;'>论文名称</th>"+
+	     		"<th width='10%' style='text-align: center;vertical-align: middle;'>收录年份</th>"+
+	     		"<th width='10%' style='text-align: center;vertical-align: middle;'>作者</th>"+
+	     	"</tr>");
+			
 			for ( var i = 0; i < thesis.length; i++) {
 				$("table[id='thesis']").append(
 					"<tr>" + 
 			     		"<td style='text-align: center;vertical-align: middle;'><span class='label label-info'>" + (i+1) + "</span></td>" + 
 			     		"<td style='text-align: center;vertical-align: middle;'>"+ thesis[i].name + "</td>" + 
 			     		"<td style='text-align: center;vertical-align: middle;'>"+ thesis[i].pubTime + "</td>" + 
-			     		"<td style='text-align: center;vertical-align: middle;'>"+ "作者" + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ cur_username + "</td>" + 
 			     	"</tr>"
 				);
 			}
@@ -43,18 +51,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
       <div class="panel panel-primary" style="width: 900px;margin-bottom: 10px;">
 	   <div class="panel-heading" >
-	      <h3 class="panel-title" align="center">会员科技论文列表</h3>
+	      <h3 class="panel-title" align="center">会员<span id="fourname"></span>科技论文列表</h3>
 	   </div><!-- ./panel-heading -->
 	   
 	   <div class="panel-body" style="padding: 5px;">
 	   		
 		<table id="thesis" class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center;vertical-align: middle;">
-	     	<tr style="vertical-align: middle;">
-	     		<th width="7%" style="text-align: center;vertical-align: middle;">编号</th>
-	     		<th width="60%" style="text-align: center;vertical-align: middle;">论文名称</th>
-	     		<th width="10%" style="text-align: center;vertical-align: middle;">收录年份</th>
-	     		<th width="10%" style="text-align: center;vertical-align: middle;">作者</th>
-	     	</tr>
 	     	
 		</table>
       	 	 

@@ -24,6 +24,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	function setAward_detail(award){
 			
+			$("table[id='award']").empty();
+			$("table[id='award']").append("<tr style='vertical-align: middle;'>"+
+	     		"<th width='7%' style='text-align: center;vertical-align: middle;'>编号</th>"+
+	     		"<th width='25%' style='text-align: center;vertical-align: middle;'>奖励名称</th>"+
+	     		"<th width='35%' style='text-align: center;vertical-align: middle;'>获奖项目名称</th>"+
+	     		"<th width='10%' style='text-align: center;vertical-align: middle;'>排名</th>"+
+	     		"<th width='15%' style='text-align: center;vertical-align: middle;'>获奖时间</th>"+
+	     		"<th width='15%' style='text-align: center;vertical-align: middle;'>获奖者</th>"+
+	     	"</tr>");
+			
 			for ( var i = 0; i < award.length; i++) {
 				$("table[id='award']").append(
 					"<tr>" + 
@@ -32,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			     		"<td style='text-align: center;vertical-align: middle;'>"+ award[i].fruitName + "</td>" + 
 			     		"<td style='text-align: center;vertical-align: middle;'>"+ award[i].rank + "</td>" + 
 			     		"<td style='text-align: center;vertical-align: middle;'>"+ award[i].awardTime + "</td>" + 
-			     		"<td style='text-align: center;vertical-align: middle;'>"+ "负责人" +"</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+  cur_username +"</td>" + 
 			     	"</tr>"
 				);
 			}
@@ -45,19 +55,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
       <div class="panel panel-primary" style="width: 900px;margin-bottom: 10px;">
 	   <div class="panel-heading" >
-	      <h3 class="panel-title" align="center">会员成果奖励列表</h3>
+	      <h3 class="panel-title" align="center">会员<span id="fourname"></span>成果奖励列表</h3>
 	   </div><!-- ./panel-heading -->
 	   
 	   <div class="panel-body" style="padding: 5px;">
    		<table id="award" class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center;vertical-align: middle;">
-	     	<tr style="vertical-align: middle;">
-	     		<th width="7%" style="text-align: center;vertical-align: middle;">编号</th>
-	     		<th width="25%" style="text-align: center;vertical-align: middle;">奖励名称</th>
-	     		<th width="35%" style="text-align: center;vertical-align: middle;">获奖项目名称</th>
-	     		<th width="10%" style="text-align: center;vertical-align: middle;">排名</th>
-	     		<th width="15%" style="text-align: center;vertical-align: middle;">获奖时间</th>
-	     		<th width="15%" style="text-align: center;vertical-align: middle;">获奖者</th>
-	     	</tr>
 	     	
 		</table>
 		

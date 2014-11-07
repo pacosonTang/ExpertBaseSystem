@@ -23,6 +23,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
     	
     	function setPatent_detail(patent){
+    	
+			$("table[id='patent']").empty();
+			$("table[id='patent']").append("<tr style='vertical-align: middle;'>" +
+	     		"<th width='7%' style='text-align: center;vertical-align: middle;'>编号</th>" +
+	     		"<th width='40%' style='text-align: center;vertical-align: middle;'>专利名称</th>" +
+	     		"<th width='24%' style='text-align: center;vertical-align: middle;'>专利号</th>" +
+	     		"<th width='14%' style='text-align: center;vertical-align: middle;'>授权时间</th>" +
+	     		"<th width='14%' style='text-align: center;vertical-align: middle;'>获得者</th>" +
+	     	"</tr>	");
 			
 			for ( var i = 0; i < patent.length; i++) {
 				$("table[id='patent']").append(
@@ -31,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			     		"<td style='text-align: center;vertical-align: middle;'>"+ patent[i].name + "</td>" + 
 			     		"<td style='text-align: center;vertical-align: middle;'>"+ patent[i].patentNo + "</td>" + 
 			     		"<td style='text-align: center;vertical-align: middle;'>"+ patent[i].authorityTime + "</td>" +
-			     		"<td style='text-align: center;vertical-align: middle;'>"+ "专利人" + "</td>" + 
+			     		"<td style='text-align: center;vertical-align: middle;'>"+ cur_username + "</td>" + 
 			     	"</tr>"
 				);
 			}
@@ -44,19 +53,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
       <div class="panel panel-primary" style="width: 900px;margin-bottom: 10px;">
 	   <div class="panel-heading" >
-	      <h3 class="panel-title" align="center">会员发明专利列表</h3>
+	      <h3 class="panel-title" align="center">会员<span id="fourname"></span>发明专利列表</h3>
 	   </div><!-- ./panel-heading -->
 	   
 	   <div class="panel-body" style="padding: 5px;">
 	   	
 	   	<table id="patent" class="table table-bordered table-striped" style="font-size: 13px;margin: 0px;text-align: center;vertical-align: middle;">
-	     	<tr style="vertical-align: middle;">
-	     		<th width="7%" style="text-align: center;vertical-align: middle;">编号</th>
-	     		<th width="40%" style="text-align: center;vertical-align: middle;">专利名称</th>
-	     		<th width="24%" style="text-align: center;vertical-align: middle;">专利号</th>
-	     		<th width="14%" style="text-align: center;vertical-align: middle;">授权时间</th>
-	     		<th width="14%" style="text-align: center;vertical-align: middle;">获得者</th>
-	     	</tr>	
 	     	
 		</table>	
 			 

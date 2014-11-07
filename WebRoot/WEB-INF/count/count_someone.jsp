@@ -22,11 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		
+		var cur_find_id = -1;
 		var access = new Array(-1,-1,-1,-1);//初试值为-1		
-		function toggleMenu(index){//让各个标签置顶
+		function toggleMenu(index){//让各个标签置顶, index = 2项目，3奖励， 4论文， 5专利
 			
 			if(index > 1 )
-				if(access[index-2] == -1)
+				if((access[index-2] == -1))
 					find_specific_four(index);
 			 
 			access[index-2] = index;//存储已经加载了的信息，2项目，3奖励， 4论文， 5专利
@@ -44,6 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//ajax 访问函数
 		function find_specific_four(index){//在后台加载数据，项目2，奖励3， 论文4， 专利5， index=2, 3, 4, 5
 			
+			cur_find_id = new_find_id;
 			access[index-2] = true;
 			var url = "count/specific!specific_four";//请求的地址 
 			$.post(url,{

@@ -13,14 +13,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=path %>/bootstrap/js/jquery.js"></script>
 	<script type="text/javascript">
 		
-		var cur_find_id;
-		/* function finduser(userid){
-			window.location="count/someone_a!find_someone_id?keyword=" + userid;
-		} */
+		var new_find_id;
+		var cur_username = "";
 		
 		//ajax 访问函数
 		function finduser(userid){
-			cur_find_id = userid;
+			
+			new_find_id = userid;
 			//alert(userid);
 			var url = "count/someone_a!find_someone_id";//请求的地址 
 			$.post(url,{
@@ -34,6 +33,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function setUser_detail(temp_user){//显示用户基本信息
 			
+			access = new Array(-1,-1,-1,-1);//初试值为-1
+			cur_username = temp_user.list[0].realname;
+			$("span[id='fourname']").text(" [" + cur_username + "] ");
 			$("table[id='user_specific'] td:eq(0)").text(temp_user.list[0].realname);
 			$("table[id='user_specific'] td:eq(1)").text(temp_user.list[0].idNo);
 			$("table[id='user_specific'] td:eq(2)").text(temp_user.list[0].sex);
@@ -55,7 +57,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("table[id='user_specific'] td:eq(18)").text(temp_user.list[0].email);
 			$("table[id='user_specific'] td:eq(19)").text(temp_user.list[0].qq);
 			$("table[id='user_specific'] td:eq(20)").text(temp_user.list[0].adept);
+			
+			$("table[id='project']").empty();
+			$("table[id='patent']").empty();
+			$("table[id='award']").empty();
+			$("table[id='thesis']").empty();
+			
 		}
+		
 	</script>
 	</head>
 <body>
