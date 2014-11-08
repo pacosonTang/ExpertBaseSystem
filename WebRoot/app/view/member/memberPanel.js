@@ -218,7 +218,7 @@ Ext.onReady(function(){
 		title : '我的信息',
 		frame : true,
 		//height : 450,
-		width : 850,
+		width : 900,
 		style : 'margin-left:15%;margin-top:5%;',
 		reader : userJsonReader,
 		buttonAlign : 'center',
@@ -229,7 +229,7 @@ Ext.onReady(function(){
 		},
 		layout : {
 			type : 'table',
-			columns : 4
+			columns : 7
 		},
 		items : [{
 			xtype : 'image',
@@ -247,6 +247,10 @@ Ext.onReady(function(){
 			msgTarget : 'under',
 			allowBlank : false
 		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*</font>'
+		}, {
 			xtype : 'combobox',
 			fieldLabel : '性别',
 			name : 'user.sex',
@@ -261,6 +265,10 @@ Ext.onReady(function(){
 			msgTarget : 'under',
 			typeAhead : true
 		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*</font>'
+		}, {
 			xtype : 'datefield',
 			fieldLabel : '出生日期',
 			name : 'user.birthday',
@@ -271,16 +279,24 @@ Ext.onReady(function(){
 			msgTarget : 'under',
 			maxValue : new Date()
 		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*</font>'
+		}, {
 			xtype : 'textfield',
 			fieldLabel : '身份证号',
 			name : 'user.idNo',
 			id : 'idNo',
 			colspan : 2,
-			width : 470,
+			width : 490,
 			allowBlank : false,
 			maxLength : 18,
 			msgTarget : 'under',
 			minLength : 18
+		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*18位</font>'
 		}, {
 			xtype : 'combobox',
 			fieldLabel : '学历',
@@ -299,14 +315,16 @@ Ext.onReady(function(){
 			msgTarget : 'under',
 			typeAhead : true
 		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*</font>'
+		}, {
 			xtype : 'textfield',
 			fieldLabel : '毕业院校',
 			name : 'user.school',
 			id : 'school',
-			colspan : 2,
-			width : 470,
-			msgTarget : 'under',
-			allowBlank : false
+			colspan : 4,
+			width : 490
 		}, {
 			xtype : 'datefield',
 			fieldLabel : '毕业时间',
@@ -314,8 +332,8 @@ Ext.onReady(function(){
 			name : 'user.graduateTime',
 			id : 'graduateTime',
 			maxValue : new Date(),
-			msgTarget : 'under',
-			allowBlank : false
+			colspan : 2,
+			msgTarget : 'under'
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '所学专业',
@@ -332,6 +350,10 @@ Ext.onReady(function(){
 				}
 			}
 		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*</font>'
+		}, {
 			xtype : 'combobox',
 			fieldLabel : '学位',
 			name : 'user.degree.id',
@@ -347,7 +369,11 @@ Ext.onReady(function(){
 			valueField : 'id',
 			displayField : 'name',
 			forceSelection : true,
-			typeAhead : true,
+			typeAhead : true
+		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*</font>'
 		}, {
 			xtype : 'combobox',
 			fieldLabel : '所属学会/协会',
@@ -366,10 +392,14 @@ Ext.onReady(function(){
 			forceSelection : true,
 			typeAhead : true
 		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*</font>'
+		}, {
 			xtype : 'button',
 			text : '上传',
 			style : 'margin-left:25px;',
-			colspan : 4,
+			colspan : 7,
 			iconCls : 'upload',
 			disabled : false,
 			handler : function(){
@@ -380,19 +410,19 @@ Ext.onReady(function(){
 			fieldLabel : '工作单位',
 			name : 'user.workUnit',
 			id : 'workUnit',
-			colspan : 2,
-			width : 340,
-			msgTarget : 'under',
-			allowBlank : false
+			colspan : 3,
+			width : 340
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '专业技术职称',
 			name : 'user.title',
+			colspan : 2,
 			id : 'title'
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '职务',
 			name : 'user.duty',
+			colspan : 2,
 			id : 'duty'
 		}, {
 			xtype : 'textfield',
@@ -401,7 +431,7 @@ Ext.onReady(function(){
 			id : 'address',
 			style : 'margin-top:10px;',
 			width : 340,
-			colspan : 2
+			colspan : 3
 		}, {
 			xtype : 'textfield',
 			fieldLabel : '手机',
@@ -414,10 +444,15 @@ Ext.onReady(function(){
 			regex : /^[1][3-8]+\d{9}/,
 			regexText : '请输入正确的手机号'
 		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*13位</font>'
+		}, {
 			xtype : 'textfield',
 			fieldLabel : '办公电话',
 			name : 'user.officePhone',
 			id : 'officePhone',
+			colspan : 2,
 			style : 'margin-top:10px;'
 		}, {
 			xtype : 'textfield',
@@ -425,9 +460,8 @@ Ext.onReady(function(){
 			name : 'user.email',
 			id : 'email',
 			style : 'margin-top:10px;',
-			colspan : 2,
+			colspan : 3,
 			width : 340,
-			allowBlank : false,
 			msgTarget : 'under',
 			regex : /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/,
 			regexText : '邮箱格式为XXX@XXX.com'
@@ -438,6 +472,7 @@ Ext.onReady(function(){
 			id : 'postcode',
 			style : 'margin-top:10px;',
 			maxLength : 6,
+			colspan : 2,
 			minLength : 6
 		}, {
 			xtype : 'textfield',
@@ -446,6 +481,7 @@ Ext.onReady(function(){
 			id : 'qq',
 			style : 'margin-top:10px;',
 			maxLength : 12,
+			colspan : 2,
 			minLength : 6
 		}, {
 			xtype : 'textarea',
@@ -459,13 +495,17 @@ Ext.onReady(function(){
 			autoScroll : true,
 			colspan : 2
 		}, {
+			xtype : 'label',
+			width : 10,
+			html : '<font color="red">*</font>'
+		}, {
 			xtype : 'textarea',
 			fieldLabel : '擅长领域',
 			name : 'user.adept',
 			id : 'adept',
 			style : 'margin-top:10px;',
 			width : 480,
-			colspan : 2
+			colspan : 4
 		}],
 		buttons : [{
 			text : '保存',
