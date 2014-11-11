@@ -41,28 +41,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("table[id='user_specific'] td:eq(2)").text(temp_user.list[0].sex);
 			$("table[id='user_specific'] td:eq(3)").text(temp_user.list[0].birthday);
 			$("table[id='user_specific'] td:eq(4)").text(temp_user.list[0].school);
-			$("table[id='user_specific'] td:eq(5)").text(temp_user.list[0].major.name);
-			$("table[id='user_specific'] td:eq(6)").text(temp_user.list[0].graduateTime);
-			$("table[id='user_specific'] td:eq(7)").text(temp_user.list[0].degree.name);
-			$("table[id='user_specific'] td:eq(8)").text(temp_user.list[0].education.name);
+			$("table[id='user_specific'] td:eq(5)").text(temp_user.list[0].graduateTime);
+			$("table[id='user_specific'] td:eq(6)").text(temp_user.list[0].education.name);
+ 			$("table[id='user_specific'] td:eq(7)").text(temp_user.list[0].degree.name);
+			$("table[id='user_specific'] td:eq(8)").text(temp_user.list[0].major.name);
 			$("table[id='user_specific'] td:eq(9)").text(temp_user.list[0].institution.name);
 			$("table[id='user_specific'] td:eq(10)").text(temp_user.list[0].workUnit);
 			$("table[id='user_specific'] td:eq(11)").text(temp_user.list[0].title);
 			$("table[id='user_specific'] td:eq(12)").text(temp_user.list[0].duty);
-			$("table[id='user_specific'] td:eq(13)").text(temp_user.list[0].currentMajor);
-			$("table[id='user_specific'] td:eq(14)").text(temp_user.list[0].address);
-			$("table[id='user_specific'] td:eq(15)").text(temp_user.list[0].telephone);
-			$("table[id='user_specific'] td:eq(16)").text(temp_user.list[0].officePhone);
-			$("table[id='user_specific'] td:eq(17)").text(temp_user.list[0].postcode);
-			$("table[id='user_specific'] td:eq(18)").text(temp_user.list[0].email);
-			$("table[id='user_specific'] td:eq(19)").text(temp_user.list[0].qq);
-			$("table[id='user_specific'] td:eq(20)").text(temp_user.list[0].adept);
-			
+			$("table[id='user_specific'] td:eq(13)").text(temp_user.list[0].telephone);
+			$("table[id='user_specific'] td:eq(14)").text(temp_user.list[0].officePhone);
+			$("table[id='user_specific'] td:eq(15)").text(temp_user.list[0].postcode);
+			$("table[id='user_specific'] td:eq(16)").text(temp_user.list[0].email);
+			$("table[id='user_specific'] td:eq(17)").text(temp_user.list[0].qq);
+			$("table[id='user_specific'] td:eq(18)").text(temp_user.list[0].address);
+			$("table[id='user_specific'] td:eq(19)").text(temp_user.list[0].adept);
+			$("table[id='user_specific'] td:eq(20)").text(temp_user.list[0].currentMajor);
 			$("table[id='project']").empty();
 			$("table[id='patent']").empty();
 			$("table[id='award']").empty();
 			$("table[id='thesis']").empty();
-			
+			$("#user_specific").show();
 		}
 		
 	</script>

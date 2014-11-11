@@ -22,6 +22,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 		
+		$(function(){
+			
+			$("#user_specific").hide();
+		});
+		
 		var cur_find_id = -1;
 		var access = new Array(-1,-1,-1,-1);//初试值为-1		
 		function toggleMenu(index){//让各个标签置顶, index = 2项目，3奖励， 4论文， 5专利
@@ -83,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body style="background-color: #fff;padding: 0px">
   
     <div class="well well-sm">
-    	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
+    	<jsp:include page="/WEB-INF/count/commone_top.jsp" flush="true"></jsp:include><!-- 顶部 -->
    	</div>
 	
 	<div class="panel panel-default" style="width: 1220px;height: 550px;margin: 0px 160px 0px 70px;"><div class="panel-body">
@@ -103,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<div id="container" style="width: 100%;margin-top: 10px;">
 			 
-			<div id="menu" style="margin: 0px 0px 0px 5px;float: top;width: 180px; "><!-- 左边 -->
+			<div id="menu" style="margin: 0px 0px 0px 0px;float: top;width: 180px; "><!-- 左边 -->
 				<table class="table table-bordered" style="text-align: center">
 					<tr class="error"><td><a href="javascript: toggleMenu(0);"><span>会员列表</span></a></td></tr>
 		            <tr class="error"><td><a href="javascript: toggleMenu(1);"><span>会员基本信息</span></a></td></tr>
@@ -117,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 			<div id="content"  style="margin: 0px 0px 0px 220px;width: 75%;float: left"><!-- 右边 -->
 				
-				<div style="margin-left: 10px;width: 105%;margin-top: 5px;height: 450px;overflow: scroll;">
+				<div style="margin-left: 10px;width: 105%;margin-top: 0px;height: 450px;overflow: scroll;">
 					<div data-spy="scroll" data-target="#navbar-example" data-offset="0" >
 					   
 					   <h4 id="item0"></h4><!-- 会员列表 -->

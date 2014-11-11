@@ -224,12 +224,22 @@ public class UserAction extends BaseAction {
 	 * @return success
 	 * @throws UnsupportedEncodingException 
 	 */
-	public String find_someone_id() throws UnsupportedEncodingException{
+	public String find_someone_id() throws UnsupportedEncodingException{//0管理员，3会员，2服务人员，1领导
 		
 		System.out.println("关键字 :  " + keyword);
 		this.getRequest().put("cur_find_id", keyword);
 		try {
 			user = userService.findUser(Integer.parseInt(keyword));
+			String cur_level = String.valueOf(this.getSession().get("cur_level"));//权限控制
+			if(!cur_level.equals("1")){
+				user.setIdNo("无权限查看");
+				user.setAddress("无权限查看");
+				user.setEmail("无权限查看");
+				user.setQq("无权限查看");
+				user.setPostcode("无权限查看");
+				user.setTelephone("无权限查看");
+				user.setOfficePhone("无权限查看");
+			}
 			/*
 			JsonConfig config = new JsonConfig();
    		    config.setIgnoreDefaultExcludes(true);  //设置默认忽略
@@ -239,7 +249,7 @@ public class UserAction extends BaseAction {
 			result = JsonUtil.jsonForSingle(user);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 			throw new AppException("查询  会员姓名  信息失败");
 		}
 /*		System.out.println(user.getAddress());

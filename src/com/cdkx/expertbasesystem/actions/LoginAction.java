@@ -38,25 +38,33 @@ public class LoginAction extends BaseAction {
 	 */
 	public String login(){
 		
+		String[] level_array = {"管理员","领导","服务人员","会员"};
 		this.session.put("access", "member");
 		user.setPassword(MD5Util.encode(user.getPassword()));
 		List<User> users = userService.login(user);
 		if(users != null && !users.isEmpty()){
 			user = users.get(0);
-			
 			session.put("userId", user.getId());
 			session.put("username", user.getUsername());
+			session.put("cur_realname", user.getRealname());//真实姓名
+			session.put("cur_level", user.getLevel());
 			session.remove("loginError");
-			if(user.getLevel() == 0)
+			if(user.getLevel() == 0){ //管理员
+				this.session.put("cur_type", "管理员");
 				return "manager_success";
-			else if(user.getLevel() == 1){
-				
-				return "leader_success";
 			}
-			else if(user.getLevel() == 2)
-				return "server_success";
-			else if(user.getLevel() == 3)
-				return "member_success";
+			else if(user.getLevel() == 1){
+				this.session.put("cur_type", "科协领导");
+				return "leader_success"; //领导
+			}
+			else if(user.getLevel() == 2){
+				this.session.put("cur_type", "服务人员");
+				return "server_success"; //服务人员
+			}
+			else if(user.getLevel() == 3){
+				this.session.put("cur_type", "会员");
+				return "member_success"; //会员
+			}
 			else
 				return ERROR;
 		} else {
@@ -68,9 +76,22 @@ public class LoginAction extends BaseAction {
 	/**
 	 * 用户注销
 	 */
-	public void logout(){
-		session.remove("userID");
-		session.remove("loginError");
+	public String logout(){
+		try {
+			session.remove("userId");
+			session.remove("loginError"); 
+			session.remove("username");
+			session.remove("cur_realname");//真实姓名
+			session.remove("cur_level");
+			session.remove("cur_type");
+			session.remove("someone");
+			session.remove("item_total");
+			session.remove("cur_sub");
+			return SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+		}
 	}
 
 	public User getUser() {

@@ -32,6 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		var access = new Array(-1,-1,-1,-1,-1);//初试值为-1	
 		$(function(){
+			 
 			load_chart_list("memberNum",0);  
 		});
 		
@@ -87,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body style="background-color: #fff">
   
     <div class="well well-sm">
-    	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
+    	<jsp:include page="/WEB-INF/count/commone_top.jsp" flush="true"></jsp:include><!-- 顶部 -->
    	</div>
 	
 	<div class="panel panel-default" style="width: 1220px;height: 600px;margin: 0px 160px 0px 70px;"><div class="panel-body">

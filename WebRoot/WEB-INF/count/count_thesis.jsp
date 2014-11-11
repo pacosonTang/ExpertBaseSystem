@@ -26,13 +26,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="<%=path %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="<%=path %>/bootstrap/js/jquery.js"></script>
     <script src="<%=path %>/bootstrap/js/bootstrap.min.js"></script>
-	  
+	
   </head>
   
   <body style="background-color: #fff">
   
     <div class="well well-sm">
-    	亲， 欢迎访问成都市科协专家库! &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; 用户类型： 管理员   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：宫健
+    	<jsp:include page="/WEB-INF/count/commone_top.jsp" flush="true"></jsp:include><!-- 顶部 -->
    	</div>
 	
 	<div class="panel panel-default" style="width: 1220px;height: 550px;margin: 0px 160px 0px 70px;"><div class="panel-body">

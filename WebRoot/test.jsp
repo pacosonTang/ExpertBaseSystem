@@ -5,52 +5,123 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html lang="en">
   <head>
-    <base href="<%=basePath%>">
-    <title>My JSP 'gdjt.jsp' starting page</title>
-	
-	<!--  -->
-	<link href="<%=path %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="<%=path %>/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-	<link href="<%=path %>/bootstrap/css/docs.css" rel="stylesheet">
-    <script src="<%=path %>/bootstrap/js/prettify.js"></script>
-	<link href="<%=path %>/bootstrap/css/prettify.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>My JSP 'basic.jsp' starting page</title>
+    <link href="<%=path %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="<%=path %>/bootstrap/js/jquery.js"></script>
     <script src="<%=path %>/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=path %>/bootstrap/js/bootstrap-tab.js"></script>
-    
+    <style type="text/css">
+    	
+    	.table>tbody>tr>td{
+    		padding:3px;	
+    	}
+    	th{
+    		align: center;
+    	}
+    		 
+    </style>
     
     <script type="text/javascript">
-    
-    	function toggleMenu(index){
-			
-			$("ul[id='someone'] > li").removeClass("active");
-			$("ul[id='someone'] > li:eq(" + index + ")").addClass("active");
-			document.getElementById("item" + index).scrollIntoView();
-			return false;
-		}
-		
+    	
+    	$(function(){
+    		
+    	});
+    	
     </script>
+    
   </head>
+  
   <body>
-  	<div class="tabbable tabs-left">
-       <ul class="nav nav-tabs">
-         <li class="active"><a href="#lA" data-toggle="tab">Section 1</a></li>
-         <li class=""><a href="#lB" data-toggle="tab">Section 2</a></li>
-         <li class=""><a href="#lC" data-toggle="tab">Section 3</a></li>
-       </ul>
-       <div class="tab-content">
-         <div class="tab-pane active" id="lA">
-           <p>I'm in Section A.</p>
-         </div>
-         <div class="tab-pane" id="lB">
-           <p>Howdy, I'm in Section B.</p>
-         </div>
-         <div class="tab-pane" id="lC">
-           <p>What up girl, this is Section C.</p>
-         </div>
-       </div>
-     </div>
+  
+  	<div class="panel panel-primary" style="width: 900px;margin-bottom: 10px;">
+	   <div class="panel-heading" >
+	      <h3 class="panel-title" align="center">会员<span id="fourname"></span>基本信息</h3>
+	   </div><!-- ./panel-heading -->
+	   
+	   <div class="panel-body" style="padding: 5px;" >
+	   
+       <table class="table table-bordered table-striped" style="font-size: 13px;margin: 0px; " id="user_specific">
+     	 
+     	<tr><!-- 基本 信息start-->
+     		<th rowspan="5" width="50px"  style="vertical-align: middle;">个人<br/>基础<br/>信息</th>
+     		<th width="80px">姓名</th>
+     		<td>你好</td>
+     		<th width="80px">身份证号</th>
+     		<td>你好</td>
+     	</tr>
+     	<tr>
+     		<th>性别</th>
+     		<td>男</td>
+     		<th>生日</th>
+     		<td>1991年9月20日</td>
+     	</tr>
+     	<tr>
+     		<th>毕业院校</th>
+     		<td>你好</td>
+     		<th>毕业时间</th>
+     		<td>你好</td>
+   		</tr><tr>
+     		<th>学历</th>
+     		<td>你好</td>
+     		<th>学位</th>
+     		<td>你好</td>
+     	</tr><tr>	
+     		<th>所学专业</th>
+     		<td>你好</td>
+     		<th>所属学会</th>
+     		<td>你好</td>
+     	</tr>
+     	 <!-- 基本 信息 end -->
+     	 
+     	<tr><!-- 工作 信息start -->
+     		<th rowspan="2" style="vertical-align: middle;">工作<br/>信息</th>
+     		<th>工作单位</th>
+     		<td colspan="3">你好</td>
+   		</tr><tr>
+     		<th>技术职称</th>
+     		<td>你好</td>
+     		<th>职务</th>
+     		<td>你好</td>
+     	</tr>
+     	
+     	<!-- 工作 信息 end -->
+     	
+     	<tr><!-- 联系 信息  start -->
+     		<th rowspan="4" style="vertical-align: middle;">通讯<br/>信息</th>
+     		<th>通讯地址</th>
+     		<td  colspan="3">你好</td>
+   		</tr><tr>
+     		<th>手机</th>
+     		<td>你好</td>
+     		<th>办公电话</th>
+     		<td>你好</td>
+	   	</tr><tr>
+     		<th>邮编</th>
+     		<td>你好</td>
+     		<th>邮箱</th>
+     		<td>你好</td>
+   		</tr><tr>
+     		<th>QQ</th><td>你好</td>
+     	</tr>
+     	 <!-- 联系 信息  over -->
+     	
+     	<tr><!-- 标签 信息 start -->
+     		<th rowspan="2" style="vertical-align: middle;">专业<br/>信息</th>     		
+     		<th>擅长领域</th>
+     		<td colspan="3">你好</td>
+   		</tr><tr>
+     		<th>现从事<br/>专业</th>
+     		<td colspan="3">你好</td>
+     	</tr>
+     	
+     	<tr>
+     		
+     	</tr><!-- 标签 信息 over-->
+     	
+    </table>
+     </div><!-- ./panel-body-->
+	 </div><!-- ./panel panel-primary-->
   </body>
 </html>

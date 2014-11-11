@@ -17,10 +17,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	.table>tbody>tr>td{
     		padding:3px;	
     	}
-    	th{
-    		align: center;
-    	}
-    		 
+    	.table>tbody>tr>th{
+    		align:center;
+    	}	 
     </style>
     
     <script type="text/javascript">
@@ -32,7 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
     
   </head>
-  
   <body>
   
   	<div class="panel panel-primary" style="width: 900px;margin-bottom: 10px;">
@@ -42,78 +40,82 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   
 	   <div class="panel-body" style="padding: 5px;" >
 	   
-       <table class="table table-bordered" style="font-size: 13px;margin: 0px;" id="user_specific">
-     	<tbody>
-     	
+       <table class="table table-bordered table-striped" style="font-size: 13px;margin: 0px; " id="user_specific">
+     	 
      	<tr><!-- 基本 信息start-->
-     		<th>姓名</th>
-     		<th>身份证号</th>
-     		<th>性别</th>
-     		<th colspan="3">生日</th>
+     		<th rowspan="3" width="50px"  style="vertical-align: middle;">个人<br/>基础<br/>信息</th>
+     		<th width="80px">姓名</th>
+     		<td width="130px"></td>
+     		<th width="80px">身份证号</th>
+     		<td width="150px"></td>
+     	 
+     		<th width="80px">性别</th>
+     		<td></td>
+     		<th width="80px">生日</th>
+     		<td></td>
      	</tr>
      	<tr>
-     		<td></td>
-     		<td></td>
-     		<td></td>
-     		<td colspan="3"></td>
-     	</tr><!-- 基本 信息 end -->
-     	
-     	<tr><!-- 教育 信息 start -->
      		<th>毕业院校</th>
-     		<th>所学专业</th>
+     		<td></td>
      		<th>毕业时间</th>
+     		<td></td>
+   		 
      		<th>学历</th>
-     		<th colspan="2">学位</th>
-     	</tr>
-     	<tr>
      		<td></td>
+     		<th>学位</th>
      		<td></td>
+     	</tr><tr>	
+     		<th>所学专业</th>
      		<td></td>
-     		<td></td>
-     		<td colspan="2"></td>
-     	</tr><!-- 教育 信息 end -->
-     	
-     	<tr><!-- 职业 信息start -->
      		<th>所属学会</th>
-     		<th>工作单位</th>
-     		<th>技术职称</th>
-     		<th>职务</th>
-     		<th colspan="2">现从事专业</th>
+     		<td colspan="5"></td>
      	</tr>
-     	<tr>
-     		<td></td>
-     		<td></td>
-     		<td></td>
-     		<td></td>
-     		<td colspan="2"></td>
-     	</tr><!-- 职业 信息 end -->
+     	 <!-- 基本 信息 end -->
+     	 
+     	<tr><!-- 工作 信息start -->
+     		<th  style="vertical-align: middle;">工作<br/>信息</th>
+     		<th style="vertical-align: middle;">工作单位</th>
+     		<td colspan="3" style="vertical-align: middle;"></td>
+     		<th style="vertical-align: middle;">技术职称</th>
+     		<td style="vertical-align: middle;"></td>
+     		<th style="vertical-align: middle;">职务</th>
+     		<td style="vertical-align: middle;"></td>
+     	</tr>
      	
-     	<tr><!-- 联系 信息  start -->
-     		<th>通讯地址</th>
+     	<!-- 工作 信息 end -->
+     	
+     	<tr><!-- 通讯 信息  start -->
+     		<th rowspan="2" style="vertical-align: middle;">通讯<br/>信息</th>
      		<th>手机</th>
+     		<td></td>
      		<th>办公电话</th>
+     		<td></td>
      		<th>邮编</th>
+     		<td></td>
      		<th>邮箱</th>
+     		<td></td>
+   		</tr><tr>
      		<th>QQ</th>
+     		<td></td>
+   			<th>通讯地址</th>
+     		<td  colspan="5"></td>
      	</tr>
-     	<tr>
-     		<td></td>
-     		<td></td>
-     		<td></td>
-     		<td></td>
-     		<td></td>
-     		<td></td>
-     	</tr><!-- 联系 信息  over -->
+     	 <!-- 联系 信息  over -->
      	
      	<tr><!-- 标签 信息 start -->
-     		<th colspan="6">标签信息[擅长领域]</th>
+     		<th rowspan="2" style="vertical-align: middle;">专业<br/>信息</th>     		
+     		<th>擅长领域</th>
+     		<td colspan="9"></td>
+   		</tr><tr>
+     		<th>现从事<br/>专业</th>
+     		<td colspan="9"></td>
      	</tr>
      	
      	<tr>
-     		<td colspan="6"></td>
+     		
      	</tr><!-- 标签 信息 over-->
      	
-    </tbody> </table>
+    </table>
      </div><!-- ./panel-body-->
 	 </div><!-- ./panel panel-primary-->
   </body>
